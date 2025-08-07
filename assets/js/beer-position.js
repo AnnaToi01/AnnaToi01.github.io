@@ -12,7 +12,7 @@ function positionBeerCupRelativeToImage() {
         contactIcon = document.createElement('a');
         contactIcon.href = 'contact.html';
         contactIcon.className = 'contact-icon';
-        contactIcon.innerHTML = '<img src="contact.svg" alt="Contact" class="contact-svg">';
+        contactIcon.innerHTML = '<img src="assets/icons/contact.svg" alt="Contact" class="contact-svg">';
         beerCup.appendChild(contactIcon);
     }
     

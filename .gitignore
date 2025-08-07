@@ -1,0 +1,25 @@
+# macOS
+*.DS_Store
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backup files
+*-backup.*
+*-temp.*
+*-original.*
+
+# Node modules (if added later)
+node_modules/
+npm-debug.log*
