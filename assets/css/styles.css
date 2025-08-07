@@ -261,8 +261,8 @@ body {
 }
 
 .sticker-image {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -325,7 +325,7 @@ body {
 
 .sticker-projects {
     top: 54%;
-    left: 3.5%;
+    left: 4%;
     transform: rotate(-8deg);
 }
 
@@ -336,8 +336,8 @@ body {
 }
 
 .sticker-about .sticker-image {
-    width: 150px;    /* Make anna.png bigger than other stickers */
-    height: 150px;
+    width: 175px;    /* Make anna.png bigger than other stickers */
+    height: 175px;
 }
 
 /* Beer Cup - positioned by JavaScript relative to visible image */
