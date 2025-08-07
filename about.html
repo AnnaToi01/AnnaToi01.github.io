@@ -7,6 +7,33 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Apply Avenir Next font to about page */
+        body {
+            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
+        }
+        
+        .page-title,
+        .section-title,
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
+        }
+        
+        .about-content p,
+        .about-content {
+            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
+        }
+        
+        /* If you have access to Apertura font files, uncomment and use this instead:
+        @font-face {
+            font-family: 'Apertura';
+            src: url('fonts/Apertura-Regular.woff2') format('woff2'),
+                 url('fonts/Apertura-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        */
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -27,6 +54,9 @@
                     <a href="projects.html" class="nav-link">Projects</a>
                 </li>
                 <li class="nav-item">
+                    <a href="CV_short_Anna_Toidze.pdf" class="nav-link" target="_blank">CV</a>
+                </li>
+                <li class="nav-item">
                     <a href="contact.html" class="nav-link">Contact</a>
                 </li>
             </ul>
@@ -39,42 +69,24 @@
     </nav>
 
     <!-- About Section -->
-    <section class="page-section about-page">
-        <div class="container">
-            <h1 class="page-title">About Me</h1>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        I'm a Master's student in Computational Biology and Bioinformatics at ETH Zürich, where I'm part of the top 3% of incoming MSc students with an ESOP scholarship. My research focuses on computational biology, bioinformatics, and machine learning applications in biological systems.
-                    </p>
-                    <p>
-                        I have extensive experience in Python, R, and bioinformatics tools, with research internships at Roche, ETH Zürich, UZH, OIST Japan, and ISTA Austria. I'm passionate about understanding biological systems through computational approaches and developing innovative solutions in bioinformatics.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>Top 3%</h3>
-                            <p>ESOP Scholarship</p>
-                        </div>
-                        <div class="stat">
-                            <h3>5+</h3>
-                            <p>Research Internships</p>
-                        </div>
-                        <div class="stat">
-                            <h3>4</h3>
-                            <p>Languages</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <main class="main-content">
+        <div class="content-wrapper">
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Anna Toidze. All rights reserved.</p>
+            
+            <section class="personal-story">
+                <h2>About</h2>
+                <div class="story-content">
+                    <p>I grew up in Tbilisi (Georgia) with mostly two things on my mind: Biology and music. So I spent my days traveling to Biology Olympiads, or practicing the piano. At 17, I left Georgia to do my bachelor's degree in Germany, after that I spent a year in Okinawa (Japan) as a researcher, and did a master's degree in Zurich.</p>
+                    
+                    <p>I'm slightly shy, but I enjoy spending time with new and old friends. I care about science and my research in evolutionary biology. I care about music: I love finding experimental music in the depth of the internet, I love going to concerts and I'm learning to play the organ. I like fashion, where I negotiate aesthetic influences from Georgia with contemporary ideas that excite me. And generally, I like science, I like things that are social and create a sense of belonging, and things that are creative and experimental.</p>
+                </div>
+            </section>
+
+
         </div>
-    </footer>
+    </main>
+
+
 
     <script src="script.js"></script>
 </body>

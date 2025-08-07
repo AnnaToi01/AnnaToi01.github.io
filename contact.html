@@ -7,6 +7,24 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Apply Avenir Next font to contact page */
+        body {
+            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
+        }
+        
+        .page-header h1,
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
+        }
+        
+        .main-content,
+        .content-wrapper,
+        .contact-info,
+        .contact-methods {
+            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -22,9 +40,11 @@
                 <li class="nav-item">
                     <a href="about.html" class="nav-link">About</a>
                 </li>
-
                 <li class="nav-item">
                     <a href="projects.html" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="CV_short_Anna_Toidze.pdf" class="nav-link" target="_blank">CV</a>
                 </li>
                 <li class="nav-item">
                     <a href="contact.html" class="nav-link active">Contact</a>
@@ -39,59 +59,39 @@
     </nav>
 
     <!-- Contact Section -->
-    <section class="page-section contact-page">
-        <div class="container">
-            <h1 class="page-title">Get In Touch</h1>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Let's work together!</h3>
-                    <p>I'm always interested in new opportunities and exciting projects. Feel free to reach out if you'd like to collaborate or just want to say hello.</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>atoidze@ethz.ch</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+41 76 759 91 60</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Zürich, Switzerland</span>
-                        </div>
+    <main class="main-content">
+        <div class="content-wrapper">
+
+            
+            <section class="contact-info">
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <h2>Email</h2>
+                        <p><a href="mailto:atoidze@ethz.ch">atoidze@ethz.ch</a></p>
                     </div>
-                    <div class="social-links">
-                        <a href="https://github.com/AnnaToi01" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/anna-toidze/" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://twitter.com/annatoiii" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="https://instagram.com/annatoiii" class="social-link"><i class="fab fa-instagram"></i></a>
+                    
+                    <div class="contact-method">
+                        <h2>Location</h2>
+                        <p>Zürich, Switzerland</p>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <h2>Professional Links</h2>
+                        <div class="professional-links">
+                            <p><a href="https://github.com/AnnaToi01" target="_blank">GitHub</a></p>
+                            <p><a href="https://www.linkedin.com/in/anna-toidze/" target="_blank">LinkedIn</a></p>
+                        </div>
                     </div>
                 </div>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
-            </div>
+                
+                <div class="contact-note">
+                    <p>I'm currently pursuing my Master's in Computational Biology and Bioinformatics at ETH Zürich and am always interested in discussing research opportunities, collaborations, or innovative projects in computational biology.</p>
+                </div>
+            </section>
         </div>
-    </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Anna Toidze. All rights reserved.</p>
-        </div>
-    </footer>
+
 
     <script src="script.js"></script>
 </body>

@@ -7,6 +7,24 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Apply Avenir Next font to projects page */
+        body {
+            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
+        }
+        
+        .page-header h1,
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
+        }
+        
+        .main-content,
+        .content-wrapper,
+        .research-projects,
+        .project-item {
+            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -22,9 +40,11 @@
                 <li class="nav-item">
                     <a href="about.html" class="nav-link">About</a>
                 </li>
-
                 <li class="nav-item">
                     <a href="projects.html" class="nav-link active">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="CV_short_Anna_Toidze.pdf" class="nav-link" target="_blank">CV</a>
                 </li>
                 <li class="nav-item">
                     <a href="contact.html" class="nav-link">Contact</a>
@@ -38,81 +58,95 @@
         </div>
     </nav>
 
-    <!-- Projects Section -->
-    <section class="page-section projects-page">
-        <div class="container">
-            <h1 class="page-title">Featured Projects</h1>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            <i class="fas fa-dna"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>scRNA Analysis at Roche</h3>
-                        <p>Single-cell RNA analysis in a pre-clinical mouse model of subretinal fibrosis using Python and R.</p>
-                        <div class="project-tech">
-                            <span>Python</span>
-                            <span>R</span>
-                            <span>scRNA-seq</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">Research</a>
-                            <a href="#" class="project-link">Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            <i class="fas fa-microscope"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>Antibiotic Resistance Modeling</h3>
-                        <p>Dynamic modeling of plasmid spread carrying antibiotic-resistance genes using ODEs in R at ETH Zürich.</p>
-                        <div class="project-tech">
-                            <span>R</span>
-                            <span>ODEs</span>
-                            <span>Modeling</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">Research</a>
-                            <a href="#" class="project-link">Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            <i class="fas fa-flask"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>E. coli GFP Libraries</h3>
-                        <p>Created mutant libraries, FACS sorting, and ML-based protein function prediction at OIST Japan.</p>
-                        <div class="project-tech">
-                            <span>Python</span>
-                            <span>FACS</span>
-                            <span>Machine Learning</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">Research</a>
-                            <a href="#" class="project-link">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Research Section -->
+    <main class="main-content">
+        <div class="content-wrapper">
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Anna Toidze. All rights reserved.</p>
+            
+            <section class="research-projects">
+                <h2>Research</h2>
+                <div class="projects-list">
+                    <div class="project-item">
+                        <h3>Internship in pRED Ophthalmology at Roche</h3>
+                        <p class="project-location"><em>Basel, Switzerland • Apr 2025–Now</em></p>
+                        <p>scRNA analysis in a pre-clinical mouse model of subretinal fibrosis in Python and R</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Internship in Laboratory of Prof. Dr. Sebastian Bonhoeffer at ETH Zürich</h3>
+                        <p class="project-location"><em>Zürich, Switzerland • Nov 2024–Mar 2025</em></p>
+                        <p>Dynamically modeling the spread of plasmids carrying antibiotic-resistance genes in R using ODEs</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Internship in Laboratory of Prof. Dr. Andreas Wagner and Dr. Aleks Nivina at UZH</h3>
+                        <p class="project-location"><em>Zürich, Switzerland • Sept 2024–Oct 2024</em></p>
+                        <p>Stochastically modelled the recombination of antibiotic-producing polyketide systems in <em>Streptomyces</em> in Python</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Laboratory Technician in Laboratory of Prof. Dr. Fyodor Kondrashov at OIST</h3>
+                        <p class="project-location"><em>Onna, Japan • Oct 2022–Aug 2023</em></p>
+                        <p>Created <em>E. coli</em> mutant libraries of GFPs, sorted them using FACS, improved prediction of function proteins through ML</p>
+                        <p>Devised and implemented a populations genetics model for epistasis in Rust</p>
+                        <p>Guided an intern in preparation of <em>E. coli</em> GFP library, sorting using FACS and successful preparation for sequencing</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Internship in Laboratory of Prof. Dr. Fyodor Kondrashov at ISTA</h3>
+                        <p class="project-location"><em>Klosterneuburg, Austria • Apr 2022–Sept 2022</em></p>
+                        <p>Cloned and purified green fluorescent proteins with varying sequence divergence from the wild-type sequence</p>
+                        <p>Experimentally assessed the physical stability of the proteins and correlated it with the mutational robustness using Python</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Internship in Laboratory of Prof. Dr. Maria Logacheva at Bioinformatics Institute</h3>
+                        <p class="project-location"><em>Online • Feb 2022–May 2022</em></p>
+                        <p>Investigated the expression patterns of egg-cell specific genes in crops using Python, R, phylogenetics tools</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Internship Laboratory of Prof. Dr. Ute Krämer at RUB</h3>
+                        <p class="project-location"><em>Bochum, Germany • Jan 2021–Jan 2022</em></p>
+                        <p>Implemented a pipeline to investigate the contribution of CNV to metal tolerance in <em>A. halleri</em> using bioinformatics tools, R</p>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>Student at School of Molecular and Theoretical Biology</h3>
+                        <p class="project-location"><em>Barcelona, Spain–Online • Aug 2019</em></p>
+                        <p>Investigated intracellular parasites <em>B. mallei</em> using Python, bioinformatics tools in Laboratory of Prof. Dr. Mikhail Gelfand in 2019</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="teaching-volunteering">
+                <h2>Teaching and Volunteering</h2>
+                <div class="teaching-list">
+                    <div class="teaching-item">
+                        <h3>Teaching Assistant in Computational Systems Biology at ETH Zürich</h3>
+                        <p class="project-location"><em>Zürich, Switzerland • Oct 2024–Now</em></p>
+                        <p>Writing lecture notes for computational systems biology class under Prof. Dr. Jörg Stelling</p>
+                    </div>
+
+                    <div class="teaching-item">
+                        <h3>Teaching Assistant in Maths and Supervisor in Laboratory practical at RUB</h3>
+                        <p class="project-location"><em>Bochum, Germany • Oct 2020–Sept 2022</em></p>
+                        <p>Supervised tutorial classes, graded assignments and exams for the maths courses for first-year (bio-)chemistry students</p>
+                        <p>Monitored experiments and graded reports of 20 students the introductory chemistry practical</p>
+                    </div>
+
+                    <div class="teaching-item">
+                        <h3>Staff member and Mentor at School of Molecular and Theoretical Biology</h3>
+                        <p class="project-location"><em>Online • Aug 2020–Aug 2022</em></p>
+                        <p>Introduced machine learning, Python, Git to high-school students in Laboratory of Prof. Dr. Olga Kalinina in 2022</p>
+                        <p>Mentored 12 students throughout their stay at the online summer school and beyond, and organized school-wide social activities</p>
+                    </div>
+                </div>
+            </section>
         </div>
-    </footer>
+    </main>
+
+
 
     <script src="script.js"></script>
 </body>
