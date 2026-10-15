@@ -210,7 +210,7 @@ footer{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(
     <div class="buttons" aria-hidden="true">
       <span class="b88">made with ♡</span><span class="b88">window shopper</span><span class="b88">best viewed on my phone</span><span class="b88">treat yourself club</span><span class="b88">est. oct 2026</span>
     </div>
-    <p id="ratesnote">All prices in euros, converted from each shop's own price at the European Central Bank rate for 15 Oct 2026 (€1 = £0.8461 = $1.1208 = ₩1,508).</p>
+    <p id="ratesnote">All prices in euros, converted from each shop's own price at the European Central Bank rate for 15 Oct 2026 (€1 = £0.8461 = $1.1208).</p>
   </footer>
 </div>
 
@@ -246,15 +246,15 @@ const ITEMS = [
   {cat:"jewelry",kind:"Ring",brand:"Soleilu",name:"Las Olas con Piedras",img:"olas",price:260,cur:"€",color:"Silver with clear stones",material:"925 sterling silver, cubic zirconia",desc:"Sea-inspired wave ring with broken zirconias cast in place. Open design, so the size adjusts.",url:"https://soleilu.com/en/products/las-olas-con-piedras?variant=53444994728266"},
   {cat:"jewelry",kind:"Ring",brand:"Soleilu",name:"Basic Ring",img:"basic",price:140,cur:"€",color:"Silver",material:"925 sterling silver",desc:"Simple everyday band, handmade without moulds so each one comes out slightly different.",url:"https://soleilu.com/en/products/basic-ring?variant=53446115033418"},
   {cat:"jewelry",kind:"Hoop earrings",brand:"Tyger by the Tail",name:"The Mini Carmens",img:"carmens",price:72,cur:"£",color:"Peridot and citrine stones",material:"Sterling silver or 18ct gold-plated brass (9ct gold made to order)",desc:"A pair of organic-shaped mini hoops with little peridot and citrine jewels.",url:"https://www.tygerbythetail.co.uk/products/the-mini-carmens?variant=54951761052034"},
-  {cat:"shops",kind:"Shoe shop",brand:"Psylos",name:"Psylos",img:"psylos",color:"Pictured: XMZY X-Dimension Chunky Shoes, white (€269.80)",material:"Independent chunky footwear labels",desc:"Bold, sculptural shoes mixing street culture with design. Prices only show on each product page.",url:"https://psylos1.com/en/products/xmzy-x-dimension-chunky-shoes-white"},
-  {cat:"shops",kind:"Shoe shop",brand:"Fluevog",name:"Fluevog women's shoes",img:"fluevog",lo:499,hi:599,cur:"$",color:"Pictured: Poppet (purple). Also: Twee (green, yellow), Kinship (green snake), Kahlo (black)",material:"249 styles in stock",desc:"A whole collection page rather than one item. Send the link to the exact pair you want and it gets its own card.",url:"https://www.fluevog.com/collections/womens?filter.v.availability=1&page=3&sort_by=created-descending"},
-  {cat:"shops",kind:"Shoes & bags",brand:"Cruda",name:"Cruda shop",img:"cruda",lo:350,hi:845,cur:"$",color:"Picks seen: Amanda, Lola, Carmen, Cecilia con Lazo, Victoria, Jenny",material:"35 items, shoes and bags",desc:"Handmade designer shoes and bags. This is the full shop page, so pick a favourite and send its link.",url:"https://crudastore.com/tienda/"},
-  {cat:"shops",kind:"Clothing & accessories",brand:"Damson Madder",name:"Damson Madder",img:"damson",lo:28,hi:125,cur:"£",color:"Pictured: Genevieve Midi Dress, rose print",material:"Knitwear, dresses, outerwear, nightwear and more (250+ items)",desc:"London label with prints, stripes and gingham. Most pieces fall in the price range shown.",url:"https://damsonmadder.com/"},
-  {cat:"shops",kind:"Clothing",brand:"ADER error",name:"ADER error",img:"ader",color:"Pictured: AW campaign",material:"Seoul label, clothing and accessories",desc:"Prices aren't on the main page. Send a link to a specific piece and it gets its own card.",url:"https://adererror.com/en/shop"},
-  {cat:"shops",kind:"Clothing & shoes",brand:"Post Archive Faction",name:"Post Archive Faction (PAF)",img:"paf",lo:14500,hi:148400,cur:"₩",color:"Pictured: Cut Out Coat",material:"155 items. Outerwear goes up to about €310.",desc:"Seoul label known for technical, deconstructed cuts. Most items fall in the price range shown.",url:"https://postarchivefaction.com/"},
-  {cat:"shops",kind:"Clothing & shoes",brand:"GmbH",name:"GmbH new season",img:"gmbh",color:"Pictured: Overknee boot, organic leather",material:"Boots, jackets, tops, hoodies and swimwear",desc:"Berlin label. Prices only show on each product page.",url:"https://gmbhgmbh.eu/shop/?category=new+season"},
-  {cat:"shops",kind:"Clothing",brand:"Ottolinger",name:"Ottolinger",img:"otto",color:"Pictured: Mesh Gown (also on your Clothes shelf)",material:"Berlin label, dresses, knits and accessories",desc:"Prices only show on each product page.",url:"https://ottolinger.com/shop"},
-  {cat:"shops",kind:"Shoe shop",brand:"Miista",name:"Miista",img:"miista",lo:210,hi:495,cur:"€",color:"Pictured: Inaya mid-calf biker boots, brown",material:"Boots, mules and platforms",desc:"London label with shoes made in Spain. Mules start around €210 and tall boots go up to about €495.",url:"https://www.miista.com/en"}
+  {cat:"shops",kind:"Shoe shop",brand:"Psylos",name:"Psylos",img:"psylos",color:"Pictured: XMZY X-Dimension Chunky Shoes, white",material:"Independent chunky footwear labels",desc:"Bold, sculptural shoes mixing street culture with design.",url:"https://psylos1.com/en/products/xmzy-x-dimension-chunky-shoes-white"},
+  {cat:"shops",kind:"Shoe shop",brand:"Fluevog",name:"Fluevog women's shoes",img:"fluevog",color:"Pictured: Poppet (purple). Also: Twee (green, yellow), Kinship (green snake), Kahlo (black)",material:"249 styles in stock",desc:"Chunky, characterful shoes and boots from Vancouver.",url:"https://www.fluevog.com/collections/womens?filter.v.availability=1&page=3&sort_by=created-descending"},
+  {cat:"shops",kind:"Shoes & bags",brand:"Cruda",name:"Cruda shop",img:"cruda",color:"Picks seen: Amanda, Lola, Carmen, Cecilia con Lazo, Victoria, Jenny",material:"35 items, shoes and bags",desc:"Handmade designer shoes and bags from Mexico.",url:"https://crudastore.com/tienda/"},
+  {cat:"shops",kind:"Clothing & accessories",brand:"Damson Madder",name:"Damson Madder",img:"damson",color:"Pictured: Genevieve Midi Dress, rose print",material:"Knitwear, dresses, outerwear, nightwear and more (250+ items)",desc:"London label with prints, stripes and gingham.",url:"https://damsonmadder.com/"},
+  {cat:"shops",kind:"Clothing",brand:"ADER error",name:"ADER error",img:"ader",color:"Pictured: AW campaign",material:"Seoul label, clothing and accessories",desc:"Seoul label with playful, slightly off-kilter basics.",url:"https://adererror.com/en/shop"},
+  {cat:"shops",kind:"Clothing & shoes",brand:"Post Archive Faction",name:"Post Archive Faction (PAF)",img:"paf",color:"Pictured: Cut Out Coat",material:"155 items, lots of outerwear",desc:"Seoul label known for technical, deconstructed cuts.",url:"https://postarchivefaction.com/"},
+  {cat:"shops",kind:"Clothing & shoes",brand:"GmbH",name:"GmbH new season",img:"gmbh",color:"Pictured: Overknee boot, organic leather",material:"Boots, jackets, tops, hoodies and swimwear",desc:"Berlin label with sharp tailoring and leather boots.",url:"https://gmbhgmbh.eu/shop/?category=new+season"},
+  {cat:"shops",kind:"Clothing",brand:"Ottolinger",name:"Ottolinger",img:"otto",color:"Pictured: Mesh Gown (also on your Clothes shelf)",material:"Berlin label, dresses, knits and accessories",desc:"Berlin label with sculptural, twisted dresses and knits.",url:"https://ottolinger.com/shop"},
+  {cat:"shops",kind:"Shoe shop",brand:"Miista",name:"Miista",img:"miista",color:"Pictured: Inaya mid-calf biker boots, brown",material:"Boots, mules and platforms",desc:"London label with shoes made in Spain. Mules, biker boots and tall riding boots.",url:"https://www.miista.com/en"}
 ];
 
 
@@ -262,11 +262,11 @@ const imgSrc = k => (IMGS && IMGS[k]) || ("img/" + k + ".jpg");
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 ITEMS.forEach(i => i.id = slug(i.brand + "-" + i.name));
 
-// European Central Bank reference rates, 15 Oct 2026: €1 = £0.8461 = $1.1208 = ₩1508.48
+// European Central Bank reference rates, 15 Oct 2026: €1 = £0.8461 = $1.1208
 const PER_EUR = {"€":1,"£":0.8461,"$":1.1208,"₩":1508.48};
 const eur = (n,cur) => n / PER_EUR[cur];
 const money = (n,cur,dec) => cur + n.toLocaleString("en-GB",{minimumFractionDigits:dec,maximumFractionDigits:dec});
-const fmt = it => it.lo==null && it.price==null ? "Prices on site" : it.lo!=null
+const fmt = it => it.lo==null && it.price==null ? "" : it.lo!=null
   ? money(eur(it.lo,it.cur),"€",0) + "–" + money(eur(it.hi,it.cur),"€",0).slice(1)
   : money(eur(it.price,it.cur),"€",2);
 const orig = it => !it.cur || it.cur==="€" ? "" : "was " + (it.lo!=null ? money(it.lo,it.cur,0)+"–"+money(it.hi,it.cur,0).slice(1) : money(it.price,it.cur,it.price%1?2:0));
@@ -306,8 +306,8 @@ function card(it){
     <div class="tile"><img src="${imgSrc(it.img)}" alt="${esc(it.name)}" loading="lazy"></div>
     <span class="kind">${esc(it.kind)}</span>
     <div><p class="brand">${esc(it.brand)}</p><h3 class="name">${esc(it.name)}</h3></div>
-    <div class="pricerow"><div class="price">${esc(fmt(it))}${orig(it)?`<small>${esc(orig(it))}${it.lo!=null?" for most items":""}</small>`:""}</div>
-      ${pickable(it)?`<button class="pick" type="button" data-pick="${it.id}" aria-pressed="${on}">${on?"♥ in basket":"♡ basket"}</button>`:""}</div>
+    ${it.cat==="shops"?"":`<div class="pricerow"><div class="price">${esc(fmt(it))}${orig(it)?`<small>${esc(orig(it))}${it.lo!=null?" for most items":""}</small>`:""}</div>
+      ${pickable(it)?`<button class="pick" type="button" data-pick="${it.id}" aria-pressed="${on}">${on?"♥ in basket":"♡ basket"}</button>`:""}</div>`}
     <p class="desc">${esc(it.desc)}</p>
     <dl><dt>Colour</dt><dd>${esc(it.color)}</dd><dt>${it.cat==="shops"?"Stock":"Made of"}</dt><dd>${esc(it.material)}</dd></dl>
     <a class="go" href="${esc(it.url)}" target="_blank" rel="noopener">Open in shop ↗</a>
