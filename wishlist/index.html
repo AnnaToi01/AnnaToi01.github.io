@@ -169,9 +169,6 @@ footer{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(
 .trash{position:absolute;top:20px;right:8px;z-index:3;display:flex;align-items:center;gap:4px;height:34px;min-width:34px;padding:0 7px;border-radius:999px;border:2px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;box-shadow:0 2px 0 var(--line);transform:rotate(5deg);font:800 .8rem var(--body)}
 .trash svg{width:20px;height:20px;flex:none}
 .trash:hover svg{animation:wobble .4s ease}
-.trash .trash-q{display:none}
-.trash.armed{background:var(--pink);border-color:var(--pink);color:var(--paper)}
-.trash.armed .trash-q{display:inline}
 @keyframes wobble{25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}}
 .toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;background:var(--ink);color:var(--paper);font-weight:700;padding:8px 16px;border-radius:999px;max-width:calc(100% - 32px);text-align:center}
 .loading{font-family:var(--hand);font-size:1.4rem;color:var(--muted);text-align:center}
@@ -206,6 +203,49 @@ footer{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(
 .mini__row .price{font-size:1.05rem}
 .mini__row .pick{font-size:.72rem;padding:2px 8px}
 .sale{font-family:var(--hand);font-weight:700;color:var(--pink);font-size:.95rem}
+
+.hh{position:relative;display:inline-block;font-weight:700;font-style:normal}
+.hh::after{content:"♥";position:absolute;left:0;top:0}
+.hh.full::after{clip-path:inset(0 0 0 0)}
+.hh.half::after{clip-path:inset(0 50% 0 0)}
+.hh.none::after{content:none}
+
+/* handwritten sticky note under an item */
+.note{position:relative;background:var(--butter);color:var(--ink);font-family:var(--hand);font-weight:700;font-size:1.15rem;line-height:1.15;padding:8px 30px 8px 12px;border-radius:3px 12px 3px 3px;transform:rotate(-1.2deg);box-shadow:0 3px 0 var(--line)}
+.note p{margin:0;white-space:pre-line;overflow-wrap:anywhere}
+.note::before{content:"✎";margin-right:4px;color:var(--pink)}
+.note p{display:inline}
+.note__edit{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:999px;border:0;background:var(--paper);color:var(--ink);cursor:pointer;font-size:.8rem}
+.note-add{align-self:flex-start;font:700 1.05rem var(--hand);color:var(--muted);background:none;border:2px dashed var(--line);border-radius:999px;padding:2px 12px;cursor:pointer}
+.note-add:hover{color:var(--pink);border-color:var(--pink)}
+.note-form{display:flex;flex-direction:column;gap:6px}
+.note-form textarea{font:700 1.1rem/1.2 var(--hand);color:var(--ink);background:var(--butter);border:2px solid var(--line);border-radius:6px;padding:8px 10px;resize:vertical;width:100%}
+.note-form__btns{display:flex;gap:6px}
+.mini .note{font-size:1rem;padding:6px 26px 6px 8px}
+.mini .note-add{font-size:.95rem}
+
+/* flagged for deletion: faded until the next update removes it */
+.leaving > *:not(.trash):not(.leaving-tag){opacity:.35;filter:grayscale(1)}
+tr.leaving td{opacity:.4;text-decoration:line-through}
+.leaving-tag{position:absolute;left:50%;top:38%;transform:translateX(-50%) rotate(-8deg);z-index:4;font-family:var(--hand);font-weight:700;font-size:1.15rem;line-height:1.1;text-align:center;color:var(--paper);background:var(--pink);padding:4px 12px;border-radius:8px;box-shadow:0 3px 0 var(--line);width:max-content;max-width:90%}
+.mini .leaving-tag{font-size:.95rem;top:30%}
+.inboxcard .leaving-tag{top:50%;transform:translate(-50%,-50%) rotate(-4deg)}
+.hearts.ro span{cursor:default}
+
+/* 90s confirm window */
+.dlg-back{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(59,30,77,.45)}
+.dlg{width:min(340px,100%);background:var(--paper);border:2px solid var(--ink);border-radius:6px 6px 4px 4px;box-shadow:6px 6px 0 var(--shadow),0 20px 50px rgba(0,0,0,.3);overflow:hidden;animation:pop .18s ease-out}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+.dlg__bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 6px 5px 10px;background:linear-gradient(#c58ce8,#a869d1);border-bottom:2px solid var(--ink);font-family:var(--mono);font-size:.82rem;font-weight:700;color:#fff;text-shadow:1px 1px 0 rgba(59,30,77,.6)}
+.dlg__x{width:22px;height:20px;display:grid;place-items:center;padding:0;background:#f0e7f7;border:1px solid #3b1e4d;border-radius:2px;font:700 .8rem/1 var(--mono);color:#3b1e4d;box-shadow:inset -1px -1px 0 rgba(59,30,77,.35);cursor:pointer}
+.dlg__body{display:flex;gap:14px;align-items:center;padding:18px 16px 10px}
+.dlg__icon{flex:none;width:44px;height:44px;color:var(--ink)}
+.dlg__icon svg{width:100%;height:100%}
+.dlg__body p{margin:0;font-size:.95rem}
+.dlg__btns{display:flex;justify-content:center;gap:10px;padding:8px 16px 16px}
+.dlg__btn{min-width:84px;padding:5px 12px;font:700 .85rem var(--mono);color:#3b1e4d;background:#f0e7f7;border:2px solid;border-color:#fff #3b1e4d #3b1e4d #fff;box-shadow:1px 1px 0 #3b1e4d;cursor:pointer}
+.dlg__btn:active{border-color:#3b1e4d #fff #fff #3b1e4d}
+.dlg__btn:focus-visible{outline:1px dotted #3b1e4d;outline-offset:-5px}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.card{transform:none!important}.sparkle{display:none}}
 </style>
@@ -270,7 +310,7 @@ footer{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(
 
 <script>
 const IMGS = null;
-const SEED = [{"cat": "clothes", "kind": "Maxi dress", "brand": "Rhi Dancey", "name": "The Options Dress", "img": "options", "price": 150, "cur": "£", "color": "Art print, black lining", "material": "95% power mesh, Lycra jersey lining", "desc": "Form-fitting maxi with adjustable spaghetti straps and a small slit. Limited-edition collab with artist Omer Mosseri. Stretchy, not see-through.", "url": "https://www.rhidancey.com/shop/p/the-options-dress", "id": "rhi-dancey-the-options-dress", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Longsleeve top", "brand": "Rhi Dancey", "name": "Lucky Star Longsleeve", "img": "lucky", "price": 89, "cur": "£", "color": "Baby blue", "material": "95% cotton, 5% elastane", "desc": "Fitted longsleeve, digitally printed on the front and sleeves. Limited-edition collab with Fiorenza Art.", "url": "https://www.rhidancey.com/shop/p/lucky-star-longsleeve", "id": "rhi-dancey-lucky-star-longsleeve", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Longsleeve top", "brand": "Rhi Dancey", "name": "Emma Longsleeve", "img": "emma", "price": 89, "cur": "£", "color": "Bunny print, striped sleeves", "material": "Cotton jersey and Lycra", "desc": "Printed bunny motif with contrast deadstock striped knit sleeves, a scoop back and two adjustable ties. Collab with Swan Gossip.", "url": "https://www.rhidancey.com/shop/p/emma-longsleeve", "id": "rhi-dancey-emma-longsleeve", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Drape skirt", "brand": "Kiko Kostadinov", "name": "Oriole Drape Skirt", "img": "kiko", "price": 935, "cur": "€", "color": "Cobalt Brush (also Slate Brush)", "material": "Printed metallic satin, 100% polyester", "desc": "Mid-rise skirt with gathered drapes around a quilted yoke, cascading tiers of different lengths and an invisible side zip.", "url": "https://kikokostadinov.com/products/oriole-drape-skirt-cobalt-brush", "id": "kiko-kostadinov-oriole-drape-skirt", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Layered tee", "brand": "ADSB", "name": "Mixed Stripe Sleeve Layered Top", "img": "adsb", "price": 180, "cur": "$", "color": "Charcoal", "material": "Cotton, polyester and elastane panels", "desc": "Oversized tee with a vintage-style graphic print, built to look like a longsleeve under a short-sleeve. Mismatched stripe sleeves and an asymmetric hem.", "url": "https://adsb.co.kr/products/mixed-stripe-sleeve-layered-top-charcoal", "id": "adsb-mixed-stripe-sleeve-layered-top", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Gown", "brand": "Ottolinger", "name": "Mesh Gown (Glitched Check)", "img": "otto", "price": 487, "cur": "€", "color": "Glitched check print", "material": "90% recycled polyester, 10% elastane, stretch jersey lining", "desc": "Sculptural floor-length gown with a cowl neckline, logo cuffs and an all-over graphic print. Designed in Berlin, made in Greece.", "url": "https://ottolinger.com/shop/products/aw26-mesh-gown-glitched-check", "id": "ottolinger-mesh-gown-glitched-check", "hearts": 0, "added": "2026-10-15"}, {"cat": "jewelry", "kind": "Ring", "brand": "Soleilu", "name": "Las Olas con Piedras", "img": "olas", "price": 260, "cur": "€", "color": "Silver with clear stones", "material": "925 sterling silver, cubic zirconia", "desc": "Sea-inspired wave ring with broken zirconias cast in place. Open design, so the size adjusts.", "url": "https://soleilu.com/en/products/las-olas-con-piedras?variant=53444994728266", "id": "soleilu-las-olas-con-piedras", "hearts": 0, "added": "2026-10-15"}, {"cat": "jewelry", "kind": "Ring", "brand": "Soleilu", "name": "Basic Ring", "img": "basic", "price": 140, "cur": "€", "color": "Silver", "material": "925 sterling silver", "desc": "Simple everyday band, handmade without moulds so each one comes out slightly different.", "url": "https://soleilu.com/en/products/basic-ring?variant=53446115033418", "id": "soleilu-basic-ring", "hearts": 0, "added": "2026-10-15"}, {"cat": "jewelry", "kind": "Hoop earrings", "brand": "Tyger by the Tail", "name": "The Mini Carmens", "img": "carmens", "price": 72, "cur": "£", "color": "Peridot and citrine stones", "material": "Sterling silver or 18ct gold-plated brass (9ct gold made to order)", "desc": "A pair of organic-shaped mini hoops with little peridot and citrine jewels.", "url": "https://www.tygerbythetail.co.uk/products/the-mini-carmens?variant=54951761052034", "id": "tyger-by-the-tail-the-mini-carmens", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoe shop", "brand": "Psylos", "name": "Psylos", "img": "psylos", "color": "Pictured: XMZY X-Dimension Chunky Shoes, white", "material": "Independent chunky footwear labels", "desc": "Bold, sculptural shoes mixing street culture with design.", "url": "https://psylos1.com/en/products/xmzy-x-dimension-chunky-shoes-white", "id": "psylos-psylos", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoe shop", "brand": "Fluevog", "name": "Fluevog women's shoes", "img": "fluevog", "color": "Pictured: Poppet (purple). Also: Twee (green, yellow), Kinship (green snake), Kahlo (black)", "material": "249 styles in stock", "desc": "Chunky, characterful shoes and boots from Vancouver.", "url": "https://www.fluevog.com/collections/womens?filter.v.availability=1&page=3&sort_by=created-descending", "id": "fluevog-fluevog-women-s-shoes", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoes & bags", "brand": "Cruda", "name": "Cruda shop", "img": "cruda", "color": "Picks seen: Amanda, Lola, Carmen, Cecilia con Lazo, Victoria, Jenny", "material": "35 items, shoes and bags", "desc": "Handmade designer shoes and bags from Mexico.", "url": "https://crudastore.com/tienda/", "id": "cruda-cruda-shop", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing & accessories", "brand": "Damson Madder", "name": "Damson Madder", "img": "damson", "color": "Pictured: Genevieve Midi Dress, rose print", "material": "Knitwear, dresses, outerwear, nightwear and more (250+ items)", "desc": "London label with prints, stripes and gingham.", "url": "https://damsonmadder.com/", "id": "damson-madder-damson-madder", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing", "brand": "ADER error", "name": "ADER error", "img": "ader", "color": "Pictured: AW campaign", "material": "Seoul label, clothing and accessories", "desc": "Seoul label with playful, slightly off-kilter basics.", "url": "https://adererror.com/en/shop", "id": "ader-error-ader-error", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing & shoes", "brand": "Post Archive Faction", "name": "Post Archive Faction (PAF)", "img": "paf", "color": "Pictured: Cut Out Coat", "material": "155 items, lots of outerwear", "desc": "Seoul label known for technical, deconstructed cuts.", "url": "https://postarchivefaction.com/", "id": "post-archive-faction-post-archive-faction-paf", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing & shoes", "brand": "GmbH", "name": "GmbH new season", "img": "gmbh", "color": "Pictured: Overknee boot, organic leather", "material": "Boots, jackets, tops, hoodies and swimwear", "desc": "Berlin label with sharp tailoring and leather boots.", "url": "https://gmbhgmbh.eu/shop/?category=new+season", "id": "gmbh-gmbh-new-season", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing", "brand": "Ottolinger", "name": "Ottolinger", "img": "otto", "color": "Pictured: Mesh Gown (also on your Clothes shelf)", "material": "Berlin label, dresses, knits and accessories", "desc": "Berlin label with sculptural, twisted dresses and knits.", "url": "https://ottolinger.com/shop", "id": "ottolinger-ottolinger", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoe shop", "brand": "Miista", "name": "Miista", "img": "miista", "color": "Pictured: Inaya mid-calf biker boots, brown", "material": "Boots, mules and platforms", "desc": "London label with shoes made in Spain. Mules, biker boots and tall riding boots.", "url": "https://www.miista.com/en", "id": "miista-miista", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Loewe – Vintage Yellow & Purple", "img": "soksi-loewe", "price": 65.0, "cur": "€", "color": "Vintage yellow and purple", "material": "40 den 3D, bicolour, made in Italy · size S/M", "desc": "Two-tone 3D tights with a flat seam and no gusset. Logo knitted under the waistband.", "url": "https://maisonsoksi.com/products/loewe-vintage-yellow-purple-tights?variant=52995419078999", "id": "soksi-loewe", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Hard Pois – Mulberry", "img": "soksi-hard-pois", "price": 65.0, "cur": "€", "color": "Mulberry", "material": "30 den, double covered, made in Italy · size S/M", "desc": "Bicolour polka-dot tights with a flat seam and no gusset.", "url": "https://maisonsoksi.com/products/hard-pois-mulberry-tights?variant=52995417243991", "id": "soksi-hard-pois", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Super Wormhole – Red", "img": "soksi-super-wormhole", "price": 44.0, "cur": "€", "color": "Red", "material": "32 den, double covered, made in Italy · size S/M", "desc": "Swirly wormhole pattern with a deeper tone, flat seam and no gusset.", "url": "https://maisonsoksi.com/products/super-wormhole-red-tights?variant=52995453747543", "id": "soksi-super-wormhole", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Wormhole – Purple", "img": "soksi-wormhole", "price": 44.0, "cur": "€", "color": "Purple", "material": "32 den, double covered, made in Italy · size S/M", "desc": "Bicolour wormhole pattern, flat seam and no gusset.", "url": "https://maisonsoksi.com/products/wormhole-purple-tights?variant=52995452666199", "id": "soksi-wormhole", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Winterberry Check", "img": "viken-winterberry", "price": 39.9, "cur": "$", "color": "Red berry check", "material": "Soft stretch fabric · size S", "desc": "Classic red-berry checks with a festive feel.", "url": "https://vikenplan.com/collections/plaid-1/products/winterberry-check-vk010625c249", "id": "viken-winterberry", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Emerald Tartan", "img": "viken-emerald-tartan", "price": 39.9, "cur": "$", "color": "Green tartan", "material": "Soft, durable stretch fabric · size S", "desc": "Rich green tartan, warm enough for winter layering.", "url": "https://vikenplan.com/collections/plaid-1/products/emerald-tartan-vk010625d548", "id": "viken-emerald-tartan", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Lavender Plaid", "img": "viken-lavender-plaid", "price": 39.9, "cur": "$", "color": "Lavender pastel check", "material": "Cosy stretch fabric · size S", "desc": "Soft pastel plaid for autumn and winter outfits.", "url": "https://vikenplan.com/collections/plaid-1/products/vk010625d547", "id": "viken-lavender-plaid", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Brown Blue College Check", "img": "viken-college-check", "price": 39.9, "cur": "$", "color": "Brown and blue check", "material": "Stretch fabric · size S", "desc": "Preppy brown-and-blue college check.", "url": "https://vikenplan.com/collections/plaid-1/products/viken-plan-college-art-print-tights-colored-stripes-pantyhose-tights-sky-blue-check-vk0281", "id": "viken-college-check", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Thor Satin Gloss", "img": "viken-thor-satin", "price": 39.9, "cur": "$", "color": "Black", "material": "Glossy stretch satin · size S", "desc": "High-shine satin tights for day or night.", "url": "https://vikenplan.com/products/thor-collection-vk070625d001?variant=46316281364642", "id": "viken-thor-satin", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Silky Velvet Touch – Lilac", "img": "viken-velvet-lilac", "price": 29.0, "cur": "$", "color": "Lilac", "material": "Velvet-touch fabric · size S", "desc": "Silky lilac tights with a soft velvet feel.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-silky-comfort-pantyhose-tightsvelvet-touch-vk030125c003?variant=45838493515938", "id": "viken-velvet-lilac", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Purple-Yellow Stripes Check", "img": "viken-purple-yellow-check", "price": 39.9, "cur": "$", "color": "Purple and yellow check", "material": "Stretch fabric · size S", "desc": "Purple and yellow checkered print.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-blue-red-stripes-checked-tights-hosiery-pantyhose-vk0489", "id": "viken-purple-yellow-check", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Crew socks", "brand": "Viken Plan", "name": "Pink Axolotl Socks", "img": "viken-axolotl-socks", "price": 25.9, "cur": "$", "color": "Light pink", "material": "Knit, with a 3D axolotl appliqué · size Free Size", "desc": "Light pink crew socks with a little knitted axolotl at the ankle, gills and tail included.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-pink-axolotl-3d-knit-applique-crew-socks-vk801226c102", "id": "viken-axolotl-socks", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Purple Black Vertical Stripe", "img": "viken-purple-black-stripe", "price": 39.9, "cur": "$", "color": "Purple and black stripes", "material": "Stretch fabric · size S", "desc": "Sleek vertical stripes for every day or evening.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-purple-black-vertical-striped-tights-hosiery-pantyhose-vk401226d241", "id": "viken-purple-black-stripe", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Striped & Polka Dot Gray", "img": "viken-stripe-dot-gray", "price": 39.9, "cur": "$", "color": "Gray", "material": "Stretch fabric · size S", "desc": "Gray tights mixing stripes and polka dots.", "url": "https://vikenplan.com/collections/striped/products/striped-polka-dot-gray-tights-hosiery-pantyhose-vk010125d628", "id": "viken-stripe-dot-gray", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Teal Check", "img": "viken-teal-check", "price": 39.9, "cur": "$", "color": "Teal check", "material": "Stretch fabric · size S", "desc": "Cool teal checks with a festive twist.", "url": "https://vikenplan.com/collections/plaid-1/products/teal-check-vk010625c250", "id": "viken-teal-check", "hearts": 0, "added": "2026-10-15", "was": 59.0}];
+const SEED = [{"cat": "clothes", "kind": "Maxi dress", "brand": "Rhi Dancey", "name": "The Options Dress", "img": "options", "price": 150, "cur": "£", "color": "Art print, black lining", "material": "95% power mesh, Lycra jersey lining", "desc": "Form-fitting maxi with adjustable spaghetti straps and a small slit. Limited-edition collab with artist Omer Mosseri. Stretchy, not see-through.", "url": "https://www.rhidancey.com/shop/p/the-options-dress", "id": "rhi-dancey-the-options-dress", "hearts": 5, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Longsleeve top", "brand": "Rhi Dancey", "name": "Lucky Star Longsleeve", "img": "lucky", "price": 89, "cur": "£", "color": "Baby blue", "material": "95% cotton, 5% elastane", "desc": "Fitted longsleeve, digitally printed on the front and sleeves. Limited-edition collab with Fiorenza Art.", "url": "https://www.rhidancey.com/shop/p/lucky-star-longsleeve", "id": "rhi-dancey-lucky-star-longsleeve", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Longsleeve top", "brand": "Rhi Dancey", "name": "Emma Longsleeve", "img": "emma", "price": 89, "cur": "£", "color": "Bunny print, striped sleeves", "material": "Cotton jersey and Lycra", "desc": "Printed bunny motif with contrast deadstock striped knit sleeves, a scoop back and two adjustable ties. Collab with Swan Gossip.", "url": "https://www.rhidancey.com/shop/p/emma-longsleeve", "id": "rhi-dancey-emma-longsleeve", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Drape skirt", "brand": "Kiko Kostadinov", "name": "Oriole Drape Skirt", "img": "kiko", "price": 935, "cur": "€", "color": "Cobalt Brush (also Slate Brush)", "material": "Printed metallic satin, 100% polyester", "desc": "Mid-rise skirt with gathered drapes around a quilted yoke, cascading tiers of different lengths and an invisible side zip.", "url": "https://kikokostadinov.com/products/oriole-drape-skirt-cobalt-brush", "id": "kiko-kostadinov-oriole-drape-skirt", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Layered tee", "brand": "ADSB", "name": "Mixed Stripe Sleeve Layered Top", "img": "adsb", "price": 180, "cur": "$", "color": "Charcoal", "material": "Cotton, polyester and elastane panels", "desc": "Oversized tee with a vintage-style graphic print, built to look like a longsleeve under a short-sleeve. Mismatched stripe sleeves and an asymmetric hem.", "url": "https://adsb.co.kr/products/mixed-stripe-sleeve-layered-top-charcoal", "id": "adsb-mixed-stripe-sleeve-layered-top", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Gown", "brand": "Ottolinger", "name": "Mesh Gown (Glitched Check)", "img": "otto", "price": 487, "cur": "€", "color": "Glitched check print", "material": "90% recycled polyester, 10% elastane, stretch jersey lining", "desc": "Sculptural floor-length gown with a cowl neckline, logo cuffs and an all-over graphic print. Designed in Berlin, made in Greece.", "url": "https://ottolinger.com/shop/products/aw26-mesh-gown-glitched-check", "id": "ottolinger-mesh-gown-glitched-check", "hearts": 0, "added": "2026-10-15"}, {"cat": "jewelry", "kind": "Ring", "brand": "Soleilu", "name": "Las Olas con Piedras", "img": "olas", "price": 260, "cur": "€", "color": "Silver with clear stones", "material": "925 sterling silver, cubic zirconia", "desc": "Sea-inspired wave ring with broken zirconias cast in place. Open design, so the size adjusts.", "url": "https://soleilu.com/en/products/las-olas-con-piedras?variant=53444994728266", "id": "soleilu-las-olas-con-piedras", "hearts": 0, "added": "2026-10-15"}, {"cat": "jewelry", "kind": "Ring", "brand": "Soleilu", "name": "Basic Ring", "img": "basic", "price": 140, "cur": "€", "color": "Silver", "material": "925 sterling silver", "desc": "Simple everyday band, handmade without moulds so each one comes out slightly different.", "url": "https://soleilu.com/en/products/basic-ring?variant=53446115033418", "id": "soleilu-basic-ring", "hearts": 0, "added": "2026-10-15"}, {"cat": "jewelry", "kind": "Hoop earrings", "brand": "Tyger by the Tail", "name": "The Mini Carmens", "img": "carmens", "price": 72, "cur": "£", "color": "Peridot and citrine stones", "material": "Sterling silver or 18ct gold-plated brass (9ct gold made to order)", "desc": "A pair of organic-shaped mini hoops with little peridot and citrine jewels.", "url": "https://www.tygerbythetail.co.uk/products/the-mini-carmens?variant=54951761052034", "id": "tyger-by-the-tail-the-mini-carmens", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoe shop", "brand": "Psylos", "name": "Psylos", "img": "psylos", "color": "Pictured: XMZY X-Dimension Chunky Shoes, white", "material": "Independent chunky footwear labels", "desc": "Bold, sculptural shoes mixing street culture with design.", "url": "https://psylos1.com/en/products/xmzy-x-dimension-chunky-shoes-white", "id": "psylos-psylos", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoe shop", "brand": "Fluevog", "name": "Fluevog women's shoes", "img": "fluevog", "color": "Pictured: Poppet (purple). Also: Twee (green, yellow), Kinship (green snake), Kahlo (black)", "material": "249 styles in stock", "desc": "Chunky, characterful shoes and boots from Vancouver.", "url": "https://www.fluevog.com/collections/womens?filter.v.availability=1&page=3&sort_by=created-descending", "id": "fluevog-fluevog-women-s-shoes", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoes & bags", "brand": "Cruda", "name": "Cruda shop", "img": "cruda", "color": "Picks seen: Amanda, Lola, Carmen, Cecilia con Lazo, Victoria, Jenny", "material": "35 items, shoes and bags", "desc": "Handmade designer shoes and bags from Mexico.", "url": "https://crudastore.com/tienda/", "id": "cruda-cruda-shop", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing & accessories", "brand": "Damson Madder", "name": "Damson Madder", "img": "damson", "color": "Pictured: Genevieve Midi Dress, rose print", "material": "Knitwear, dresses, outerwear, nightwear and more (250+ items)", "desc": "London label with prints, stripes and gingham.", "url": "https://damsonmadder.com/", "id": "damson-madder-damson-madder", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing", "brand": "ADER error", "name": "ADER error", "img": "ader", "color": "Pictured: AW campaign", "material": "Seoul label, clothing and accessories", "desc": "Seoul label with playful, slightly off-kilter basics.", "url": "https://adererror.com/en/shop", "id": "ader-error-ader-error", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing & shoes", "brand": "Post Archive Faction", "name": "Post Archive Faction (PAF)", "img": "paf", "color": "Pictured: Cut Out Coat", "material": "155 items, lots of outerwear", "desc": "Seoul label known for technical, deconstructed cuts.", "url": "https://postarchivefaction.com/", "id": "post-archive-faction-post-archive-faction-paf", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing & shoes", "brand": "GmbH", "name": "GmbH new season", "img": "gmbh", "color": "Pictured: Overknee boot, organic leather", "material": "Boots, jackets, tops, hoodies and swimwear", "desc": "Berlin label with sharp tailoring and leather boots.", "url": "https://gmbhgmbh.eu/shop/?category=new+season", "id": "gmbh-gmbh-new-season", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing", "brand": "Ottolinger", "name": "Ottolinger", "img": "otto", "color": "Pictured: Mesh Gown (also on your Clothes shelf)", "material": "Berlin label, dresses, knits and accessories", "desc": "Berlin label with sculptural, twisted dresses and knits.", "url": "https://ottolinger.com/shop", "id": "ottolinger-ottolinger", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoe shop", "brand": "Miista", "name": "Miista", "img": "miista", "color": "Pictured: Inaya mid-calf biker boots, brown", "material": "Boots, mules and platforms", "desc": "London label with shoes made in Spain. Mules, biker boots and tall riding boots.", "url": "https://www.miista.com/en", "id": "miista-miista", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Loewe – Vintage Yellow & Purple", "img": "soksi-loewe", "price": 65, "cur": "€", "color": "Vintage yellow and purple", "material": "40 den 3D, bicolour, made in Italy · size S/M", "desc": "Two-tone 3D tights with a flat seam and no gusset. Logo knitted under the waistband.", "url": "https://maisonsoksi.com/products/loewe-vintage-yellow-purple-tights?variant=52995419078999", "id": "soksi-loewe", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Hard Pois – Mulberry", "img": "soksi-hard-pois", "price": 65, "cur": "€", "color": "Mulberry", "material": "30 den, double covered, made in Italy · size S/M", "desc": "Bicolour polka-dot tights with a flat seam and no gusset.", "url": "https://maisonsoksi.com/products/hard-pois-mulberry-tights?variant=52995417243991", "id": "soksi-hard-pois", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Super Wormhole – Red", "img": "soksi-super-wormhole", "price": 44, "cur": "€", "color": "Red", "material": "32 den, double covered, made in Italy · size S/M", "desc": "Swirly wormhole pattern with a deeper tone, flat seam and no gusset.", "url": "https://maisonsoksi.com/products/super-wormhole-red-tights?variant=52995453747543", "id": "soksi-super-wormhole", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Wormhole – Purple", "img": "soksi-wormhole", "price": 44, "cur": "€", "color": "Purple", "material": "32 den, double covered, made in Italy · size S/M", "desc": "Bicolour wormhole pattern, flat seam and no gusset.", "url": "https://maisonsoksi.com/products/wormhole-purple-tights?variant=52995452666199", "id": "soksi-wormhole", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Winterberry Check", "img": "viken-winterberry", "price": 39.9, "cur": "$", "color": "Red berry check", "material": "Soft stretch fabric · size S", "desc": "Classic red-berry checks with a festive feel.", "url": "https://vikenplan.com/collections/plaid-1/products/winterberry-check-vk010625c249", "id": "viken-winterberry", "hearts": 0, "added": "2026-10-15", "was": 59}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Emerald Tartan", "img": "viken-emerald-tartan", "price": 39.9, "cur": "$", "color": "Green tartan", "material": "Soft, durable stretch fabric · size S", "desc": "Rich green tartan, warm enough for winter layering.", "url": "https://vikenplan.com/collections/plaid-1/products/emerald-tartan-vk010625d548", "id": "viken-emerald-tartan", "hearts": 0, "added": "2026-10-15", "was": 59}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Lavender Plaid", "img": "viken-lavender-plaid", "price": 39.9, "cur": "$", "color": "Lavender pastel check", "material": "Cosy stretch fabric · size S", "desc": "Soft pastel plaid for autumn and winter outfits.", "url": "https://vikenplan.com/collections/plaid-1/products/vk010625d547", "id": "viken-lavender-plaid", "hearts": 0, "added": "2026-10-15", "was": 59}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Brown Blue College Check", "img": "viken-college-check", "price": 39.9, "cur": "$", "color": "Brown and blue check", "material": "Stretch fabric · size S", "desc": "Preppy brown-and-blue college check.", "url": "https://vikenplan.com/collections/plaid-1/products/viken-plan-college-art-print-tights-colored-stripes-pantyhose-tights-sky-blue-check-vk0281", "id": "viken-college-check", "hearts": 0, "added": "2026-10-15", "was": 59}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Thor Satin Gloss", "img": "viken-thor-satin", "price": 39.9, "cur": "$", "color": "Black", "material": "Glossy stretch satin · size S", "desc": "High-shine satin tights for day or night.", "url": "https://vikenplan.com/products/thor-collection-vk070625d001?variant=46316281364642", "id": "viken-thor-satin", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Silky Velvet Touch – Lilac", "img": "viken-velvet-lilac", "price": 29, "cur": "$", "color": "Lilac", "material": "Velvet-touch fabric · size S", "desc": "Silky lilac tights with a soft velvet feel.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-silky-comfort-pantyhose-tightsvelvet-touch-vk030125c003?variant=45838493515938", "id": "viken-velvet-lilac", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Purple-Yellow Stripes Check", "img": "viken-purple-yellow-check", "price": 39.9, "cur": "$", "color": "Purple and yellow check", "material": "Stretch fabric · size S", "desc": "Purple and yellow checkered print.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-blue-red-stripes-checked-tights-hosiery-pantyhose-vk0489", "id": "viken-purple-yellow-check", "hearts": 0, "added": "2026-10-15", "was": 59}, {"cat": "tights", "kind": "Crew socks", "brand": "Viken Plan", "name": "Pink Axolotl Socks", "img": "viken-axolotl-socks", "price": 25.9, "cur": "$", "color": "Light pink", "material": "Knit, with a 3D axolotl appliqué · size Free Size", "desc": "Light pink crew socks with a little knitted axolotl at the ankle, gills and tail included.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-pink-axolotl-3d-knit-applique-crew-socks-vk801226c102", "id": "viken-axolotl-socks", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Purple Black Vertical Stripe", "img": "viken-purple-black-stripe", "price": 39.9, "cur": "$", "color": "Purple and black stripes", "material": "Stretch fabric · size S", "desc": "Sleek vertical stripes for every day or evening.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-purple-black-vertical-striped-tights-hosiery-pantyhose-vk401226d241", "id": "viken-purple-black-stripe", "hearts": 0, "added": "2026-10-15", "was": 59}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Striped & Polka Dot Gray", "img": "viken-stripe-dot-gray", "price": 39.9, "cur": "$", "color": "Gray", "material": "Stretch fabric · size S", "desc": "Gray tights mixing stripes and polka dots.", "url": "https://vikenplan.com/collections/striped/products/striped-polka-dot-gray-tights-hosiery-pantyhose-vk010125d628", "id": "viken-stripe-dot-gray", "hearts": 0, "added": "2026-10-15", "was": 59}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Teal Check", "img": "viken-teal-check", "price": 39.9, "cur": "$", "color": "Teal check", "material": "Stretch fabric · size S", "desc": "Cool teal checks with a festive twist.", "url": "https://vikenplan.com/collections/plaid-1/products/teal-check-vk010625c250", "id": "viken-teal-check", "hearts": 0, "added": "2026-10-15", "was": 59}];
 const REPO = "AnnaToi01/AnnaToi01.github.io", ITEMS_PATH = "wishlist/items.json", INBOX_PATH = "wishlist/inbox.json";
 const CATS = {
   inbox:{label:"To sort"},
@@ -303,6 +343,7 @@ let inbox = [];  // links saved from the quick-add box, waiting to be sorted
 let filter = "all", view = store.get("wl-view","cards");
 let picked = new Set(store.get("wl-basket",[]));
 let ready = false;
+let editingNote = null, noteDraft = "";  // the item whose note is open for editing
 
 const onSite = /github\.io$/.test(location.hostname);
 const getToken = () => store.get("wl-token","");
@@ -364,22 +405,35 @@ async function loadData(){
 /* ---------- rendering ---------- */
 const inboxId = x => "inbox-" + x.added;
 function allItems(){ return [...inbox.map(x=>({...x,cat:"inbox",id:inboxId(x)})), ...ITEMS]; }
-const pickable = it => it.price!=null && it.cat!=="inbox";
+const pickable = it => it.price!=null && it.cat!=="inbox" && !it.remove;
 
+// each heart is ♡ with a ♥ painted over it, cut to full / half / none
+const heartFill = (k,n) => n>=k ? "full" : n>=k-.5 ? "half" : "none";
+const heartsLabel = n => `${String(n).replace(".5","½")} of 5 hearts`;
 function heartsHTML(it){
   const n = it.hearts||0;
-  if(canEdit()) return `<div class="hearts" role="group" aria-label="Hearts for ${esc(it.name)}">${[1,2,3,4,5].map(k=>
-    `<button type="button" data-heart="${esc(it.id)}" data-k="${k}" aria-label="${k} ${k===1?"heart":"hearts"}" aria-pressed="${k<=n}">${k<=n?"♥":"♡"}</button>`).join("")}</div>`;
-  return n ? `<div class="hearts" aria-label="${n} hearts"><span>${"♥".repeat(n)}</span></div>` : "";
+  if(canEdit()) return `<div class="hearts" role="group" aria-label="${heartsLabel(n)} for ${esc(it.name)}">${[1,2,3,4,5].map(k=>
+    `<button type="button" data-heart="${esc(it.id)}" data-k="${k}" aria-label="${k} ${k===1?"heart":"hearts"}"><b class="hh ${heartFill(k,n)}">♡</b></button>`).join("")}</div>`;
+  return `<div class="hearts ro" role="img" aria-label="${heartsLabel(n)}">${[1,2,3,4,5].map(k=>`<span><b class="hh ${heartFill(k,n)}">♡</b></span>`).join("")}</div>`;
 }
-const trashHTML = it => canEdit() ? `<button type="button" class="trash" data-del="${esc(it.id)}" aria-label="Delete ${esc(it.name||hostOf(it.url))}">${BIN}<span class="trash-q">bye?</span></button>` : "";
+const trashHTML = it => canEdit() ? `<button type="button" class="trash" data-del="${esc(it.id)}" aria-label="${it.remove?"Keep":"Delete"} ${esc(it.name||hostOf(it.url))}">${BIN}</button>` : "";
+function noteHTML(it){
+  const id = esc(it.id);
+  if(editingNote===it.id) return `<form class="note-form" data-note-form="${id}">
+      <textarea id="note-${id}" maxlength="280" rows="3" placeholder="this would go well with…" aria-label="Note for ${esc(it.name)}">${esc(noteDraft)}</textarea>
+      <div class="note-form__btns"><button class="pick" type="submit">Save</button><button class="pick" type="button" data-note-cancel>Cancel</button></div>
+    </form>`;
+  if(it.comment) return `<div class="note"><p>${esc(it.comment)}</p>${canEdit()?`<button type="button" class="note__edit" data-edit-note="${id}" aria-label="Edit note">✎</button>`:""}</div>`;
+  return canEdit() ? `<button type="button" class="note-add" data-edit-note="${id}">✎ add a note</button>` : "";
+}
+const leavingHTML = it => it.remove ? `<span class="leaving-tag">bye bye on the next update</span>` : "";
 
 function card(it){
-  if(it.cat==="inbox") return `<article class="inboxcard" style="position:relative">${trashHTML(it)}<span class="when">${esc(new Date(it.added).toLocaleDateString("en-GB",{day:"numeric",month:"short"}))}</span>
+  if(it.cat==="inbox") return `<article class="inboxcard${it.remove?" leaving":""}" style="position:relative">${trashHTML(it)}${leavingHTML(it)}<span class="when">${esc(new Date(it.added).toLocaleDateString("en-GB",{day:"numeric",month:"short"}))}</span>
     <a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(hostOf(it.url))}</a>${it.note?`<span>${esc(it.note)}</span>`:""}</article>`;
   const on = picked.has(it.id);
-  return `<article class="card c-${it.cat}${on?" picked":""}" id="card-${esc(it.id)}">
-    ${heartsHTML(it)}${trashHTML(it)}
+  return `<article class="card c-${it.cat}${on?" picked":""}${it.remove?" leaving":""}" id="card-${esc(it.id)}">
+    ${heartsHTML(it)}${trashHTML(it)}${leavingHTML(it)}
     <div class="tile"><img src="${imgSrc(it.img)}" alt="${esc(it.name)}" loading="lazy"></div>
     <span class="kind">${esc(it.kind)}</span>
     <div><p class="brand">${esc(it.brand)}</p><h3 class="name">${esc(it.name)}</h3></div>
@@ -387,19 +441,21 @@ function card(it){
       ${pickable(it)?`<button class="pick" type="button" data-pick="${esc(it.id)}" aria-pressed="${on}">${on?"♥ in basket":"♡ basket"}</button>`:""}</div>`}
     <p class="desc">${esc(it.desc)}</p>
     <dl><dt>Colour</dt><dd>${esc(it.color)}</dd><dt>${it.cat==="shops"?"Stock":"Made of"}</dt><dd>${esc(it.material)}</dd></dl>
+    ${noteHTML(it)}
     <a class="go" href="${esc(it.url)}" target="_blank" rel="noopener">Open in shop ↗</a>
   </article>`;
 }
 
 function mini(it){
   const on = picked.has(it.id);
-  return `<article class="mini${on?" picked":""}" id="card-${esc(it.id)}">
-    ${heartsHTML(it)}${trashHTML(it)}
+  return `<article class="mini${on?" picked":""}${it.remove?" leaving":""}" id="card-${esc(it.id)}">
+    ${heartsHTML(it)}${trashHTML(it)}${leavingHTML(it)}
     <a class="mini__img" href="${esc(it.url)}" target="_blank" rel="noopener"><img src="${imgSrc(it.img)}" alt="${esc(it.name)}" loading="lazy"></a>
     <p class="mini__name">${esc(it.name)}</p>
     <p class="mini__brand">${esc(it.brand)} · ${esc(it.kind.toLowerCase())}${it.was?` <span class="sale">sale!</span>`:""}</p>
     <div class="mini__row"><span class="price">${esc(fmt(it))}</span>
-      <button class="pick" type="button" data-pick="${esc(it.id)}" aria-pressed="${on}">${on?"♥":"♡ basket"}</button></div>
+      ${pickable(it)?`<button class="pick" type="button" data-pick="${esc(it.id)}" aria-pressed="${on}">${on?"♥":"♡ basket"}</button>`:""}</div>
+    ${noteHTML(it)}
   </article>`;
 }
 
@@ -440,13 +496,13 @@ function render(){
     const sel = rows.filter(i=>picked.has(i.id));
     const pk = rows.filter(pickable), allOn = pk.length && pk.every(i=>picked.has(i.id));
     out.innerHTML = `<div class="tablewrap"><table><thead><tr>
-      <th><input type="checkbox" id="pick-all" aria-label="Select all items" ${allOn?"checked":""}></th><th></th><th>Category</th><th>Item</th><th>Brand</th><th>♥</th><th>Price (€)</th><th>Colour</th><th>Made of</th></tr></thead><tbody>${
-      rows.map(it=>`<tr class="${picked.has(it.id)?"sel":""}">
+      <th><input type="checkbox" id="pick-all" aria-label="Select all items" ${allOn?"checked":""}></th><th></th><th>Category</th><th>Item</th><th>Brand</th><th>♥</th><th>Price (€)</th><th>Colour</th><th>Made of</th><th>Note</th></tr></thead><tbody>${
+      rows.map(it=>`<tr class="${picked.has(it.id)?"sel":""}${it.remove?" leaving":""}">
         <td>${pickable(it)?`<input type="checkbox" data-pick="${esc(it.id)}" aria-label="Add ${esc(it.name)} to basket" ${picked.has(it.id)?"checked":""}>`:""}</td>
         <td><img class="thumb" src="${imgSrc(it.img)}" alt=""></td><td>${CATS[it.cat].label}</td>
-        <td><a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)}</a></td><td>${esc(it.brand)}</td><td style="color:var(--pink);white-space:nowrap">${"♥".repeat(it.hearts||0)}</td>
-        <td class="num">${esc(fmt(it))}${orig(it)?`<small>${esc(orig(it))}</small>`:""}</td><td>${esc(it.color)}</td><td>${esc(it.material)}</td></tr>`).join("")
-    }</tbody><tfoot><tr><td colspan="6">Basket: ${sel.length} ${sel.length===1?"thing":"things"} ticked</td><td class="num">${money(sel.reduce((a,i)=>a+eur(i.price,i.cur),0),"€",2)}</td><td colspan="2"></td></tr></tfoot></table></div>`;
+        <td><a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)}</a></td><td>${esc(it.brand)}</td><td style="color:var(--pink);white-space:nowrap">${it.hearts?[1,2,3,4,5].filter(k=>(it.hearts||0)>=k-.5).map(k=>`<b class="hh ${heartFill(k,it.hearts)}">♡</b>`).join(""):""}</td>
+        <td class="num">${esc(fmt(it))}${orig(it)?`<small>${esc(orig(it))}</small>`:""}</td><td>${esc(it.color)}</td><td>${esc(it.material)}</td><td style="font-family:var(--hand);font-size:1.05rem">${esc(it.comment)}</td></tr>`).join("")
+    }</tbody><tfoot><tr><td colspan="6">Basket: ${sel.length} ${sel.length===1?"thing":"things"} ticked</td><td class="num">${money(sel.reduce((a,i)=>a+eur(i.price,i.cur),0),"€",2)}</td><td colspan="3"></td></tr></tfoot></table></div>`;
   } else {
     const groups = Object.keys(CATS).map(k=>{
       const g = list.filter(i=>i.cat===k); if(!g.length) return "";
@@ -476,31 +532,54 @@ function togglePick(id, on){
 const heartTimers = {};
 function setHearts(id, k){
   const it = ITEMS.find(i=>i.id===id); if(!it) return;
-  const n = (it.hearts||0)===k ? 0 : k;
+  const cur = it.hearts||0;
+  const n = cur===k ? k-.5 : (cur===k-.5 && k===1) ? 0 : k;
   it.hearts = n; render();
   clearTimeout(heartTimers[id]);
   heartTimers[id] = setTimeout(()=>{
-    mutate(ITEMS_PATH, list=>{ const x=list.find(i=>i.id===id); if(x) x.hearts=n; }, `wishlist: ${n} ♥ for ${it.name}`)
+    mutate(ITEMS_PATH, list=>{ const x=list.find(i=>i.id===id); if(x) x.hearts=n; }, `wishlist: ${String(n).replace('.5','½')} ♥ for ${it.name}`)
       .catch(err=>{ toast(err.message); loadData(); });
   }, 700);
 }
-function del(id, btn){
-  if(!btn.classList.contains("armed")){
-    document.querySelectorAll(".trash.armed").forEach(b=>b.classList.remove("armed"));
-    btn.classList.add("armed"); clearTimeout(del.t); del.t = setTimeout(()=>btn.classList.remove("armed"), 3000);
-    return;
-  }
-  if(id.startsWith("inbox-")){
-    const added = id.slice(6);
-    inbox = inbox.filter(x=>x.added!==added); render();
-    mutate(INBOX_PATH, list=>list.filter(x=>x.added!==added), "wishlist: remove link from inbox")
-      .then(()=>toast("Gone ♡")).catch(err=>{ toast(err.message); loadData(); });
-    return;
-  }
-  const it = ITEMS.find(i=>i.id===id);
-  ITEMS = ITEMS.filter(i=>i.id!==id); picked.delete(id); store.set("wl-basket",[...picked]); render();
-  mutate(ITEMS_PATH, list=>list.filter(i=>i.id!==id), `wishlist: remove ${it ? it.name : id}`)
-    .then(()=>toast("Gone ♡")).catch(err=>{ toast(err.message); loadData(); });
+function del(id){
+  const isInbox = id.startsWith("inbox-");
+  const it = isInbox ? inbox.find(x=>inboxId(x)===id) : ITEMS.find(i=>i.id===id);
+  if(!it) return;
+  const name = it.name || hostOf(it.url), undo = !!it.remove;
+  ask({
+    title: undo ? "Recycle Bin" : "Confirm Item Delete",
+    text: undo ? `Keep “${name}” after all?` : `Are you sure you want to send “${name}” to the Recycle Bin?`,
+    yes: undo ? "Keep it" : "Yes", no: undo ? "Still bye" : "No"
+  }).then(ok=>{
+    if(!ok) return;
+    const flag = x => { if(undo) delete x.remove; else x.remove = true; };
+    flag(it); picked.delete(id); store.set("wl-basket",[...picked]); render();
+    const path = isInbox ? INBOX_PATH : ITEMS_PATH;
+    const match = isInbox ? (x=>inboxId(x)===id) : (x=>x.id===id);
+    mutate(path, list=>{ const x=list.find(match); if(x) flag(x); }, `wishlist: ${undo?"keep":"mark for deletion"} ${name}`)
+      .then(()=>toast(undo ? "Kept ♡" : "Okay! It's gone on the next update ♡"))
+      .catch(err=>{ toast(err.message); loadData(); });
+  });
+}
+
+// a little 90s-window confirm box (the page can't use confirm())
+function ask({title,text,yes,no}){
+  return new Promise(resolve=>{
+    const back = document.createElement("div");
+    back.className = "dlg-back";
+    back.innerHTML = `<div class="dlg" role="alertdialog" aria-modal="true" aria-labelledby="dlg-t" aria-describedby="dlg-x">
+      <div class="dlg__bar"><span id="dlg-t">${esc(title)}</span><button type="button" class="dlg__x" data-a="no" aria-label="Close">×</button></div>
+      <div class="dlg__body"><div class="dlg__icon" aria-hidden="true">${BIN}</div><p id="dlg-x">${esc(text)}</p></div>
+      <div class="dlg__btns"><button type="button" class="dlg__btn" data-a="yes">${esc(yes)}</button><button type="button" class="dlg__btn" data-a="no">${esc(no)}</button></div>
+    </div>`;
+    const prev = document.activeElement;
+    const done = v => { back.remove(); document.removeEventListener("keydown",key); prev && prev.focus && prev.focus(); resolve(v); };
+    const key = e => { if(e.key==="Escape") done(false); };
+    back.addEventListener("click",e=>{ const b=e.target.closest("[data-a]"); if(b) done(b.dataset.a==="yes"); else if(e.target===back) done(false); });
+    document.addEventListener("keydown",key);
+    document.body.appendChild(back);
+    back.querySelector('[data-a="yes"]').focus();
+  });
 }
 
 /* ---------- scattered notes in the margins (wide screens) ---------- */
@@ -544,10 +623,24 @@ document.getElementById("out").addEventListener("click",e=>{
   const b = e.target.closest("button"); if(!b) return;
   if(b.dataset.pick) return togglePick(b.dataset.pick);
   if(b.dataset.heart) return setHearts(b.dataset.heart, +b.dataset.k);
-  if(b.dataset.del) return del(b.dataset.del, b);
+  if(b.dataset.del) return del(b.dataset.del);
+  if(b.dataset.editNote){ const it=ITEMS.find(i=>i.id===b.dataset.editNote); editingNote=b.dataset.editNote; noteDraft=(it&&it.comment)||""; render();
+    const ta=document.getElementById("note-"+editingNote); if(ta){ ta.focus(); ta.setSelectionRange(ta.value.length,ta.value.length); } return; }
+  if(b.hasAttribute("data-note-cancel")){ editingNote=null; render(); return; }
   if(b.hasAttribute("data-fold")) return setFolder(!store.get("wl-folder-min",false));
 });
 document.getElementById("out").addEventListener("dblclick",e=>{ if(e.target.closest(".folder__bar")) setFolder(!store.get("wl-folder-min",false)); });
+document.getElementById("out").addEventListener("input",e=>{ if(e.target.closest("[data-note-form]")) noteDraft=e.target.value; });
+document.getElementById("out").addEventListener("submit",e=>{
+  const f=e.target.closest("[data-note-form]"); if(!f) return;
+  e.preventDefault();
+  const id=f.dataset.noteForm, it=ITEMS.find(i=>i.id===id); if(!it) return;
+  const text=noteDraft.trim();
+  if(text) it.comment=text; else delete it.comment;
+  editingNote=null; render();
+  mutate(ITEMS_PATH, list=>{ const x=list.find(i=>i.id===id); if(x){ if(text) x.comment=text; else delete x.comment; } }, `wishlist: note on ${it.name}`)
+    .then(()=>toast(text?"Note saved ♡":"Note removed")).catch(err=>{ toast(err.message); loadData(); });
+});
 document.getElementById("out").addEventListener("change",e=>{
   if(e.target.id==="pick-all"){ ITEMS.filter(i=>pickable(i)&&(filter==="all"||i.cat===filter)).forEach(i=>e.target.checked?picked.add(i.id):picked.delete(i.id)); store.set("wl-basket",[...picked]); render(); return; }
   if(e.target.dataset.pick) togglePick(e.target.dataset.pick, e.target.checked);
