@@ -387,7 +387,8 @@
   "id": "viken-college-check",
   "hearts": 0,
   "added": "2026-10-15",
-  "was": 59
+  "was": 59,
+  "remove": true
  },
  {
   "cat": "tights",
