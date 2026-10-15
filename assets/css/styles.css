@@ -1,3 +1,49 @@
+/* ============================================
+   DESIGN TOKENS
+   ------------------------------------------------
+   Everything visual routes through these, so restyling means editing here and
+   nowhere else.
+
+   FONTS - swap the three values and the whole site follows. The pattern taken
+   from the small-web sites surveyed in docs/design-notes.md is one
+   characterful display face plus one very plain body face; see style-lab.html
+   for alternatives rendered on real content.
+
+   COLOURS - dark only, by choice. Semantic names rather than hues so a value
+   can be retuned without hunting through rules.
+   ============================================ */
+:root {
+    --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+    --font-body: 'Atkinson Hyperlegible', 'Instrument Sans', system-ui, sans-serif;
+    --font-mono: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --bg: #1a1024;
+    --card: #241634;
+    --ink: #f0e7f7;
+    --text: #d9cbe6;
+    --text-2: #cbb9dc;
+    --muted: #a894bd;
+    --muted-2: #8f7aa6;
+    --faint: #7a6690;
+    --rule: #3a2650;
+    --rule-2: #4d3468;
+    --accent: #c58ce8;
+    --accent-dark: #a869d1;
+    --accent-deep: #9457c0;
+    --accent-soft: #b89ccd;
+    --blue: #7fb0d4;
+    --shadow: rgba(0, 0, 0, 0.5);
+
+    /* object colours, deliberately NOT tied to the text/surface tokens:
+       a blackboard has to stay dark whatever the UI does */
+    --board: #1d1430;
+}
+
+/* tell the browser its own UI (scrollbars, form controls) is on a dark page */
+:root {
+    color-scheme: dark;
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -33,10 +79,10 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     line-height: 1.6;
-    color: #2d1b0e;
-    background-color: #fefbf7 !important; /* Force background to prevent white screen */
+    color: var(--ink);
+    background-color: var(--bg) !important; /* Force background to prevent white screen */
     overflow-x: hidden;
     position: relative; /* Establish positioning context */
     min-height: 100vh; /* Ensure full height coverage */
@@ -48,16 +94,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--rule);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: var(--muted-2);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: var(--text-2);
 }
 
 .container {
@@ -71,12 +117,12 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(254, 251, 247, 0.95);
+    background: rgba(247, 251, 255, 0.95);
     backdrop-filter: blur(20px);
     z-index: 1000;
     padding: 1.5rem 0;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-bottom: 1px solid rgba(45, 27, 14, 0.1);
+    border-bottom: 1px solid rgba(59, 30, 77, 0.1);
 }
 
 .nav-container {
@@ -91,14 +137,14 @@ body {
 .nav-logo a {
     font-size: 1.8rem;
     font-weight: 300;
-    color: #8b4513;
+    color: var(--accent);
     text-decoration: none;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     letter-spacing: -0.02em;
 }
 
 .nav-logo a:hover {
-    color: #654321;
+    color: var(--accent-dark);
     transform: scale(1.05);
 }
 
@@ -109,7 +155,7 @@ body {
 }
 
 .nav-link {
-    color: #8b7355;
+    color: var(--blue);
     text-decoration: none;
     font-weight: 400;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -119,7 +165,7 @@ body {
 }
 
 .nav-link:hover {
-    color: #8b4513;
+    color: var(--accent);
     transform: translateY(-2px);
 }
 
@@ -130,7 +176,7 @@ body {
     height: 1px;
     bottom: -8px;
     left: 0;
-    background-color: #d2691e;
+    background-color: var(--accent-soft);
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -147,9 +193,181 @@ body {
 .bar {
     width: 25px;
     height: 3px;
-    background-color: #333;
+    background-color: var(--ink);
     margin: 3px 0;
     transition: 0.3s;
+}
+
+/* ============================================
+   RESEARCH PAGE - ALTERNATING FIGURE / TEXT ROWS
+   ============================================ */
+
+/* Two columns need more room than the 800px reading measure */
+.main-content--wide {
+    max-width: 1100px;
+}
+
+.research-intro {
+    margin: 0 0 1rem 0;
+    max-width: 46rem;
+}
+
+.research-intro p {
+    color: var(--text);
+    margin: 0 0 1rem 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* The standalone question in the intro */
+.research-question {
+    font-size: 1.15rem !important;
+    font-style: italic;
+    color: var(--accent) !important;
+    border-left: 3px solid rgba(140, 77, 180, 0.3);
+    padding-left: 1rem;
+    margin: 1.25rem 0 1.5rem 0 !important;
+}
+
+/* "Now I am studying" / "Some of my previous projects" */
+.research-group {
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--blue);
+    margin: 3rem 0 0.5rem 0;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--rule);
+}
+
+.project-row {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 2.5rem;
+    align-items: start;
+    margin: 2.5rem 0;
+}
+
+/* Alternate the sides. Only <article> elements are counted, so the <h2>
+   group headings between rows do not shift the rhythm. */
+.project-row:nth-of-type(even) .project-figure {
+    order: 2;
+}
+
+.project-figure {
+    margin: 0;
+    position: sticky;
+    top: 7rem;   /* keeps the figure beside the text on long sections */
+}
+
+.project-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(59, 30, 77, 0.12);
+}
+
+.project-figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--faint);
+    font-style: italic;
+}
+
+/* Temporary stand-in until the real figures are dropped in */
+.project-figure__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3 / 2;
+    border: 1px dashed rgba(140, 77, 180, 0.35);
+    border-radius: 10px;
+    background: rgba(140, 77, 180, 0.04);
+}
+
+.project-figure__placeholder span {
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--rule-2);
+}
+
+.project-body h3 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 0.75rem 0;
+    line-height: 1.25;
+}
+
+.project-body p {
+    color: var(--text-2);
+    margin: 0 0 0.9rem 0;
+    font-size: 0.98rem;
+    line-height: 1.7;
+}
+
+.project-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* Stack on narrow screens, figure always above its text */
+@media (max-width: 820px) {
+    .project-row {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        margin: 2rem 0;
+    }
+
+    .project-figure {
+        position: static;
+    }
+
+    /* Cancel the alternation so the figure never drops below its own text */
+    .project-row:nth-of-type(even) .project-figure {
+        order: 0;
+    }
+
+    .research-group {
+        margin-top: 2.25rem;
+    }
+}
+
+/* ============================================
+   KEEPING THE OVERLAY IN STEP WITH THE PHOTO
+   ------------------------------------------------
+   The background photo uses `object-fit: cover`, so which part of it is visible
+   changes with the window's aspect ratio. Two different rules are needed, and
+   the trick is that neither requires knowing the "design" window size:
+
+   1. THE BEER CUP must sit on the table in the photo, so it is anchored in the
+      photo's own coordinate system using the --img-* variables below. These
+      reproduce the cover-fit geometry in pure CSS - no JavaScript, no resize
+      listeners, no jump on first paint. max() picks the correct branch by
+      itself: when the window is proportionally wider than the photo the photo
+      fills the width and overflows vertically, otherwise the reverse.
+
+   2. THE STICKERS AND BUBBLES keep their original percentage / vw / vh
+      placement, because whenever the window is wider than the photo's own 3:2
+      the photo fills the width exactly - so 100vw IS the photo's width and vw
+      units are already photo-proportional. Sizes that used to be fixed px are
+      now vw, which is what was actually broken: at 1512px wide they resolve to
+      exactly the old px values, and they scale from there. The bubbles' px
+      max-width/min-width clamps were removed for the same reason - they froze
+      the bubbles at a fixed size on large screens.
+
+   Nothing here is calibrated to a particular screen: the vw values are exact at
+   any width, and the --img-* maths is derived, not measured.
+   ============================================ */
+:root {
+    --img-ar: 1.49953;   /* background.jpeg is 1600 x 1067 */
+    --img-w: max(100vw, calc(100vh * var(--img-ar)));
+    --img-h: max(100vh, calc(100vw / var(--img-ar)));
+    --img-x: calc((100vw - var(--img-w)) / 2);
+    --img-y: calc((100vh - var(--img-h)) / 2);
 }
 
 /* Home with Background Image */
@@ -261,8 +479,8 @@ body {
 }
 
 .sticker-image {
-    width: 150px;
-    height: 150px;
+    width: 11.1607vw;
+    height: 11.1607vw;
     object-fit: cover;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -300,7 +518,7 @@ body {
 .sticker-placeholder {
     width: 120px;
     height: 120px;
-    background: linear-gradient(135deg, #d2691e, #ffd700);
+    background: linear-gradient(135deg, var(--accent-soft), var(--rule-2));
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -310,7 +528,7 @@ body {
     font-size: 0.9rem;
     text-align: center;
     padding: 10px;
-    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+    box-shadow: 0 4px 12px rgba(140, 77, 180, 0.2);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -331,20 +549,30 @@ body {
 
 .sticker-about {
     top: 30%;
-    right: 14%;
+    right: 7%;
     transform: rotate(4deg);
 }
 
 .sticker-about .sticker-image {
-    width: 175px;    /* Make anna.png bigger than other stickers */
-    height: 175px;
+    width: 13.0208vw;    /* Make anna.png bigger than other stickers */
+    height: 13.0208vw;
 }
 
-/* Beer Cup - positioned by JavaScript relative to visible image */
+/* Beer Cup - fine-positioned by JavaScript relative to the visible image.
+   The values below are a close approximation of what beer-position.js computes,
+   so the cup does not visibly jump on first paint (and still lands roughly
+   right if JavaScript is unavailable). JS overrides these inline. */
 .beer-cup-container {
     z-index: 5;
     pointer-events: none;
-    /* Position, size, and transform will be set by JavaScript */
+    position: absolute;
+    /* 0.41 / 0.665 / 0.38 are the exact constants beer-position.js used to
+       compute this against the visible image. Expressed in CSS, the cup tracks
+       the photo at every viewport size with no JS and no first-paint jump. */
+    left: calc(var(--img-x) + var(--img-w) * 0.41);
+    top: calc(var(--img-y) + var(--img-h) * 0.665);
+    width: calc(var(--img-w) * 0.38);
+    transform: translate(-50%, -50%);
 }
 
 /* Contact icon in the center of beer cup - styled like other stickers */
@@ -354,7 +582,11 @@ body {
     left: 40%;
     transform: translate(-50%, -50%);
     z-index: 6;
-    pointer-events: auto;
+    /* none here, auto on .contact-svg below: the hit area must be the chat
+       bubble artwork, not this whole box. Hover still applies to this anchor
+       because hovering a descendant hovers its ancestors, so the tooltip and
+       the :hover transform keep working. */
+    pointer-events: none;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     outline: none !important;
@@ -372,9 +604,18 @@ body {
 }
 
 .contact-svg {
-    width: 275px; /* Fixed size like other sticker images */
-    height: 275px;
+    width: 18.1878vw; /* scales with the photo */
+    height: 18.1878vw;
     object-fit: cover;
+    pointer-events: auto;
+    /* contact.svg is an A4 canvas holding a small chat bubble - only 0.7% of
+       the box is drawn. Without this clip the whole rectangle is clickable,
+       so bubbles drifting across it triggered the contact link. clip-path
+       shrinks hit-testing as well as painting, and everything removed here
+       was transparent, so nothing looks different.
+       Values are the artwork's measured bbox, remapped through object-fit:
+       cover. inset() order is top right bottom left. */
+    clip-path: inset(43.2% 47% 38.7% 26.5%);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: none !important;
     background: transparent !important;
@@ -385,6 +626,9 @@ body {
 .beer-cup-image {
     width: 100%;
     height: auto;
+    /* Same story: the cup fills only 3.5% of beer_cup.svg's A4 canvas. */
+    pointer-events: auto;
+    clip-path: inset(49.2% 24.8% 2.7% 14%);
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
     transition: all 0.3s ease;
     opacity: 0.9;
@@ -410,9 +654,7 @@ body {
 
 /* Individual Bubble Positioning - True Sequential Start */
 .bubble-1 {
-    width: 40vw;
-    max-width: 600px;
-    min-width: 300px;
+    width: 39.6825vw;
     bottom: -15vh;
     left: 25vw;
     animation: bubble-flowy-1 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -420,9 +662,7 @@ body {
 }
 
 .bubble-2 {
-    width: 36vw;
-    max-width: 500px;
-    min-width: 240px;
+    width: 33.0688vw;
     bottom: -12vh;
     left: 28vw;
     animation: bubble-flowy-2 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -430,9 +670,7 @@ body {
 }
 
 .bubble-3 {
-    width: 30vw;
-    max-width: 400px;
-    min-width: 200px;
+    width: 26.4550vw;
     bottom: -18vh;
     left: 31vw;
     animation: bubble-flowy-3 3.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -441,9 +679,7 @@ body {
 
 /* Second Wave - More Bubbles! */
 .bubble-4 {
-    width: 44vw;
-    max-width: 560px;
-    min-width: 280px;
+    width: 37.0370vw;
     bottom: -20vh;
     left: 22vw;
     animation: bubble-flowy-1 2.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -451,9 +687,7 @@ body {
 }
 
 .bubble-5 {
-    width: 32vw;
-    max-width: 440px;
-    min-width: 220px;
+    width: 29.1005vw;
     bottom: -16vh;
     left: 34vw;
     animation: bubble-flowy-2 2.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -461,9 +695,7 @@ body {
 }
 
 .bubble-6 {
-    width: 38vw;
-    max-width: 480px;
-    min-width: 260px;
+    width: 31.7460vw;
     bottom: -14vh;
     left: 26vw;
     animation: bubble-flowy-3 2.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -472,9 +704,7 @@ body {
 
 /* Third Wave - Even More! */
 .bubble-7 {
-    width: 28vw;
-    max-width: 360px;
-    min-width: 180px;
+    width: 23.8095vw;
     bottom: -22vh;
     left: 29vw;
     animation: bubble-flowy-1 2.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -482,9 +712,7 @@ body {
 }
 
 .bubble-8 {
-    width: 34vw;
-    max-width: 420px;
-    min-width: 210px;
+    width: 27.7778vw;
     bottom: -17vh;
     left: 32vw;
     animation: bubble-flowy-2 2.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -493,9 +721,7 @@ body {
 
 /* Fourth Wave - More Bubbles! */
 .bubble-9 {
-    width: 26vw;
-    max-width: 350px;
-    min-width: 180px;
+    width: 23.1481vw;
     bottom: -19vh;
     left: 24vw;
     animation: bubble-flowy-3 2.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -503,9 +729,7 @@ body {
 }
 
 .bubble-10 {
-    width: 42vw;
-    max-width: 520px;
-    min-width: 260px;
+    width: 34.3915vw;
     bottom: -13vh;
     left: 30vw;
     animation: bubble-flowy-1 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -513,9 +737,7 @@ body {
 }
 
 .bubble-11 {
-    width: 35vw;
-    max-width: 450px;
-    min-width: 225px;
+    width: 29.7619vw;
     bottom: -21vh;
     left: 27vw;
     animation: bubble-flowy-2 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -523,9 +745,7 @@ body {
 }
 
 .bubble-12 {
-    width: 29vw;
-    max-width: 380px;
-    min-width: 190px;
+    width: 25.1323vw;
     bottom: -16vh;
     left: 33vw;
     animation: bubble-flowy-3 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -534,9 +754,7 @@ body {
 
 /* Fifth Wave - Even More Bubbles! */
 .bubble-13 {
-    width: 37vw;
-    max-width: 470px;
-    min-width: 235px;
+    width: 31.0847vw;
     bottom: -14vh;
     left: 25vw;
     animation: bubble-flowy-1 2.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -544,9 +762,7 @@ body {
 }
 
 .bubble-14 {
-    width: 31vw;
-    max-width: 390px;
-    min-width: 195px;
+    width: 25.7937vw;
     bottom: -18vh;
     left: 29vw;
     animation: bubble-flowy-2 2.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -554,9 +770,7 @@ body {
 }
 
 .bubble-15 {
-    width: 40vw;
-    max-width: 500px;
-    min-width: 250px;
+    width: 33.0688vw;
     bottom: -20vh;
     left: 26vw;
     animation: bubble-flowy-3 2.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -564,9 +778,7 @@ body {
 }
 
 .bubble-16 {
-    width: 33vw;
-    max-width: 410px;
-    min-width: 205px;
+    width: 27.1164vw;
     bottom: -15vh;
     left: 31vw;
     animation: bubble-flowy-1 2.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -575,9 +787,7 @@ body {
 
 /* Sixth Wave - Maximum Bubbles! */
 .bubble-17 {
-    width: 28vw;
-    max-width: 360px;
-    min-width: 180px;
+    width: 23.8095vw;
     bottom: -22vh;
     left: 28vw;
     animation: bubble-flowy-2 2.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -585,9 +795,7 @@ body {
 }
 
 .bubble-18 {
-    width: 39vw;
-    max-width: 490px;
-    min-width: 245px;
+    width: 32.4074vw;
     bottom: -17vh;
     left: 23vw;
     animation: bubble-flowy-3 2.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -595,9 +803,7 @@ body {
 }
 
 .bubble-19 {
-    width: 36vw;
-    max-width: 460px;
-    min-width: 230px;
+    width: 30.4233vw;
     bottom: -19vh;
     left: 32vw;
     animation: bubble-flowy-1 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -605,9 +811,7 @@ body {
 }
 
 .bubble-20 {
-    width: 32vw;
-    max-width: 400px;
-    min-width: 200px;
+    width: 26.4550vw;
     bottom: -14vh;
     left: 27vw;
     animation: bubble-flowy-2 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
@@ -618,28 +822,28 @@ body {
 @keyframes bubble-flowy-1 {
     0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(0); opacity: 0; }
     8% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 0.9; }
-    25% { transform: translate3d(-8px, -100px, 0) rotate(-3deg) scale(1.08); opacity: 0.8; }
-    50% { transform: translate3d(-6px, -200px, 0) rotate(-2deg) scale(1); opacity: 0.6; }
-    75% { transform: translate3d(8px, -350px, 0) rotate(2deg) scale(0.91); opacity: 0.3; }
-    100% { transform: translate3d(0, -480px, 0) rotate(0deg) scale(0.8); opacity: 0; }
+    25% { transform: translate3d(-0.5291vw, -6.6138vw, 0) rotate(-3deg) scale(1.08); opacity: 0.8; }
+    50% { transform: translate3d(-0.3968vw, -13.2275vw, 0) rotate(-2deg) scale(1); opacity: 0.6; }
+    75% { transform: translate3d(0.5291vw, -23.1481vw, 0) rotate(2deg) scale(0.91); opacity: 0.3; }
+    100% { transform: translate3d(0, -31.7460vw, 0) rotate(0deg) scale(0.8); opacity: 0; }
 }
 
 @keyframes bubble-flowy-2 {
     0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(0); opacity: 0; }
     10% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 0.8; }
-    30% { transform: translate3d(14px, -110px, 0) rotate(5deg) scale(1.09); opacity: 0.7; }
-    60% { transform: translate3d(-5px, -275px, 0) rotate(-2deg) scale(0.98); opacity: 0.4; }
-    85% { transform: translate3d(6px, -440px, 0) rotate(2deg) scale(0.89); opacity: 0.15; }
-    100% { transform: translate3d(0, -510px, 0) rotate(0deg) scale(0.83); opacity: 0; }
+    30% { transform: translate3d(0.9259vw, -7.2751vw, 0) rotate(5deg) scale(1.09); opacity: 0.7; }
+    60% { transform: translate3d(-0.3307vw, -18.1878vw, 0) rotate(-2deg) scale(0.98); opacity: 0.4; }
+    85% { transform: translate3d(0.3968vw, -29.1005vw, 0) rotate(2deg) scale(0.89); opacity: 0.15; }
+    100% { transform: translate3d(0, -33.7302vw, 0) rotate(0deg) scale(0.83); opacity: 0; }
 }
 
 @keyframes bubble-flowy-3 {
     0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(0); opacity: 0; }
     12% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 0.85; }
-    35% { transform: translate3d(-12px, -96px, 0) rotate(-5deg) scale(1.1); opacity: 0.75; }
-    65% { transform: translate3d(11px, -240px, 0) rotate(4deg) scale(0.99); opacity: 0.45; }
-    85% { transform: translate3d(8px, -336px, 0) rotate(3deg) scale(0.93); opacity: 0.25; }
-    100% { transform: translate3d(0, -432px, 0) rotate(0deg) scale(0.87); opacity: 0; }
+    35% { transform: translate3d(-0.7937vw, -6.3492vw, 0) rotate(-5deg) scale(1.1); opacity: 0.75; }
+    65% { transform: translate3d(0.7275vw, -15.8730vw, 0) rotate(4deg) scale(0.99); opacity: 0.45; }
+    85% { transform: translate3d(0.5291vw, -22.2222vw, 0) rotate(3deg) scale(0.93); opacity: 0.25; }
+    100% { transform: translate3d(0, -28.5714vw, 0) rotate(0deg) scale(0.87); opacity: 0; }
 }
 
 /* Chaotic animations removed for performance */
@@ -658,8 +862,8 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: #fefbf7;
-    color: #2d1b0e;
+    background: var(--bg);
+    color: var(--ink);
     padding-top: 120px;
     position: relative;
     overflow: hidden;
@@ -673,9 +877,9 @@ body {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 20% 80%, rgba(210, 105, 30, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(139, 69, 19, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(163, 129, 185, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(169, 198, 222, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(140, 77, 180, 0.1) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -700,14 +904,14 @@ body {
 }
 
 .highlight {
-    color: #d2691e;
+    color: var(--accent-soft);
     font-weight: 400;
 }
 
 .hero-subtitle {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    color: #8b7355;
+    color: var(--blue);
     font-weight: 300;
     letter-spacing: 0.02em;
 }
@@ -715,7 +919,7 @@ body {
 .hero-description {
     font-size: 1.2rem;
     margin-bottom: 3rem;
-    color: #a0522d;
+    color: var(--accent);
     line-height: 1.7;
     font-weight: 300;
     max-width: 500px;
@@ -743,29 +947,29 @@ body {
 }
 
 .btn-primary {
-    background: #8b4513;
-    color: #fefbf7;
-    border: 1px solid #8b4513;
+    background: var(--accent);
+    color: var(--bg);
+    border: 1px solid var(--accent);
 }
 
 .btn-primary:hover {
-    background: #fefbf7;
-    color: #8b4513;
+    background: var(--bg);
+    color: var(--accent);
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2);
+    box-shadow: 0 10px 30px rgba(140, 77, 180, 0.2);
 }
 
 .btn-secondary {
     background: transparent;
-    color: #8b4513;
-    border: 1px solid #8b4513;
+    color: var(--accent);
+    border: 1px solid var(--accent);
 }
 
 .btn-secondary:hover {
-    background: #8b4513;
-    color: #fefbf7;
+    background: var(--accent);
+    color: var(--bg);
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2);
+    box-shadow: 0 10px 30px rgba(140, 77, 180, 0.2);
 }
 
 .hero-image {
@@ -777,17 +981,17 @@ body {
 .profile-placeholder {
     width: 400px;
     height: 400px;
-    background: linear-gradient(135deg, #d2691e, #ffd700, #8b4513);
+    background: linear-gradient(135deg, var(--accent-soft), var(--rule-2), var(--accent));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 6rem;
     color: rgba(255, 255, 255, 0.9);
-    border: 8px solid #fefbf7;
+    border: 8px solid var(--bg);
     box-shadow: 
-        0 20px 60px rgba(139, 69, 19, 0.15),
-        0 0 0 1px rgba(45, 27, 14, 0.1);
+        0 20px 60px rgba(140, 77, 180, 0.15),
+        0 0 0 1px rgba(59, 30, 77, 0.1);
     position: relative;
     overflow: hidden;
 }
@@ -827,7 +1031,7 @@ section {
     font-size: 3.5rem;
     font-weight: 200;
     margin-bottom: 4rem;
-    color: #2d1b0e;
+    color: var(--ink);
     position: relative;
     letter-spacing: -0.02em;
 }
@@ -840,19 +1044,19 @@ section {
     transform: translateX(-50%);
     width: 80px;
     height: 2px;
-    background: linear-gradient(90deg, #d2691e, #ffd700);
+    background: linear-gradient(90deg, var(--accent-soft), var(--rule-2));
     border-radius: 1px;
 }
 
 /* Active Navigation State */
 .nav-link.active {
-    color: #d2691e;
+    color: var(--accent-soft);
     font-weight: 500;
 }
 
 .nav-link.active::after {
     width: 100%;
-    background-color: #d2691e;
+    background-color: var(--accent-soft);
 }
 
 .section-title {
@@ -860,7 +1064,7 @@ section {
     font-size: 3.5rem;
     font-weight: 200;
     margin-bottom: 4rem;
-    color: #2d1b0e;
+    color: var(--ink);
     position: relative;
     letter-spacing: -0.02em;
 }
@@ -873,13 +1077,13 @@ section {
     transform: translateX(-50%);
     width: 80px;
     height: 2px;
-    background: linear-gradient(90deg, #d2691e, #ffd700);
+    background: linear-gradient(90deg, var(--accent-soft), var(--rule-2));
     border-radius: 1px;
 }
 
 /* About Section */
 .about {
-    background: #fefbf7;
+    background: var(--bg);
     position: relative;
 }
 
@@ -891,8 +1095,8 @@ section {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 10% 90%, rgba(210, 105, 30, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 90% 10%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 10% 90%, rgba(163, 129, 185, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 10%, rgba(169, 198, 222, 0.05) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -905,7 +1109,7 @@ section {
 .about-text p {
     font-size: 1.3rem;
     margin-bottom: 2rem;
-    color: #8b7355;
+    color: var(--blue);
     line-height: 1.8;
     font-weight: 300;
     max-width: 800px;
@@ -939,7 +1143,7 @@ section {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #d2691e, #ffd700);
+    background: linear-gradient(90deg, var(--accent-soft), var(--rule-2));
 }
 
 .stat:hover {
@@ -950,13 +1154,13 @@ section {
 .stat h3 {
     font-size: 2.5rem;
     font-weight: 200;
-    color: #8b4513;
+    color: var(--accent);
     margin-bottom: 0.5rem;
     letter-spacing: -0.02em;
 }
 
 .stat p {
-    color: #a0522d;
+    color: var(--accent);
     font-weight: 400;
     font-size: 1rem;
 }
@@ -986,7 +1190,7 @@ section {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #d2691e, #ffd700, #8b4513);
+    background: linear-gradient(90deg, var(--accent-soft), var(--rule-2), var(--accent));
 }
 
 .skill-category:hover {
@@ -998,7 +1202,7 @@ section {
     font-size: 1.8rem;
     font-weight: 300;
     margin-bottom: 1.5rem;
-    color: #2d1b0e;
+    color: var(--ink);
     letter-spacing: -0.01em;
 }
 
@@ -1009,27 +1213,27 @@ section {
 }
 
 .skill-item {
-    background: #f5f5dc;
-    color: #8b7355;
+    background: var(--rule);
+    color: var(--blue);
     padding: 0.75rem 1.5rem;
     border-radius: 25px;
     font-size: 0.95rem;
     font-weight: 400;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(139, 69, 19, 0.1);
+    border: 1px solid rgba(140, 77, 180, 0.1);
     letter-spacing: 0.02em;
 }
 
 .skill-item:hover {
-    background: linear-gradient(135deg, #d2691e, #ffd700);
+    background: linear-gradient(135deg, var(--accent-soft), var(--rule-2));
     color: white;
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(210, 105, 30, 0.3);
+    box-shadow: 0 8px 25px rgba(163, 129, 185, 0.3);
 }
 
 /* Projects Section */
 .projects {
-    background: #fefbf7;
+    background: var(--bg);
     position: relative;
 }
 
@@ -1041,8 +1245,8 @@ section {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 80% 20%, rgba(210, 105, 30, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 80% 20%, rgba(163, 129, 185, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(169, 198, 222, 0.05) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -1069,7 +1273,7 @@ section {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #d2691e, #ffd700, #8b4513);
+    background: linear-gradient(90deg, var(--accent-soft), var(--rule-2), var(--accent));
 }
 
 .project-card:hover {
@@ -1079,7 +1283,7 @@ section {
 
 .project-image {
     height: 250px;
-    background: linear-gradient(135deg, #d2691e, #ffd700, #8b4513);
+    background: linear-gradient(135deg, var(--accent-soft), var(--rule-2), var(--accent));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1113,12 +1317,12 @@ section {
     font-size: 1.5rem;
     font-weight: 300;
     margin-bottom: 1rem;
-    color: #2d1b0e;
+    color: var(--ink);
     letter-spacing: -0.01em;
 }
 
 .project-content p {
-    color: #8b7355;
+    color: var(--blue);
     margin-bottom: 1.5rem;
     line-height: 1.7;
     font-weight: 300;
@@ -1133,13 +1337,13 @@ section {
 }
 
 .project-tech span {
-    background: #f5f5dc;
-    color: #8b7355;
+    background: var(--rule);
+    color: var(--blue);
     padding: 0.5rem 1rem;
     border-radius: 15px;
     font-size: 0.85rem;
     font-weight: 400;
-    border: 1px solid rgba(139, 69, 19, 0.1);
+    border: 1px solid rgba(140, 77, 180, 0.1);
     letter-spacing: 0.02em;
 }
 
@@ -1149,7 +1353,7 @@ section {
 }
 
 .project-link {
-    color: #d2691e;
+    color: var(--accent-soft);
     text-decoration: none;
     font-weight: 400;
     font-size: 0.95rem;
@@ -1165,12 +1369,12 @@ section {
     height: 1px;
     bottom: -2px;
     left: 0;
-    background: #d2691e;
+    background: var(--accent-soft);
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-link:hover {
-    color: #8b4513;
+    color: var(--accent);
 }
 
 .project-link:hover::after {
@@ -1189,11 +1393,11 @@ section {
     font-size: 1.8rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: #1f2937;
+    color: var(--ink);
 }
 
 .contact-info p {
-    color: #6b7280;
+    color: var(--muted);
     margin-bottom: 2rem;
     line-height: 1.8;
 }
@@ -1207,11 +1411,11 @@ section {
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
-    color: #4b5563;
+    color: var(--text);
 }
 
 .contact-item i {
-    color: #2563eb;
+    color: var(--accent);
     width: 20px;
 }
 
@@ -1223,23 +1427,23 @@ section {
 .social-link {
     width: 60px;
     height: 60px;
-    background: #f5f5dc;
+    background: var(--rule);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #8b7355;
+    color: var(--blue);
     text-decoration: none;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(139, 69, 19, 0.1);
+    border: 1px solid rgba(140, 77, 180, 0.1);
     font-size: 1.2rem;
 }
 
 .social-link:hover {
-    background: linear-gradient(135deg, #d2691e, #ffd700);
+    background: linear-gradient(135deg, var(--accent-soft), var(--rule-2));
     color: white;
     transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 10px 30px rgba(210, 105, 30, 0.3);
+    box-shadow: 0 10px 30px rgba(163, 129, 185, 0.3);
 }
 
 .contact-form {
@@ -1259,7 +1463,7 @@ section {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #d2691e, #ffd700, #8b4513);
+    background: linear-gradient(90deg, var(--accent-soft), var(--rule-2), var(--accent));
 }
 
 .form-group {
@@ -1270,21 +1474,21 @@ section {
 .form-group textarea {
     width: 100%;
     padding: 16px 20px;
-    border: 1px solid rgba(139, 69, 19, 0.2);
+    border: 1px solid rgba(140, 77, 180, 0.2);
     border-radius: 12px;
     font-size: 1rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     font-family: inherit;
-    background: #fefbf7;
-    color: #2d1b0e;
+    background: var(--bg);
+    color: var(--ink);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #d2691e;
+    border-color: var(--accent-soft);
     background: white;
-    box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.1);
+    box-shadow: 0 0 0 3px rgba(163, 129, 185, 0.1);
 }
 
 .form-group textarea {
@@ -1294,8 +1498,8 @@ section {
 
 /* Footer */
 .footer {
-    background: #2d1b0e;
-    color: #fefbf7;
+    background: var(--ink);
+    color: var(--bg);
     text-align: center;
     padding: 3rem 0;
     position: relative;
@@ -1308,7 +1512,42 @@ section {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(169, 198, 222, 0.2), transparent);
+}
+
+/* ------------------------------------------------
+   Phone-sized windows only. Above this width the landing page uses the normal
+   layout scaled by vw, so dragging the window to half a screen (756px on a 14"
+   display) gives a proportionally smaller version of the full composition
+   rather than switching to the phone layout.
+   ------------------------------------------------ */
+@media (max-width: 560px) {
+    .sticker {
+        transform: scale(0.7);
+    }
+
+    .sticker-image,
+    .sticker-placeholder {
+        width: 90px;
+        height: 90px;
+    }
+
+
+    /* Sticker positions for phones */
+    .sticker-education {
+        top: 20%;
+        left: 10%;
+    }
+
+    .sticker-projects {
+        top: 55%;
+        left: 20%;
+    }
+
+    .sticker-contact {
+        top: 75%;
+        right: 15%;
+    }
 }
 
 /* Responsive Design */
@@ -1360,34 +1599,7 @@ section {
         font-size: 1rem;
     }
 
-    .sticker {
-        transform: scale(0.7);
-    }
-
-    .sticker-image,
-    .sticker-placeholder {
-        width: 80px;
-        height: 80px;
-    }
-
     /* Arrow image styles removed */
-
-    /* Sticker positions for mobile */
-    .sticker-education {
-        top: 20%;
-        left: 10%;
-    }
-
-    .sticker-projects {
-        top: 55%;
-        left: 20%;
-    }
-
-    .sticker-contact {
-        top: 75%;
-        right: 15%;
-    }
-}
 
     .hero-container {
         grid-template-columns: 1fr;
@@ -1461,7 +1673,7 @@ section {
     margin: 0 auto;
     padding: 30px 40px 30px;
     min-height: 100vh;
-    background: #fefbf7;
+    background: var(--bg);
 }
 
 .content-wrapper {
@@ -1470,21 +1682,22 @@ section {
 
 .page-header {
     margin-bottom: 2rem;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid var(--rule);
     padding-bottom: 1.5rem;
 }
 
 .page-header h1 {
+    font-family: var(--font-display);
     font-size: 2.5rem;
     font-weight: 300;
-    color: #2d1b0e;
+    color: var(--ink);
     margin: 0 0 0.5rem 0;
     letter-spacing: -0.02em;
 }
 
 .page-header .subtitle {
     font-size: 1.1rem;
-    color: #666;
+    color: var(--muted);
     margin: 0;
     font-weight: 300;
 }
@@ -1497,12 +1710,12 @@ section {
 .personal-story h2 {
     font-size: 1.4rem;
     font-weight: 500;
-    color: #2d1b0e;
+    color: var(--ink);
     margin: 0 0 1rem 0;
 }
 
 .story-content p {
-    color: #444;
+    color: var(--text);
     margin: 0 0 1rem 0;
     font-size: 1rem;
     line-height: 1.6;
@@ -1516,7 +1729,7 @@ section {
 .research-projects h2 {
     font-size: 1.4rem;
     font-weight: 500;
-    color: #2d1b0e;
+    color: var(--ink);
     margin: 0 0 1rem 0;
 }
 
@@ -1528,20 +1741,20 @@ section {
 .project-item h3 {
     font-size: 1.1rem;
     font-weight: 500;
-    color: #2d1b0e;
+    color: var(--ink);
     margin: 0 0 0.5rem 0;
     line-height: 1.3;
 }
 
 .project-location {
-    color: #888;
+    color: var(--muted-2);
     margin: 0 0 0.5rem 0;
     font-size: 0.9rem;
     font-style: italic;
 }
 
 .project-item p {
-    color: #555;
+    color: var(--text-2);
     margin: 0.3rem 0;
     font-size: 0.95rem;
     line-height: 1.5;
@@ -1555,7 +1768,7 @@ section {
 .teaching-volunteering h2 {
     font-size: 1.4rem;
     font-weight: 500;
-    color: #2d1b0e;
+    color: var(--ink);
     margin: 0 0 1rem 0;
 }
 
@@ -1567,7 +1780,7 @@ section {
 .teaching-item {
     margin: 0 0 1rem 0;
     padding: 0 0 1rem 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--rule);
 }
 
 .teaching-item:last-child {
@@ -1579,13 +1792,13 @@ section {
 .teaching-item h3 {
     font-size: 1.1rem;
     font-weight: 500;
-    color: #2d1b0e;
+    color: var(--ink);
     margin: 0 0 0.5rem 0;
     line-height: 1.3;
 }
 
 .teaching-item p {
-    color: #555;
+    color: var(--text-2);
     margin: 0.3rem 0;
     font-size: 0.95rem;
     line-height: 1.5;
@@ -1599,7 +1812,7 @@ section {
 .project-item {
     margin: 0 0 1rem 0;
     padding: 0 0 1rem 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--rule);
 }
 
 .project-item:last-child {
@@ -1611,31 +1824,31 @@ section {
 .project-item h2 {
     font-size: 1.3rem;
     font-weight: 500;
-    color: #2d1b0e;
+    color: var(--ink);
     margin: 0 0 1rem 0;
     line-height: 1.3;
 }
 
 .project-description {
-    color: #444;
+    color: var(--text);
     margin: 0 0 1rem 0;
     font-size: 1rem;
     line-height: 1.6;
 }
 
 .project-methods {
-    color: #555;
+    color: var(--text-2);
     margin: 0.5rem 0;
     font-size: 0.95rem;
 }
 
 .project-methods strong {
-    color: #2d1b0e;
+    color: var(--ink);
     font-weight: 600;
 }
 
 .project-context {
-    color: #888;
+    color: var(--muted-2);
     margin: 0.8rem 0 0 0;
     font-size: 0.9rem;
     font-style: italic;
@@ -1655,24 +1868,24 @@ section {
 .contact-method h2 {
     font-size: 1.2rem;
     font-weight: 500;
-    color: #2d1b0e;
+    color: var(--ink);
     margin: 0 0 0.5rem 0;
 }
 
 .contact-method p {
     margin: 0;
-    color: #555;
+    color: var(--text-2);
 }
 
 .contact-method a {
-    color: #2d1b0e;
+    color: var(--ink);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border-color 0.2s ease;
 }
 
 .contact-method a:hover {
-    border-bottom-color: #2d1b0e;
+    border-bottom-color: var(--ink);
 }
 
 .professional-links p {
@@ -1681,14 +1894,14 @@ section {
 
 .contact-note {
     padding: 2rem;
-    background: #f8f8f8;
-    border-left: 3px solid #d2691e;
+    background: var(--bg);
+    border-left: 3px solid var(--accent-soft);
     margin-top: 2rem;
 }
 
 .contact-note p {
     margin: 0;
-    color: #555;
+    color: var(--text-2);
     font-style: italic;
 }
 
@@ -1718,4 +1931,1210 @@ section {
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
+}
+
+/* ============================================
+   HOMEPAGE TEXT, LINKS AND ACCESSIBILITY
+   Appended last so it overrides the earlier
+   `outline: none !important` sticker resets.
+   ============================================ */
+
+/* Visual CV timeline (Experience page) */
+.cv-preview {
+    margin: 0 0 0.5rem 0;
+}
+
+.cv-preview a {
+    display: block;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(59, 30, 77, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cv-preview a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(59, 30, 77, 0.18);
+}
+
+.cv-preview img {
+    display: block;
+    width: 100%;
+    height: auto;      /* width/height attrs on the img reserve the 16:9 box */
+    background: #fff;
+}
+
+.cv-preview figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--muted-2);
+    font-style: italic;
+    text-align: center;
+}
+
+.cv-preview figcaption a {
+    display: inline;
+    color: var(--accent);
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.cv-preview figcaption a:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* CV download button (Experience page) */
+.cv-download {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1rem 0 0 0;
+}
+
+.download-btn {
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.download-btn:hover {
+    background: var(--accent-dark);
+    transform: translateY(-1px);
+}
+
+/* Skip link - visible only when focused */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0 0 8px 8px;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Name, bottom right of the landing page. Also the page's only h1. */
+.site-name {
+    font-family: var(--font-display);
+    position: absolute;
+    right: 3rem;
+    bottom: 2.25rem;
+    z-index: 4;
+    margin: 0;
+    font-size: clamp(1.4rem, 2.4vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+    color: #a58d6d;
+    /* Soft shadow keeps it readable wherever the photo is light */
+    text-shadow: 0 1px 8px rgba(255, 255, 255, 0.45);
+    pointer-events: none;
+}
+
+/* Hover labels on the landing page icons.
+   Text comes from each icon's data-label attribute.
+   The counter-transform cancels the parent's hover scale/rotate so the
+   label sits upright and at a constant size. */
+.sticker[data-label]::after,
+.contact-icon[data-label]::after {
+    content: attr(data-label);
+    position: absolute;
+    /* Top right, tucked against the artwork. The icons are drawn with
+       object-fit: cover so they fill their box - the box corner is the
+       artwork corner. */
+    bottom: 82%;
+    left: 74%;
+    /* Cancels the parent's scale(1.15) rotate(2deg) hover transform so the
+       label stays upright and the same size on every icon. */
+    transform: rotate(-2deg) scale(0.87);
+    transform-origin: bottom left;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(45, 27, 14, 0.82);
+    color: #fefbf7;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.sticker[data-label]:hover::after,
+.sticker[data-label]:focus-visible::after,
+.contact-icon[data-label]:hover::after,
+.contact-icon[data-label]:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* The cup icon is much larger than the stickers, so its label needs a
+   tighter inset to stay visually close to the artwork. */
+.contact-icon[data-label]::after {
+    bottom: 62%;
+    left: 58%;
+}
+
+/* Stickers are now real <a> elements - strip link styling */
+a.sticker {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Restore a visible focus ring for keyboard users only.
+   Mouse clicks still show nothing, preserving the original look. */
+a.sticker:focus-visible,
+.contact-icon:focus-visible,
+.nav-link:focus-visible,
+.download-btn:focus-visible,
+.skip-link:focus-visible {
+    outline: 3px solid var(--accent) !important;
+    outline-offset: 4px;
+    border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+    .site-name {
+        right: 1.25rem;
+        bottom: 1.25rem;
+    }
+}
+
+/* Respect users who ask for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    /* The bubbles float via infinite keyframe animations on `transform`.
+       Pinning the transform would freeze them in a stack, so hide them
+       instead - they are purely decorative. */
+    .bubble-container {
+        display: none !important;
+    }
+
+    .sticker,
+    .sticker-image,
+    .contact-icon {
+        transition: none !important;
+    }
 } 
+
+/* ============================================
+   CUSTOM CURSORS - PHAGE AND E. COLI
+   ------------------------------------------------
+   Built from assets/icons/phage.svg and ecoli.svg: filled to a solid white
+   silhouette and given a thin dark outline, because pure white would be
+   invisible against the near-white page background (var(--bg)). The phage is
+   rotated 30deg anticlockwise so its head sits where a normal arrow cursor's
+   tip would be, and its hotspot is on that head tip.
+
+   PNG rather than SVG on purpose: Safari does not support SVG cursors.
+   The numbers after each url() are the hotspot - the exact pixel that clicks.
+   The second `cursor` line serves a 2x asset to retina screens; browsers that
+   do not understand image-set() simply ignore it and keep the first line.
+   Always keep a keyword fallback (auto / pointer) at the end: if the image
+   fails to load without one, the cursor disappears entirely.
+   ============================================ */
+body {
+    cursor: url("../icons/cursor-phage.png") 4 0, auto;
+    cursor: image-set(url("../icons/cursor-phage.png") 1x,
+                      url("../icons/cursor-phage@2x.png") 2x) 4 0, auto;
+}
+
+/* Anything clickable gets the E. coli */
+a,
+button,
+.sticker,
+.contact-icon,
+.beer-cup-container,
+.hamburger,
+.download-btn,
+.nav-link,
+.nav-logo a {
+    cursor: url("../icons/cursor-ecoli.png") 22 11, pointer;
+    cursor: image-set(url("../icons/cursor-ecoli.png") 1x,
+                      url("../icons/cursor-ecoli@2x.png") 2x) 22 11, pointer;
+}
+
+/* Text selection and form fields keep their normal cursors, which are
+   genuinely informative */
+input,
+textarea,
+select {
+    cursor: auto;
+}
+
+/* Touch devices have no cursor to style, and coarse pointers make the
+   custom hotspot meaningless */
+@media (hover: none), (pointer: coarse) {
+    body,
+    a,
+    button,
+    .sticker,
+    .contact-icon,
+    .beer-cup-container,
+    .hamburger,
+    .download-btn,
+    .nav-link,
+    .nav-logo a {
+        cursor: auto;
+    }
+}
+
+/* ============================================
+   THE LAB BENCH (Research page)
+   ------------------------------------------------
+   A scene you explore rather than a document you scroll. Objects sit on a
+   bench; clicking one opens its project in an overlay panel.
+
+   The whole scene lives in .bench-stage, which has a fixed aspect ratio.
+   Every object is positioned and sized in PERCENTAGES OF THAT STAGE, so the
+   composition scales as one unit at any window size and never drifts apart -
+   the same principle as the landing page's photo anchoring, but simpler here
+   because the stage is ours to define rather than a cover-fit photo.
+
+   Panels are shown with :target, so there is no JavaScript requirement:
+   deep links work and the back button closes a panel.
+   ============================================ */
+
+.bench-page {
+    background: var(--bg);
+}
+
+.bench {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 3rem;
+}
+
+/* ---------- intro copy above the scene ---------- */
+.bench-intro {
+    max-width: 44rem;
+    margin: 0 auto 2.5rem;
+}
+
+.bench-intro h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 1rem;
+}
+
+.bench-lede {
+    color: var(--text);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0 0 0.9rem;
+}
+
+.bench-question {
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    border-left: 3px solid rgba(140, 77, 180, 0.3);
+    padding-left: 1rem;
+    margin: 1.25rem 0 1.4rem;
+}
+
+.bench-hint {
+    margin: 1.75rem 0 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    color: var(--accent-soft);
+}
+
+.bench-hint span {
+    margin-right: 0.35rem;
+}
+
+/* ---------- the stage ---------- */
+.bench-stage {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(59, 30, 77, 0.14);
+}
+
+.bench-wall {
+    position: absolute;
+    inset: 0 0 38% 0;
+    background:
+        radial-gradient(120% 90% at 50% 100%, rgba(255,255,255,0.35), transparent 70%),
+        linear-gradient(var(--rule), var(--rule-2));
+}
+
+.bench-surface {
+    position: absolute;
+    inset: 62% 0 0 0;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0) 18%),
+        linear-gradient(var(--accent-soft), var(--accent-deep));
+}
+
+/* the bench edge highlight */
+.bench-surface::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 6px;
+    background: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0));
+}
+
+/* ---------- objects ---------- */
+.bench-object {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.bench-object:hover,
+.bench-object:focus-visible {
+    transform: translateY(-6px) scale(1.03);
+    z-index: 5;
+}
+
+.bench-art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    filter: drop-shadow(0 8px 10px rgba(59, 30, 77, 0.28));
+}
+
+.bench-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* placeholder frame for objects whose artwork does not exist yet */
+.bench-art--empty {
+    border: 2px dashed rgba(59, 30, 77, 0.4);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.35);
+    filter: none;
+}
+
+.bench-art__todo {
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    text-align: center;
+    padding: 0.25rem;
+}
+
+/* the blackboard is drawn rather than an image, so the formula stays editable */
+.bench-art--chalk {
+    aspect-ratio: 4 / 3;
+    background: var(--board);
+    border: 6px solid var(--rule-2);
+    border-radius: 4px;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.45), 0 8px 14px rgba(59, 30, 77,0.3);
+    filter: none;
+    flex-direction: column;
+    gap: 0.35em;
+    padding: 0.6em;
+}
+
+.chalk {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    font-family: var(--font-body);
+    color: rgba(255, 255, 255, 0.86);
+    text-shadow: 0 0 6px rgba(255,255,255,0.25);
+}
+
+.chalk-line {
+    font-size: clamp(0.5rem, 1.15vw, 0.95rem);
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
+.chalk-faint {
+    opacity: 0.5;
+}
+
+.bench-object__name {
+    margin-top: 0.5rem;
+    font-size: clamp(0.7rem, 1.15vw, 0.95rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.bench-object__sub {
+    font-size: clamp(0.6rem, 0.95vw, 0.8rem);
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+/* the "now" flag on the current work */
+.bench-tag {
+    position: absolute;
+    top: -0.4rem;
+    right: -0.9rem;
+    background: var(--accent);
+    color: #fff;
+    font-size: clamp(0.55rem, 0.85vw, 0.72rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.15em 0.5em;
+    border-radius: 999px;
+    transform: rotate(6deg);
+}
+
+/* ---------- object placement, all % of the stage ---------- */
+.bench-object--blackboard {
+    left: 5%;
+    top: 7%;
+    width: 30%;
+}
+
+.bench-object--computer {
+    left: 44%;
+    top: 30%;
+    width: 22%;
+}
+
+.bench-object--pipettes {
+    left: 21%;
+    top: 46%;
+    width: 10%;
+}
+
+.bench-object--mice {
+    left: 71%;
+    top: 44%;
+    width: 21%;
+}
+
+/* ---------- panels ---------- */
+.bench-panel {
+    display: none;
+}
+
+.bench-panel:target {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    overflow-y: auto;
+    padding: 4rem 1.25rem;
+    background: rgba(59, 30, 77, 0.55);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    animation: bench-panel-in 0.25s ease-out;
+}
+
+@keyframes bench-panel-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.bench-panel__card {
+    position: relative;
+    max-width: 46rem;
+    margin: 0 auto;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 2.5rem 2.5rem 2.25rem;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+}
+
+.bench-panel__close {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    font-size: 1.9rem;
+    line-height: 1;
+    color: var(--accent-soft);
+    text-decoration: none;
+}
+
+.bench-panel__close:hover {
+    color: var(--accent);
+}
+
+.bench-panel__kicker {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-soft);
+    margin: 0 0 0.5rem;
+}
+
+.bench-panel__card h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 1rem;
+    line-height: 1.2;
+}
+
+.bench-panel__card h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 0.85rem;
+    line-height: 1.25;
+}
+
+.bench-panel__card p {
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.72;
+    margin: 0 0 0.95rem;
+}
+
+.bench-panel__card p:last-child {
+    margin-bottom: 0;
+}
+
+.bench-panel__rule {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 2rem 0 1.5rem;
+}
+
+/* ---------- narrow screens: the scene gets taller, objects re-tuck ---------- */
+@media (max-width: 820px) {
+    .bench {
+        padding: 6rem 1rem 2rem;
+    }
+
+    .bench-stage {
+        aspect-ratio: 4 / 5;
+    }
+
+    .bench-wall   { inset: 0 0 46% 0; }
+    .bench-surface { inset: 54% 0 0 0; }
+
+    .bench-object--blackboard { left: 8%;  top: 5%;  width: 54%; }
+    .bench-object--computer   { left: 12%; top: 40%; width: 40%; }
+    .bench-object--pipettes   { left: 62%; top: 30%; width: 18%; }
+    .bench-object--mice       { left: 58%; top: 60%; width: 36%; }
+
+    .bench-object__name { font-size: 0.8rem; }
+    .bench-object__sub  { font-size: 0.68rem; }
+
+    .bench-panel:target { padding: 2rem 0.75rem; }
+    .bench-panel__card  { padding: 2rem 1.35rem 1.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bench-object { transition: none; }
+    .bench-panel:target { animation: none; }
+}
+
+/* ------------------------------------------------
+   The generated bench SVG (tools/build-bench.py)
+   Replaces .bench-stage once assets/bench/bench.svg exists. Placement and
+   scale come entirely from the SVG's own viewBox, so there is nothing to
+   tune here - and because SVG <a> hit-tests the drawn shape, each object is
+   clickable exactly where it is visible.
+   ------------------------------------------------ */
+.bench-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 10px 40px rgba(59, 30, 77, 0.14);
+}
+
+.bench-hit {
+    cursor: pointer;
+}
+
+/* transform-box/origin are essential in SVG: without them the transform is
+   measured from the SVG's origin, so objects fly across the scene instead of
+   lifting in place. */
+.bench-hit > * {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1),
+                filter 0.25s ease;
+}
+
+.bench-hit:hover > *,
+.bench-hit:focus-visible > * {
+    transform: translateY(-1.5%) scale(1.04);
+    filter: drop-shadow(0 6px 10px rgba(59, 30, 77, 0.35));
+}
+
+.bench-hit:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bench-hit > * { transition: none; }
+}
+
+/* ============================================
+   POP-UP WINDOWS  (index.html + the lab bench)
+   ------------------------------------------------
+   A chunky XP-ish window that rolls up into view. Shown with :target, so no
+   JavaScript is needed for open/close - deep links and the back button work
+   on their own.
+
+   `display: none` until targeted would kill the animation, so the closed
+   state uses visibility + a collapsed scaleY instead. transform-origin is at
+   the bottom, which is what gives the roll-up.
+   ============================================ */
+.win {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5vh 1rem;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.win:target,
+.win.is-open {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* click-anywhere-outside to close */
+.win__scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(59, 30, 77, 0.55);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.win:target .win__scrim,
+.win.is-open .win__scrim {
+    opacity: 1;
+}
+
+.win__frame {
+    position: relative;
+    width: min(46rem, 100%);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    border-radius: 6px 6px 4px 4px;
+    box-shadow: 6px 6px 0 rgba(59, 30, 77, 0.35), 0 22px 50px rgba(59, 30, 77, 0.3);
+    overflow: hidden;
+    /* the roll-up */
+    transform: scaleY(0.02) translateY(12px);
+    transform-origin: bottom center;
+    opacity: 0;
+    transition: transform 0.32s cubic-bezier(0.2, 1.25, 0.4, 1), opacity 0.2s ease;
+}
+
+.win--wide .win__frame {
+    width: min(64rem, 100%);
+}
+
+.win:target .win__frame,
+.win.is-open .win__frame {
+    transform: scaleY(1) translateY(0);
+    opacity: 1;
+}
+
+/* ---------- title bar ---------- */
+.win__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.5rem 0.4rem 0.75rem;
+    background: linear-gradient(var(--accent), var(--accent-dark));
+    border-bottom: 2px solid var(--ink);
+    flex: none;
+}
+
+.win__title {
+    flex: 1;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #fff;
+    text-shadow: 1px 1px 0 rgba(59, 30, 77, 0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.win__btns {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.win__btn,
+.win__close {
+    width: 1.35rem;
+    height: 1.2rem;
+    display: grid;
+    place-items: center;
+    background: var(--rule);
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1;
+    color: var(--ink);
+    text-decoration: none;
+    box-shadow: inset -1px -1px 0 rgba(59, 30, 77, 0.35);
+}
+
+.win__close:hover,
+.win__close:focus-visible {
+    background: var(--accent-soft);
+    color: #fff;
+}
+
+/* ---------- body ---------- */
+.win__body {
+    padding: 1.5rem 1.75rem 1.75rem;
+    overflow-y: auto;
+    color: var(--text);
+}
+
+.win__prompt {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted-2);
+    margin: 0 0 1rem;
+}
+
+.win__body p {
+    font-size: 1rem;
+    line-height: 1.72;
+    margin: 0 0 1rem;
+}
+
+.win__body p:last-child {
+    margin-bottom: 0;
+}
+
+.win__body h2,
+.win__body h3 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    line-height: 1.25;
+    margin: 0 0 0.85rem;
+}
+
+.win__body h2 {
+    font-family: var(--font-display); font-size: 1.5rem; }
+.win__body h3 { font-size: 1.2rem; margin-top: 1.75rem; }
+
+.win__note {
+    margin-top: 1.25rem !important;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.92rem !important;
+    color: var(--muted);
+}
+
+.win__rule {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 1.75rem 0 1.25rem;
+}
+
+/* ---------- contact list ---------- */
+.chat-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+}
+
+.chat-list dt {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.chat-list dd {
+    margin: 0;
+    color: var(--ink);
+}
+
+.chat-list a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-soft);
+    text-underline-offset: 3px;
+}
+
+.chat-list a:hover {
+    color: var(--accent);
+}
+
+/* ---------- the CV slide, which is itself the download button ---------- */
+.cv-slide {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: #fff;
+}
+
+.cv-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.cv-slide__hint {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    gap: 0.4rem;
+    font-size: clamp(1rem, 2.4vw, 1.6rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(59, 30, 77, 0.62);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.cv-slide__hint span {
+    font-size: 1.3em;
+}
+
+.cv-slide:hover img,
+.cv-slide:focus-visible img {
+    transform: scale(1.02);
+}
+
+.cv-slide:hover .cv-slide__hint,
+.cv-slide:focus-visible .cv-slide__hint {
+    opacity: 1;
+}
+
+@media (max-width: 640px) {
+    .win { padding: 2vh 0.5rem; }
+    .win__body { padding: 1.15rem 1.15rem 1.35rem; }
+    .chat-list { grid-template-columns: 1fr; gap: 0.15rem; }
+    .chat-list dd { margin-bottom: 0.6rem; }
+    /* touch has no hover, so always show the download affordance */
+    .cv-slide__hint { opacity: 1; background: rgba(59, 30, 77, 0.35); }
+}
+
+@media (hover: none) {
+    .cv-slide__hint { opacity: 1; background: rgba(59, 30, 77, 0.35); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .win__frame {
+        transition: opacity 0.2s ease;
+        transform: none;
+    }
+    .win:target .win__frame,
+    .win.is-open .win__frame { transform: none; }
+    .cv-slide img { transition: none; }
+}
+
+/* back link on the bench page - there is no navbar any more, only two pages */
+.back-home {
+    position: fixed;
+    top: 1.25rem;
+    left: 1.25rem;
+    z-index: 50;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    background: var(--card);
+    border: 2px solid var(--accent-soft);
+    border-radius: 999px;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.45);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.back-home:hover,
+.back-home:focus-visible {
+    background: var(--accent-soft);
+    color: #fff;
+}
+
+.win__kicker {
+    font-size: 0.75rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent-soft);
+    margin: 0 0 0.5rem !important;
+}
+
+/* ============================================
+   WINDOW TREATMENTS
+   ------------------------------------------------
+   The base rules above are the XP/98 chrome. These variants restyle the same
+   markup, selected by data-win on <body>, so switching the whole site's window
+   look is a one-word edit in two HTML files. See style-lab.html for all five
+   rendered side by side.
+
+       data-win="specimen"  herbarium / museum catalogue card   (default)
+       data-win="xp"         the original chrome
+       data-win="crt"        purple-phosphor terminal
+       data-win="paper"      scalloped stamp-edge card
+   ============================================ */
+
+/* ---------- specimen label ---------- */
+body[data-win="specimen"] .win__frame {
+    background: var(--card);
+    border: 1px solid var(--rule-2);
+    border-radius: 2px;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+body[data-win="specimen"] .win__bar {
+    background: none;
+    border-bottom: 1px solid var(--rule);
+    padding: 0.9rem 1.25rem 0.7rem;
+}
+
+body[data-win="specimen"] .win__title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    text-shadow: none;
+}
+
+/* the fake minimise/maximise squares are chrome-specific; drop them here */
+body[data-win="specimen"] .win__btns {
+    display: none;
+}
+
+body[data-win="specimen"] .win__close {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    color: var(--muted-2);
+    width: auto;
+    height: auto;
+}
+
+body[data-win="specimen"] .win__close:hover {
+    background: none;
+    color: var(--accent);
+}
+
+/* an accession-style rule under the header */
+body[data-win="specimen"] .win__body {
+    padding: 1.6rem 1.75rem 1.9rem;
+}
+
+body[data-win="specimen"] .win__prompt {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.7rem;
+}
+
+body[data-win="specimen"] .win__body h2,
+body[data-win="specimen"] .win__body h3 {
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* ---------- terminal / CRT ---------- */
+body[data-win="crt"] .win__frame {
+    background: #140d1c;
+    border: 2px solid #2a1b3d;
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(140, 77, 180, 0.3);
+}
+
+body[data-win="crt"] .win__bar {
+    background: none;
+    border-bottom: 1px dashed #4a2f66;
+}
+
+body[data-win="crt"] .win__title,
+body[data-win="crt"] .win__prompt {
+    font-family: var(--font-mono);
+    color: #e9d5ff;
+    text-shadow: 0 0 8px rgba(180, 120, 235, 0.5);
+}
+
+body[data-win="crt"] .win__btns { display: none; }
+
+body[data-win="crt"] .win__close {
+    background: none;
+    border: 1px solid #4a2f66;
+    color: #cfa8ee;
+    box-shadow: none;
+}
+
+body[data-win="crt"] .win__body,
+body[data-win="crt"] .win__body p,
+body[data-win="crt"] .win__body h2,
+body[data-win="crt"] .win__body h3 {
+    color: #cfa8ee;
+    text-shadow: 0 0 6px rgba(180, 120, 235, 0.35);
+}
+
+/* scanlines, drawn over the frame and never intercepting clicks */
+body[data-win="crt"] .win__frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    pointer-events: none;
+    background: repeating-linear-gradient(rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 3px);
+}
+
+/* ---------- scalloped stamp-edge paper ---------- */
+body[data-win="paper"] .win__frame {
+    background: var(--card);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    filter: drop-shadow(0 12px 22px var(--shadow));
+    /* the scallops are repeated radial-gradient masks - no images involved */
+    --s: 14px;
+    -webkit-mask:
+        radial-gradient(var(--s) at 50% 0, #0000 98%, #000) 0 0/28px 28px repeat-x,
+        radial-gradient(var(--s) at 50% 100%, #0000 98%, #000) 0 100%/28px 28px repeat-x,
+        linear-gradient(#000, #000) 0 14px/100% calc(100% - 28px) no-repeat;
+            mask:
+        radial-gradient(var(--s) at 50% 0, #0000 98%, #000) 0 0/28px 28px repeat-x,
+        radial-gradient(var(--s) at 50% 100%, #0000 98%, #000) 0 100%/28px 28px repeat-x,
+        linear-gradient(#000, #000) 0 14px/100% calc(100% - 28px) no-repeat;
+}
+
+body[data-win="paper"] .win__bar {
+    background: none;
+    border-bottom: 1px solid var(--rule);
+    padding-top: 1.4rem;
+}
+
+body[data-win="paper"] .win__title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    text-shadow: none;
+}
+
+body[data-win="paper"] .win__btns { display: none; }
+
+body[data-win="paper"] .win__close {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    color: var(--muted-2);
+    font-size: 1.5rem;
+}
+
+body[data-win="paper"] .win__body {
+    padding-bottom: 2rem;
+}
+
+/* small art scaled up should stay crisp rather than smeared */
+.pixel-art,
+.pixel-art img {
+    image-rendering: pixelated;
+}
+
+/* ============================================
+   BENCH IDLE MOTION
+   Small looping idle animations were on almost every site surveyed - they make
+   a scene feel alive without demanding attention. Each object drifts on its own
+   slightly different period so they never march in step.
+   ============================================ */
+@keyframes bench-drift {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-3px) rotate(-0.4deg); }
+}
+
+.bench-object .bench-art,
+.bench-hit > * {
+    animation: bench-drift 6s ease-in-out infinite;
+}
+
+.bench-object--computer .bench-art   { animation-duration: 7.5s; animation-delay: -1.2s; }
+.bench-object--pipettes .bench-art   { animation-duration: 5.5s; animation-delay: -2.6s; }
+.bench-object--mice .bench-art       { animation-duration: 8.5s; animation-delay: -0.7s; }
+.bench-object--blackboard .bench-art { animation-duration: 9.5s; animation-delay: -3.4s; }
+
+/* hovering takes over from the drift */
+.bench-object:hover .bench-art,
+.bench-object:focus-visible .bench-art {
+    animation-play-state: paused;
+}
+
+/* blinking cursor on the invitation line */
+.bench-hint::after {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+    margin-left: 0.15em;
+    vertical-align: -0.15em;
+    background: var(--accent-soft);
+    animation: bench-blink 1.15s steps(1) infinite;
+}
+
+@keyframes bench-blink { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+    .bench-object .bench-art,
+    .bench-hit > *,
+    .bench-hint::after {
+        animation: none;
+    }
+}

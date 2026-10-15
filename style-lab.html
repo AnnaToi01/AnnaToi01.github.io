@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Style lab — window treatments &amp; fonts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=VT323&family=Silkscreen:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Unbounded:wght@400;700;900&family=Special+Elite&family=Gaegu:wght@400;700&family=Cherry+Bomb+One&family=DotGothic16&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* the site palette */
+  --pale:#f7fbff; --ice:#d4e4f2; --mid:#a9c6de; --steel:#5f8fb3;
+  --lilac:#a381b9; --purple:#8c4db4; --ink:#3b1e4d;
+  --body:#4a3560; --muted:#6b5b83;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pale);color:var(--body);
+     font-family:'Instrument Sans',system-ui,sans-serif;line-height:1.6}
+.wrap{max-width:1180px;margin:0 auto;padding:2.5rem 1.25rem 6rem}
+h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2rem,5vw,3.4rem);
+   color:var(--ink);margin:0 0 .35rem;line-height:1.05}
+.sub{color:var(--muted);margin:0 0 2.5rem;max-width:44rem}
+h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.9rem;color:var(--ink);
+   margin:3.5rem 0 .3rem;border-top:1px solid var(--ice);padding-top:1.5rem}
+h2 span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.14em;
+        text-transform:uppercase;color:var(--lilac);display:block;margin-bottom:.4rem}
+.note{font-size:.9rem;color:var(--muted);margin:.2rem 0 1.5rem;max-width:52rem}
+.note code{font-family:'IBM Plex Mono',monospace;font-size:.85em;background:var(--ice);
+           padding:.1em .35em;border-radius:3px;color:var(--ink)}
+.demo{margin:0 0 1rem}
+
+/* ============ 1. XP / 98 CHROME  (what the site has now) ============ */
+.w-xp{background:var(--pale);border:2px solid var(--ink);border-radius:6px 6px 4px 4px;
+      box-shadow:6px 6px 0 rgba(59,30,77,.35);overflow:hidden;max-width:44rem}
+.w-xp .bar{display:flex;align-items:center;gap:.5rem;padding:.4rem .5rem .4rem .75rem;
+      background:linear-gradient(var(--purple),#6d3a90);border-bottom:2px solid var(--ink)}
+.w-xp .t{flex:1;font-family:'IBM Plex Mono',monospace;font-size:.85rem;font-weight:600;
+      color:#fff;text-shadow:1px 1px 0 rgba(59,30,77,.6)}
+.w-xp .b{width:1.35rem;height:1.2rem;display:grid;place-items:center;background:var(--ice);
+      border:1px solid var(--ink);border-radius:2px;font-size:.7rem;font-family:monospace;
+      box-shadow:inset -1px -1px 0 rgba(59,30,77,.35)}
+.w-xp .body{padding:1.35rem 1.5rem}
+
+/* ============ 2. TERMINAL / CRT ============ */
+.w-crt{position:relative;background:#140d1c;border-radius:10px;padding:1.4rem 1.6rem;
+      max-width:44rem;box-shadow:0 0 0 2px #2a1b3d,0 0 30px rgba(140,77,180,.35) inset;
+      font-family:'VT323',monospace;color:#cfa8ee}
+.w-crt .t{color:#e9d5ff;font-size:1.1rem;letter-spacing:.06em;margin-bottom:.6rem;
+      border-bottom:1px dashed #4a2f66;padding-bottom:.5rem}
+.w-crt p{font-size:1.28rem;line-height:1.42;margin:.55rem 0;text-shadow:0 0 6px rgba(180,120,235,.45)}
+.w-crt .cur{display:inline-block;width:.55em;height:1.05em;vertical-align:-.15em;
+      background:#e9d5ff;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+/* scanlines */
+.w-crt::after{content:'';position:absolute;inset:0;border-radius:10px;pointer-events:none;
+      background:repeating-linear-gradient(rgba(255,255,255,.045) 0 1px,transparent 1px 3px)}
+
+/* ============ 3. SPECIMEN LABEL (museum / herbarium sheet) ============ */
+.w-spec{background:#fffdf7;border:1px solid #cdbfa8;padding:1.6rem 1.8rem;max-width:44rem;
+      box-shadow:0 1px 0 #fff inset,0 8px 22px rgba(59,30,77,.10);
+      font-family:'Atkinson Hyperlegible',system-ui,sans-serif}
+.w-spec .cat{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.18em;
+      text-transform:uppercase;color:#a3907a;display:flex;justify-content:space-between;
+      border-bottom:1px solid #e3d8c6;padding-bottom:.5rem;margin-bottom:1rem}
+.w-spec h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;
+      font-size:1.7rem;color:#2f2418;margin:0 0 .2rem}
+.w-spec .det{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#a3907a;
+      margin:0 0 1rem}
+.w-spec p{color:#4a3f30;font-size:.97rem}
+.w-spec .rule{border:0;border-top:1px solid #e3d8c6;margin:1.2rem 0 .8rem}
+
+/* ============ 4. TORN / SCALLOPED PAPER (pearlitegates) ============ */
+.w-torn{position:relative;background:#efe9f5;padding:2rem 1.9rem 1.7rem;max-width:44rem;
+      color:var(--ink);filter:drop-shadow(0 10px 18px rgba(59,30,77,.18))}
+/* scalloped top + bottom edge, made from repeated radial gradients */
+.w-torn{--s:14px;
+  -webkit-mask:
+    radial-gradient(var(--s) at 50% 0,#0000 98%,#000) 0 0/28px 28px repeat-x,
+    radial-gradient(var(--s) at 50% 100%,#0000 98%,#000) 0 100%/28px 28px repeat-x,
+    linear-gradient(#000,#000) 0 14px/100% calc(100% - 28px) no-repeat;
+          mask:
+    radial-gradient(var(--s) at 50% 0,#0000 98%,#000) 0 0/28px 28px repeat-x,
+    radial-gradient(var(--s) at 50% 100%,#0000 98%,#000) 0 100%/28px 28px repeat-x,
+    linear-gradient(#000,#000) 0 14px/100% calc(100% - 28px) no-repeat}
+.w-torn h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.8rem;
+      margin:.2rem 0 .7rem}
+.w-torn p{font-size:.98rem}
+
+/* ============ 5. NOTEBOOK PAGE ============ */
+.w-note{max-width:44rem;background:
+      linear-gradient(#fff,#fff) padding-box,
+      repeating-linear-gradient(#fdfdff 0 27px,#dbe7f3 27px 28px);
+      border:1px solid #c9d9e8;border-left:3px solid #e58fa8;
+      padding:1.5rem 1.7rem 1.7rem 3rem;position:relative;
+      font-family:'Gaegu',cursive;color:#26324a;
+      box-shadow:0 8px 20px rgba(59,30,77,.10)}
+.w-note::before{content:'';position:absolute;left:2.1rem;top:0;bottom:0;width:1px;background:#f0b9c8}
+.w-note h3{font-family:'Gaegu',cursive;font-size:2rem;font-weight:700;margin:0 0 .3rem;color:#1c2740}
+.w-note p{font-size:1.25rem;line-height:28px;margin:0 0 28px}
+
+/* ============ font specimens ============ */
+.fonts{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,20rem),1fr))}
+.spec{border:1px solid var(--ice);border-radius:8px;padding:1.1rem 1.2rem;background:#fff}
+.spec .nm{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--lilac);margin-bottom:.55rem}
+.spec .big{font-size:1.65rem;line-height:1.15;color:var(--ink);margin-bottom:.3rem}
+.spec .sm{font-size:.9rem;color:var(--muted)}
+.f-instrument .big{font-family:'Instrument Serif',serif}
+.f-unbounded  .big{font-family:'Unbounded',sans-serif;font-weight:700;font-size:1.35rem}
+.f-vt323     .big{font-family:'VT323',monospace;font-size:2.1rem}
+.f-silk      .big{font-family:'Silkscreen',monospace;font-size:1.15rem}
+.f-dot       .big{font-family:'DotGothic16',sans-serif;font-size:1.5rem}
+.f-cherry    .big{font-family:'Cherry Bomb One',cursive;font-size:1.5rem}
+.f-elite     .big{font-family:'Special Elite',cursive;font-size:1.45rem}
+.f-gaegu     .big{font-family:'Gaegu',cursive;font-size:2rem}
+.f-space     .big{font-family:'Space Mono',monospace;font-size:1.35rem}
+.f-plex      .big{font-family:'IBM Plex Mono',monospace;font-size:1.35rem}
+.f-atkinson  .big{font-family:'Atkinson Hyperlegible',sans-serif}
+.f-isans     .big{font-family:'Instrument Sans',sans-serif}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Style lab</h1>
+  <p class="sub">Five ways to dress the pop-up windows, and a font shortlist drawn
+  from the small-web sites in <code>docs/design-notes.md</code>. Nothing here is
+  wired into the site — pick what you like and I'll apply it. Not indexed, not linked.</p>
+
+  <h2><span>option 1 — currently live</span>XP / 98 chrome</h2>
+  <p class="note">What the site has now. Gradient title bar, hard offset shadow, monospace
+  filename. Reads as "computer", which suits the computational half of your work but
+  fights the hand-drawn half.</p>
+  <div class="demo"><div class="w-xp">
+    <div class="bar"><span class="t">about_anna.txt</span><span class="b">&minus;</span><span class="b">&#9633;</span><span class="b">&times;</span></div>
+    <div class="body"><p>I grew up in Tbilisi (Georgia) with mostly two things on my mind:
+    Biology and music. So I spent my days traveling to Biology Olympiads, or practicing
+    the piano.</p></div>
+  </div></div>
+
+  <h2><span>option 2</span>Terminal / CRT</h2>
+  <p class="note">Purple phosphor, <code>VT323</code>, scanline overlay, a blinking block
+  cursor. Funkiest of the five and genuinely retro rather than retro-flavoured. Caveat:
+  the low-contrast glow gets tiring for long prose — best if the windows stay short.</p>
+  <div class="demo"><div class="w-crt">
+    <div class="t">C:\&gt; type about_anna.txt</div>
+    <p>I grew up in Tbilisi (Georgia) with mostly two things on my mind: Biology and music.</p>
+    <p>&gt; _<span class="cur"></span></p>
+  </div></div>
+
+  <h2><span>option 3 — my pick for you</span>Specimen label</h2>
+  <p class="note">A herbarium sheet / museum catalogue card: accession number, small caps
+  metadata, italic serif binomial, hairline rules, <code>Atkinson Hyperlegible</code> body
+  (designed for low vision, so it reads beautifully at any size). Says "biologist" without
+  costume, and the italic serif handles species names natively.</p>
+  <div class="demo"><div class="w-spec">
+    <div class="cat"><span>Coll. no. AT&nbsp;2026&mdash;004</span><span>Institut Pasteur</span></div>
+    <h3>Escherichia coli</h3>
+    <p class="det">Pangenome evolution &middot; commensal&ndash;pathogen spectrum</p>
+    <p>One of the best-studied organisms in biology, but it has a dual nature: a common gut
+    commensal, while also being a major opportunistic pathogen.</p>
+    <hr class="rule">
+    <p class="det" style="margin:0">det. A. Toidze &middot; 2026</p>
+  </div></div>
+
+  <h2><span>option 4</span>Torn / scalloped paper</h2>
+  <p class="note">Stamp-edge card, lifted from pearlitegates.com. The scallops are pure CSS
+  (repeated radial-gradient masks) — no images. Warmest of the five and closest to the
+  sticker-collage language of your landing page.</p>
+  <div class="demo"><div class="w-torn">
+    <h3>Co-evolution of MGEs</h3>
+    <p>Mobile genetic elements are often thought of as parasites of their hosts &mdash; but
+    they can themselves have parasites. Parasites of parasites of parasites.</p>
+  </div></div>
+
+  <h2><span>option 5</span>Lab notebook page</h2>
+  <p class="note">Ruled paper, pink margin rule, <code>Gaegu</code> handwriting. Charming for
+  short asides; I would not put three paragraphs of research prose in it. Could be lovely
+  for one thing only — a "currently reading" or status note.</p>
+  <div class="demo"><div class="w-note">
+    <h3>14 Aug — bench notes</h3>
+    <p>Plasmid coexistence: check segregation loss term, it dominates at low transfer rate.</p>
+    <p>Ask F. about the pangenome tree scaling.</p>
+  </div></div>
+
+  <h2><span>typography</span>Font shortlist</h2>
+  <p class="note">All free on Google Fonts, so no files to host. Funky ones up top, workhorses
+  at the bottom. The strongest move on nearly every site I looked at was <strong>one
+  characterful display face + one very plain body face</strong> — not three funky fonts at once.</p>
+  <div class="fonts">
+    <div class="spec f-instrument"><div class="nm">Instrument Serif — display</div><div class="big">Microbes &amp; evolution</div><div class="sm">Elegant, high contrast, free italic. What pearlitegates uses. Handles <em>italic species names</em> natively.</div></div>
+    <div class="spec f-unbounded"><div class="nm">Unbounded — display</div><div class="big">Microbes &amp; evolution</div><div class="sm">Geometric, wide, confident. Very now. Good for a name/masthead only.</div></div>
+    <div class="spec f-vt323"><div class="nm">VT323 — terminal</div><div class="big">Microbes &amp; evolution</div><div class="sm">DEC terminal. Cheap and effective funk. Poor at small sizes.</div></div>
+    <div class="spec f-silk"><div class="nm">Silkscreen — pixel</div><div class="big">Microbes &amp; evolution</div><div class="sm">Tiny bitmap. Labels and buttons only, never paragraphs.</div></div>
+    <div class="spec f-dot"><div class="nm">DotGothic16 — dot matrix</div><div class="big">Microbes &amp; evolution</div><div class="sm">Dot-matrix printer. Legible at body size, unlike most pixel fonts.</div></div>
+    <div class="spec f-cherry"><div class="nm">Cherry Bomb One — display</div><div class="big">Microbes &amp; evolution</div><div class="sm">Round, bouncy, sticker-like. Pairs with your collage.</div></div>
+    <div class="spec f-elite"><div class="nm">Special Elite — typewriter</div><div class="big">Microbes &amp; evolution</div><div class="sm">Battered typewriter. Suits the specimen-label direction.</div></div>
+    <div class="spec f-gaegu"><div class="nm">Gaegu — handwriting</div><div class="big">Microbes &amp; evolution</div><div class="sm">Loose handwriting. Notebook asides only.</div></div>
+    <div class="spec f-space"><div class="nm">Space Mono — mono</div><div class="big">Microbes &amp; evolution</div><div class="sm">Quirky mono with real character. Great for window title bars.</div></div>
+    <div class="spec f-plex"><div class="nm">IBM Plex Mono — mono</div><div class="big">Microbes &amp; evolution</div><div class="sm">The sane one. Labels, captions, code, metadata.</div></div>
+    <div class="spec f-atkinson"><div class="nm">Atkinson Hyperlegible — body</div><div class="big">Microbes &amp; evolution</div><div class="sm">Built for low vision; unambiguous letterforms. Best body face here.</div></div>
+    <div class="spec f-isans"><div class="nm">Instrument Sans — body</div><div class="big">Microbes &amp; evolution</div><div class="sm">Neutral, slightly warm. Pairs with Instrument Serif by design.</div></div>
+  </div>
+</div>
+</body>
+</html>

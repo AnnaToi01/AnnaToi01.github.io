@@ -3,124 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anna Toidze - Computational Biology & Bioinformatics</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
+    <title>Anna Toidze — Computational Biology &amp; Bioinformatics, ETH Zürich</title>
+    <meta name="description" content="Anna Toidze — computational biologist working on microbes and evolution: mobile genetic elements, bacterial pangenomes and protein evolution. PhD at Institut Pasteur. About, CV and contact details.">
+    <meta name="author" content="Anna Toidze">
+    <link rel="canonical" href="https://annatoi01.github.io/">
 
+    <!-- Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Anna Toidze">
+    <meta property="og:title" content="Anna Toidze — Computational Biology &amp; Bioinformatics">
+    <meta property="og:description" content="Computational biologist in Zürich. MSc in Computational Biology and Bioinformatics at ETH Zürich; evolutionary biology, phylodynamics and single-cell genomics.">
+    <meta property="og:url" content="https://annatoi01.github.io/">
+    <meta property="og:image" content="https://annatoi01.github.io/assets/images/anna.png">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="stylesheet" href="assets/css/styles.css?v=7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+
+    <!-- Structured data: helps Google connect this site to "Anna Toidze" the person -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Anna Toidze",
+        "url": "https://annatoi01.github.io/",
+        "image": "https://annatoi01.github.io/assets/images/anna.png",
+        "jobTitle": "Computational Biologist",
+        "description": "Computational biologist working on evolutionary biology, phylodynamics and single-cell genomics.",
+        "email": "mailto:atoidze@ethz.ch",
+        "knowsAbout": [
+            "Computational Biology",
+            "Bioinformatics",
+            "Evolutionary Biology",
+            "Phylodynamics",
+            "Single-cell RNA sequencing",
+            "Population Genetics"
+        ],
+        "alumniOf": [
+            {
+                "@type": "CollegeOrUniversity",
+                "name": "ETH Zürich"
+            },
+            {
+                "@type": "CollegeOrUniversity",
+                "name": "Ruhr University Bochum"
+            }
+        ],
+        "homeLocation": {
+            "@type": "Place",
+            "name": "Zürich, Switzerland"
+        },
+        "sameAs": [
+            "https://github.com/AnnaToi01",
+            "https://www.linkedin.com/in/anna-toidze/"
+        ]
+    }
+    </script>
+</head>
+<body data-win="specimen">
     <!-- Home with Background Image -->
     <section id="home" class="home-with-background">
         <div class="background-image">
-            <img src="assets/images/769DECF3-CBB6-4BCF-946A-68C6448605B0.jpeg" alt="Background" class="bg-image">
+            <img src="assets/images/background.jpeg" alt="" aria-hidden="true" class="bg-image">
             <div class="background-overlay"></div>
-            
+
             <!-- Beer Cup Decorative Element -->
             <div class="beer-cup-container">
-                <img src="assets/icons/beer_cup.svg" alt="Beer Cup" class="beer-cup-image">
+                <img src="assets/icons/beer_cup.svg" alt="" aria-hidden="true" class="beer-cup-image">
+                <!-- Hardcoded so crawlers and keyboard users can reach it.
+                     beer-position.js reuses this element instead of creating one. -->
+                <a href="#w-chat" class="contact-icon" data-label="Let’s chat" aria-label="Let’s chat: my contact details">
+                    <img src="assets/icons/contact.svg" alt="Contact" class="contact-svg">
+                </a>
             </div>
         </div>
-        
-        <!-- Interactive Stickers and Arrows -->
+
+        <!-- Name, bottom right. Also the page's only h1. -->
+        <h1 class="site-name">Anna Toidze</h1>
+
+        <!-- Interactive Stickers.
+             data-label drives the hover tooltip (see .sticker::after in styles.css) -->
         <div class="home-stickers">
-            <!-- Education Sticker -->
-            <div class="sticker sticker-education" onclick="window.location.href='education.html'">
+            <!-- Experience Sticker -->
+            <a class="sticker sticker-education" href="#w-cv" data-label="CV" aria-label="Open my CV">
                 <div class="sticker-container">
-                    <img src="assets/icons/education.svg" alt="Education" class="sticker-image">
+                    <img src="assets/icons/education.svg" alt="" aria-hidden="true" class="sticker-image">
                 </div>
-            </div>
-            
+            </a>
+
             <!-- Projects Sticker -->
-            <div class="sticker sticker-projects" onclick="window.location.href='projects.html'">
+            <a class="sticker sticker-projects" href="projects.html" data-label="Projects →" aria-label="Projects: go to my lab bench">
                 <div class="sticker-container">
-                    <img src="assets/icons/projects.svg" alt="Projects" class="sticker-image">
+                    <img src="assets/icons/projects.svg" alt="" aria-hidden="true" class="sticker-image">
                 </div>
-            </div>
-            
+            </a>
+
             <!-- About Me Sticker -->
-            <div class="sticker sticker-about" onclick="window.location.href='about.html'">
+            <a class="sticker sticker-about" href="#w-about" data-label="About me" aria-label="About me">
                 <div class="sticker-container">
-                    <img src="assets/images/anna.png" alt="About Me" class="sticker-image">
+                    <img src="assets/images/anna.png" alt="Anna Toidze" class="sticker-image">
                 </div>
-            </div>
-            
+            </a>
+
             <!-- Animated Bubbles - Multiple Sets -->
             <div class="bubble-container bubble-1">
-                <img src="assets/bubbles/bubble1.svg" alt="Bubble 1" class="bubble-image">
+                <img src="assets/bubbles/bubble1.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-2">
-                <img src="assets/bubbles/bubble2.svg" alt="Bubble 2" class="bubble-image">
+                <img src="assets/bubbles/bubble2.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-3">
-                <img src="assets/bubbles/bubble3.svg" alt="Bubble 3" class="bubble-image">
+                <img src="assets/bubbles/bubble3.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
-            
+
             <!-- Extra Bubbles - Second Wave -->
             <div class="bubble-container bubble-4">
-                <img src="assets/bubbles/bubble1.svg" alt="Bubble 4" class="bubble-image">
+                <img src="assets/bubbles/bubble1.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-5">
-                <img src="assets/bubbles/bubble2.svg" alt="Bubble 5" class="bubble-image">
+                <img src="assets/bubbles/bubble2.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-6">
-                <img src="assets/bubbles/bubble3.svg" alt="Bubble 6" class="bubble-image">
+                <img src="assets/bubbles/bubble3.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
-            
+
             <!-- Extra Bubbles - Third Wave -->
             <div class="bubble-container bubble-7">
-                <img src="assets/bubbles/bubble1.svg" alt="Bubble 7" class="bubble-image">
+                <img src="assets/bubbles/bubble1.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-8">
-                <img src="assets/bubbles/bubble2.svg" alt="Bubble 8" class="bubble-image">
+                <img src="assets/bubbles/bubble2.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
-            
+
             <!-- Fourth Wave - More Bubbles -->
             <div class="bubble-container bubble-9">
-                <img src="assets/bubbles/bubble3.svg" alt="Bubble 9" class="bubble-image">
+                <img src="assets/bubbles/bubble3.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-10">
-                <img src="assets/bubbles/bubble1.svg" alt="Bubble 10" class="bubble-image">
+                <img src="assets/bubbles/bubble1.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-11">
-                <img src="assets/bubbles/bubble2.svg" alt="Bubble 11" class="bubble-image">
+                <img src="assets/bubbles/bubble2.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-12">
-                <img src="assets/bubbles/bubble3.svg" alt="Bubble 12" class="bubble-image">
+                <img src="assets/bubbles/bubble3.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
-            
+
             <!-- Fifth Wave - Even More Bubbles -->
             <div class="bubble-container bubble-13">
-                <img src="assets/bubbles/bubble1.svg" alt="Bubble 13" class="bubble-image">
+                <img src="assets/bubbles/bubble1.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-14">
-                <img src="assets/bubbles/bubble2.svg" alt="Bubble 14" class="bubble-image">
+                <img src="assets/bubbles/bubble2.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-15">
-                <img src="assets/bubbles/bubble3.svg" alt="Bubble 15" class="bubble-image">
+                <img src="assets/bubbles/bubble3.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-16">
-                <img src="assets/bubbles/bubble1.svg" alt="Bubble 16" class="bubble-image">
+                <img src="assets/bubbles/bubble1.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
-            
+
             <!-- Sixth Wave - Maximum Bubbles -->
             <div class="bubble-container bubble-17">
-                <img src="assets/bubbles/bubble2.svg" alt="Bubble 17" class="bubble-image">
+                <img src="assets/bubbles/bubble2.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-18">
-                <img src="assets/bubbles/bubble3.svg" alt="Bubble 18" class="bubble-image">
+                <img src="assets/bubbles/bubble3.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-19">
-                <img src="assets/bubbles/bubble1.svg" alt="Bubble 19" class="bubble-image">
+                <img src="assets/bubbles/bubble1.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
             <div class="bubble-container bubble-20">
-                <img src="assets/bubbles/bubble2.svg" alt="Bubble 20" class="bubble-image">
+                <img src="assets/bubbles/bubble2.svg" alt="" aria-hidden="true" class="bubble-image">
             </div>
         </div>
     </section>
 
-    <script src="assets/js/script.js"></script>
-    <script src="assets/js/beer-position.js"></script>
-    <script src="assets/js/bubble-spawn.js"></script>
+
+    <!-- ============================================================
+         POP-UP WINDOWS
+         Opened with the CSS :target selector, so no JavaScript is
+         required: deep links work (index.html#w-about), the back
+         button closes a window, and it still works if JS fails.
+         script.js only adds Escape-to-close on top.
+         The copy lives here in the page, not injected, so it stays
+         readable to search engines and screen readers.
+         ============================================================ -->
+
+    <div class="win" id="w-about" role="dialog" aria-labelledby="w-about-t" tabindex="-1">
+        <a class="win__scrim" href="#home" aria-label="Close window" tabindex="-1"></a>
+        <div class="win__frame">
+            <div class="win__bar">
+                <span class="win__title" id="w-about-t">about_anna.txt</span>
+                <span class="win__btns" aria-hidden="true">
+                    <span class="win__btn">&minus;</span><span class="win__btn">&#9633;</span>
+                </span>
+                <a class="win__close" href="#home" aria-label="Close window">&times;</a>
+            </div>
+            <div class="win__body">
+                <p class="win__prompt" aria-hidden="true">C:\&gt; type about_anna.txt</p>
+                <p>I grew up in Tbilisi (Georgia) with mostly two things on my mind: Biology and music. So I spent my days traveling to Biology Olympiads, or practicing the piano. At 17, I left Georgia to do my bachelor's degree in Germany, after that I spent a year in Okinawa (Japan) as a researcher, and did a master's degree in Zurich.</p>
+                    
+                    <p>I'm slightly shy, but I enjoy spending time with new and old friends. I care about science and my research in evolutionary biology. I care about music: I love finding experimental music in the depth of the internet, I love going to concerts and I'm learning to play the organ. I like fashion, where I negotiate aesthetic influences from Georgia with contemporary ideas that excite me. And generally, I like science, I like things that are social and create a sense of belonging, and things that are creative and experimental.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="win" id="w-chat" role="dialog" aria-labelledby="w-chat-t" tabindex="-1">
+        <a class="win__scrim" href="#home" aria-label="Close window" tabindex="-1"></a>
+        <div class="win__frame">
+            <div class="win__bar">
+                <span class="win__title" id="w-chat-t">lets_chat.exe</span>
+                <span class="win__btns" aria-hidden="true">
+                    <span class="win__btn">&minus;</span><span class="win__btn">&#9633;</span>
+                </span>
+                <a class="win__close" href="#home" aria-label="Close window">&times;</a>
+            </div>
+            <div class="win__body">
+                <p class="win__prompt" aria-hidden="true">C:\&gt; finger anna</p>
+                <dl class="chat-list">
+                    <dt>Email</dt>
+                    <dd><a href="mailto:atoidze@ethz.ch">atoidze@ethz.ch</a></dd>
+                    <dt>Where</dt>
+                    <dd>Paris, France</dd>
+                    <dt>GitHub</dt>
+                    <dd><a href="https://github.com/AnnaToi01" target="_blank" rel="noopener">github.com/AnnaToi01</a></dd>
+                    <dt>LinkedIn</dt>
+                    <dd><a href="https://www.linkedin.com/in/anna-toidze/" target="_blank" rel="noopener">linkedin.com/in/anna-toidze</a></dd>
+                </dl>
+                <p class="win__note">I&rsquo;m always interested in talking about evolution,
+                mobile genetic elements, collaborations &mdash; or music.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="win win--wide" id="w-cv" role="dialog" aria-labelledby="w-cv-t" tabindex="-1">
+        <a class="win__scrim" href="#home" aria-label="Close window" tabindex="-1"></a>
+        <div class="win__frame">
+            <div class="win__bar">
+                <span class="win__title" id="w-cv-t">anna_toidze_cv.pdf</span>
+                <span class="win__btns" aria-hidden="true">
+                    <span class="win__btn">&minus;</span><span class="win__btn">&#9633;</span>
+                </span>
+                <a class="win__close" href="#home" aria-label="Close window">&times;</a>
+            </div>
+            <!-- the whole slide is the download button -->
+            <a class="cv-slide" href="docs/CV_Anna_Toidze.pdf" download>
+                <picture>
+                    <source srcset="assets/images/cv-timeline.webp" type="image/webp">
+                    <img src="assets/images/cv-timeline.jpg" width="1920" height="1080"
+                         loading="lazy" decoding="async" alt="Timeline of Anna Toidze's education and research from 2019 to 2029: high school diploma in Tbilisi, Georgia and the International Biology Olympiad in 2018-19; BSc in Biochemistry at Ruhr University Bochum with a thesis on the mutational robustness and physical stability of fluorescent proteins; courses and a thesis at the Bioinformatics Institute; bachelor's thesis and lab technician work in evolutionary and synthetic biology with Prof. Fyodor Kondrashov at ISTA in Austria and OIST in Japan; an MSc in Computational Biology and Bioinformatics in Zurich and Basel, including a lab rotation with Prof. Andreas Wagner and Dr. Aleks Nivina on stochastic modelling of PKS recombination in Streptomyces, a lab rotation with Prof. Sebastian Bonhoeffer on mathematical modeling of mobilizable plasmids, and an internship with Prof. Sarah Doyle and Dr. Ema Ozaki on scRNA analysis in a pre-clinical mouse model of subretinal fibrosis; a master's thesis with Prof. Francois Blanquart in Paris on the pangenome evolution of Escherichia coli on the commensal-pathogen spectrum; and a PhD on a PPU fellowship at Institut Pasteur in Paris with Prof. Eduardo Rocha and Prof. Francois Blanquart, on the impact of interactions between mobile genetic elements on bacterial adaptation.">
+                </picture>
+                <span class="cv-slide__hint"><span aria-hidden="true">&#8681;</span> Download CV</span>
+            </a>
+        </div>
+    </div>
+
+
+    <script src="assets/js/script.js?v=7"></script>
+    <script src="assets/js/beer-position.js?v=7"></script>
+    <script src="assets/js/bubble-spawn.js?v=7"></script>
 </body>
 </html>

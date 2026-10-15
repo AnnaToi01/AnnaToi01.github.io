@@ -3,151 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Anna Toidze</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Apply Avenir Next font to projects page */
-        body {
-            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
-        }
-        
-        .page-header h1,
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
-        }
-        
-        .main-content,
-        .content-wrapper,
-        .research-projects,
-        .project-item {
-            font-family: 'Avenir Next', 'Avenir', 'Helvetica Neue', Arial, sans-serif !important;
-        }
-    </style>
+    <title>Research — Anna Toidze, Microbes &amp; Evolution</title>
+    <meta name="description" content="Anna Toidze's research on microbes and evolution: co-evolution of mobile genetic elements, pangenome evolution of E. coli, mathematical modelling of plasmids, subretinal fibrosis and GFP fitness landscapes.">
+    <meta name="author" content="Anna Toidze">
+    <link rel="canonical" href="https://annatoi01.github.io/projects.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Research — Anna Toidze">
+    <meta property="og:description" content="Microbes and evolution: mobile genetic elements, bacterial pangenomes, plasmid modelling and protein fitness landscapes.">
+    <meta property="og:url" content="https://annatoi01.github.io/projects.html">
+    <link rel="stylesheet" href="assets/css/styles.css?v=7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html">Anna Toidze</a>
+<body class="bench-page" data-win="specimen">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="back-home" href="index.html">
+        <span aria-hidden="true">&larr;</span> back to Anna
+    </a>
+
+    <main id="main">
+        <!-- ============================================================
+             THE BENCH
+             Objects are plain <a href="#panel-id"> links and the panels open
+             with the CSS :target selector. That means: no JavaScript needed,
+             deep links work (annatoi01.github.io/projects.html#p-computer),
+             and the browser back button closes a panel. script.js only adds
+             Escape-to-close and backdrop-click on top of that.
+
+             ARTWORK: every object is a .bench-art frame. Two of them borrow
+             existing icons as stand-ins; the other two are empty dashed
+             frames. Each one is commented with the file to drop in. Replace
+             the whole <span class="bench-art"> contents with your <img>.
+             ============================================================ -->
+        <section class="bench" id="bench" aria-labelledby="bench-title">
+            <header class="bench-intro">
+                <h1 id="bench-title">Research</h1>
+                <p class="bench-lede">I am Anna, and I like microbes and evolution. My path into
+                science began in high school with a simple question:</p>
+                <p class="bench-question">Why can some people tolerate lactose, when nearly all
+                mammals lose that ability as adults?</p>
+                <p class="bench-lede">The curiosity to answer these questions pulled me down a
+                rabbit hole towards evolutionary biology and pushed me towards research early on. I
+                started with competing in biology Olympiads and a high school project about the
+                evolution of genomic structure of <em>Burkholderia mallei</em>.</p>
+                <p class="bench-hint"><span aria-hidden="true">↓</span> You find yourself at my
+                bench. Pick something up.</p>
+            </header>
+
+            <!-- The scene is generated from assets/bench/bench.svg by
+                 tools/build-bench.py - do not hand-edit between the markers,
+                 it gets overwritten. Placement lives in the SVG. -->
+            <!-- BENCH:START (generated) -->
+            <div class="bench-stage">
+                <div class="bench-wall" aria-hidden="true"></div>
+                <div class="bench-surface" aria-hidden="true"></div>
+
+                <!-- BLACKBOARD -> mathematical modelling of plasmids.
+                     Drawn in CSS/text rather than an image so the chalk formula
+                     stays editable. Swap for assets/icons/bench/blackboard.svg
+                     if you'd rather have your own drawing. -->
+                <a class="bench-object bench-object--blackboard" href="#p-blackboard">
+                    <span class="bench-art bench-art--chalk">
+                        <span class="chalk" aria-hidden="true">
+                            <span class="chalk-line">dD/dt = &gamma;DR &minus; &alpha;D</span>
+                            <span class="chalk-line">dR/dt = &psi;R &minus; &gamma;DR</span>
+                            <span class="chalk-line chalk-faint">c, &sigma; &hellip;</span>
+                        </span>
+                    </span>
+                    <span class="bench-object__name">blackboard</span>
+                    <span class="bench-object__sub">modelling plasmids</span>
+                </a>
+
+                <!-- COMPUTER -> the two computational projects (MGEs + pangenome) -->
+                <a class="bench-object bench-object--computer" href="#p-computer">
+                    <span class="bench-art">
+                        <!-- swap for: assets/icons/bench/computer.svg -->
+                        <img src="assets/icons/laptop-svgrepo-com.svg" alt="" aria-hidden="true">
+                    </span>
+                    <span class="bench-tag">now</span>
+                    <span class="bench-object__name">computer</span>
+                    <span class="bench-object__sub">MGEs &amp; pangenomes</span>
+                </a>
+
+                <!-- PIPETTES + PROTEIN COLUMN -> GFP fitness landscapes -->
+                <a class="bench-object bench-object--pipettes" href="#p-pipettes">
+                    <span class="bench-art">
+                        <!-- swap for: assets/icons/bench/pipettes.svg -->
+                        <img src="assets/icons/Test_Tube.svg" alt="" aria-hidden="true">
+                    </span>
+                    <span class="bench-object__name">pipettes &amp; column</span>
+                    <span class="bench-object__sub">GFP landscapes</span>
+                </a>
+
+                <!-- MICE + LASER -> subretinal fibrosis -->
+                <a class="bench-object bench-object--mice" href="#p-mice">
+                    <span class="bench-art bench-art--empty">
+                        <!-- swap for: assets/icons/bench/mice-laser.svg -->
+                        <span class="bench-art__todo" aria-hidden="true">mice&nbsp;+&nbsp;laser</span>
+                    </span>
+                    <span class="bench-object__name">mice &amp; laser</span>
+                    <span class="bench-object__sub">subretinal fibrosis</span>
+                </a>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="about.html" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="projects.html" class="nav-link active">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a href="docs/CV_short_Anna_Toidze.pdf" class="nav-link" target="_blank">CV</a>
-                </li>
-                <li class="nav-item">
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+            <!-- BENCH:END -->
+        </section>
 
-    <!-- Research Section -->
-    <main class="main-content">
-        <div class="content-wrapper">
+        <!-- ============================================================
+             PANELS - one per object. Hidden until their id is the URL
+             fragment, then shown as an overlay.
+             ============================================================ -->
+        <div class="bench-panels">
 
-            
-            <section class="research-projects">
-                <h2>Research</h2>
-                <div class="projects-list">
-                    <div class="project-item">
-                        <h3>Internship in pRED Ophthalmology at Roche</h3>
-                        <p class="project-location"><em>Basel, Switzerland • Apr 2025–Now</em></p>
-                        <p>scRNA analysis in a pre-clinical mouse model of subretinal fibrosis in Python and R</p>
+            <article class="win win--wide" id="p-computer" tabindex="-1" role="dialog" aria-labelledby="p-computer-h">
+                <a class="win__scrim" href="#bench" aria-label="Close window" tabindex="-1"></a>
+                <div class="win__frame">
+                    <div class="win__bar">
+                        <span class="win__title">co_evolution_of_mges.txt</span>
+                        <span class="win__btns" aria-hidden="true">
+                            <span class="win__btn">&minus;</span><span class="win__btn">&#9633;</span>
+                        </span>
+                        <a class="win__close" href="#bench" aria-label="Close window">&times;</a>
                     </div>
+                    <div class="win__body">
+                        <p class="win__prompt" aria-hidden="true">C:\&gt; type co_evolution_of_mges.txt</p>
+                        <p class="win__kicker">on the computer &middot; now</p>
+                        <h2 id="p-computer-h">Co-evolution of MGEs</h2>
+                    <p>I am currently pursuing a PhD at Institut Pasteur co-supervised by Eduardo
+                    Rocha and François Blanquart. I study how mobile genetic elements (MGEs), like
+                    plasmids or phages, shape the evolution of bacteria.</p>
+                    <p>These elements are often thought of as parasites of their hosts: plasmids may
+                    incur costs for their maintenance and transfer, while phages may even lyse the
+                    cells they infect. But, at the same time, these MGEs may be useful to their
+                    hosts, as they carry traits such as antimicrobial resistance or virulence.</p>
+                    <p>Even more interestingly, these elements can themselves have parasites. Some
+                    plasmids hijack the transfer machinery of other plasmids to spread, while phage
+                    satellites hijack phage particles for their own dissemination. This encapsulates
+                    interactions that range from parasitism to mutualism and unfold over several
+                    nested levels within one bacterial genome.</p>
+                    <p>I am curious about how these MGEs interact with one another and with their
+                    bacterial hosts, sometimes creating systems composed of parasites of parasites of
+                    parasites. I want to understand: how do these parasites and their hosts co-evolve,
+                    and what changes when we move beyond the usual two-player host&ndash;parasite
+                    system?</p>
 
-                    <div class="project-item">
-                        <h3>Internship in Laboratory of Prof. Dr. Sebastian Bonhoeffer at ETH Zürich</h3>
-                        <p class="project-location"><em>Zürich, Switzerland • Nov 2024–Mar 2025</em></p>
-                        <p>Dynamically modeling the spread of plasmids carrying antibiotic-resistance genes in R using ODEs</p>
-                    </div>
+                    <hr class="win__rule">
 
-                    <div class="project-item">
-                        <h3>Internship in Laboratory of Prof. Dr. Andreas Wagner and Dr. Aleks Nivina at UZH</h3>
-                        <p class="project-location"><em>Zürich, Switzerland • Sept 2024–Oct 2024</em></p>
-                        <p>Stochastically modelled the recombination of antibiotic-producing polyketide systems in <em>Streptomyces</em> in Python</p>
-                    </div>
-
-                    <div class="project-item">
-                        <h3>Laboratory Technician in Laboratory of Prof. Dr. Fyodor Kondrashov at OIST</h3>
-                        <p class="project-location"><em>Onna, Japan • Oct 2022–Aug 2023</em></p>
-                        <p>Created <em>E. coli</em> mutant libraries of GFPs, sorted them using FACS, improved prediction of function proteins through ML</p>
-                        <p>Devised and implemented a populations genetics model for epistasis in Rust</p>
-                        <p>Guided an intern in preparation of <em>E. coli</em> GFP library, sorting using FACS and successful preparation for sequencing</p>
-                    </div>
-
-                    <div class="project-item">
-                        <h3>Internship in Laboratory of Prof. Dr. Fyodor Kondrashov at ISTA</h3>
-                        <p class="project-location"><em>Klosterneuburg, Austria • Apr 2022–Sept 2022</em></p>
-                        <p>Cloned and purified green fluorescent proteins with varying sequence divergence from the wild-type sequence</p>
-                        <p>Experimentally assessed the physical stability of the proteins and correlated it with the mutational robustness using Python</p>
-                    </div>
-
-                    <div class="project-item">
-                        <h3>Internship in Laboratory of Prof. Dr. Maria Logacheva at Bioinformatics Institute</h3>
-                        <p class="project-location"><em>Online • Feb 2022–May 2022</em></p>
-                        <p>Investigated the expression patterns of egg-cell specific genes in crops using Python, R, phylogenetics tools</p>
-                    </div>
-
-                    <div class="project-item">
-                        <h3>Internship Laboratory of Prof. Dr. Ute Krämer at RUB</h3>
-                        <p class="project-location"><em>Bochum, Germany • Jan 2021–Jan 2022</em></p>
-                        <p>Implemented a pipeline to investigate the contribution of CNV to metal tolerance in <em>A. halleri</em> using bioinformatics tools, R</p>
-                    </div>
-
-                    <div class="project-item">
-                        <h3>Student at School of Molecular and Theoretical Biology</h3>
-                        <p class="project-location"><em>Barcelona, Spain–Online • Aug 2019</em></p>
-                        <p>Investigated intracellular parasites <em>B. mallei</em> using Python, bioinformatics tools in Laboratory of Prof. Dr. Mikhail Gelfand in 2019</p>
+                    <h3>Pangenome evolution of <em>E. coli</em></h3>
+                    <p><em>Escherichia coli</em> is one of the best-studied organisms in biology, but
+                    it has a dual nature: it is a common gut commensal, while also being a major
+                    opportunistic pathogen responsible for up to a million deaths each year.</p>
+                    <p>Whether an <em>E. coli</em> is more likely to live harmlessly in the gut or
+                    cause disease depends partly on its genomic composition and evolutionary history.
+                    In my master's thesis I studied the pangenome evolution of major clones, sequence
+                    types, of <em>E. coli</em>. All of them are globally widespread and can be found
+                    both in healthy carriers and infected patients, but some are much more strongly
+                    associated with infections than others. I wanted to understand: what makes more
+                    pathogenic clones different from more commensal ones? What makes some
+                    <em>E. coli</em> lineages more successful than others? How do their pangenomes
+                    diversify over time? And what drives their diversification? (wink at the MGEs
+                    above)</p>
+                    <p>I&rsquo;ve presented this work at MEEHubs2026 and &ldquo;Ecology and evolution
+                    of host&ndash;parasite interactions in a changing world&rdquo; Jacques Monod
+                    Conference in Roscoff.</p>
                     </div>
                 </div>
-            </section>
+            </article>
 
-            <section class="teaching-volunteering">
-                <h2>Teaching and Volunteering</h2>
-                <div class="teaching-list">
-                    <div class="teaching-item">
-                        <h3>Teaching Assistant in Computational Systems Biology at ETH Zürich</h3>
-                        <p class="project-location"><em>Zürich, Switzerland • Oct 2024–Now</em></p>
-                        <p>Writing lecture notes for computational systems biology class under Prof. Dr. Jörg Stelling</p>
+            <article class="win win--wide" id="p-blackboard" tabindex="-1" role="dialog" aria-labelledby="p-blackboard-h">
+                <a class="win__scrim" href="#bench" aria-label="Close window" tabindex="-1"></a>
+                <div class="win__frame">
+                    <div class="win__bar">
+                        <span class="win__title">mathematical_modeling_of_plasmids.txt</span>
+                        <span class="win__btns" aria-hidden="true">
+                            <span class="win__btn">&minus;</span><span class="win__btn">&#9633;</span>
+                        </span>
+                        <a class="win__close" href="#bench" aria-label="Close window">&times;</a>
                     </div>
-
-                    <div class="teaching-item">
-                        <h3>Teaching Assistant in Maths and Supervisor in Laboratory practical at RUB</h3>
-                        <p class="project-location"><em>Bochum, Germany • Oct 2020–Sept 2022</em></p>
-                        <p>Supervised tutorial classes, graded assignments and exams for the maths courses for first-year (bio-)chemistry students</p>
-                        <p>Monitored experiments and graded reports of 20 students the introductory chemistry practical</p>
-                    </div>
-
-                    <div class="teaching-item">
-                        <h3>Staff member and Mentor at School of Molecular and Theoretical Biology</h3>
-                        <p class="project-location"><em>Online • Aug 2020–Aug 2022</em></p>
-                        <p>Introduced machine learning, Python, Git to high-school students in Laboratory of Prof. Dr. Olga Kalinina in 2022</p>
-                        <p>Mentored 12 students throughout their stay at the online summer school and beyond, and organized school-wide social activities</p>
+                    <div class="win__body">
+                        <p class="win__prompt" aria-hidden="true">C:\&gt; type mathematical_modeling_of_plasmids.txt</p>
+                        <p class="win__kicker">on the blackboard &middot; previously</p>
+                        <h2 id="p-blackboard-h">Mathematical modeling of plasmids</h2>
+                    <p>Some plasmids encode the machinery needed to transfer themselves between
+                    bacterial cells and are called conjugative plasmids. Others, called mobilizable
+                    plasmids, do not encode this costly machinery and instead hijack it from
+                    conjugative plasmids for horizontal transfer. I created a mathematical model to
+                    understand: under which conditions can these elements coexist? How do factors
+                    such as transfer rates, plasmid costs, and segregation loss shape whether their
+                    relationship looks more like parasitism or mutualism? I also added traits such as
+                    antimicrobial resistance and toxin-antitoxin systems, often carried by plasmids,
+                    to ask whether they shift the dynamics of the whole system in one direction or
+                    the other.</p>
                     </div>
                 </div>
-            </section>
+            </article>
+
+            <article class="win win--wide" id="p-pipettes" tabindex="-1" role="dialog" aria-labelledby="p-pipettes-h">
+                <a class="win__scrim" href="#bench" aria-label="Close window" tabindex="-1"></a>
+                <div class="win__frame">
+                    <div class="win__bar">
+                        <span class="win__title">gfp_fitness_landscapes.txt</span>
+                        <span class="win__btns" aria-hidden="true">
+                            <span class="win__btn">&minus;</span><span class="win__btn">&#9633;</span>
+                        </span>
+                        <a class="win__close" href="#bench" aria-label="Close window">&times;</a>
+                    </div>
+                    <div class="win__body">
+                        <p class="win__prompt" aria-hidden="true">C:\&gt; type gfp_fitness_landscapes.txt</p>
+                        <p class="win__kicker">at the pipettes &middot; previously</p>
+                        <h2 id="p-pipettes-h">GFP fitness landscapes</h2>
+                    <p>I was curious about how mutations interact with one another through epistasis
+                    and how these interactions shape protein function and evolution. This
+                    relationship can be represented using fitness landscapes, where protein
+                    sequences are mapped to their function.</p>
+                    <p>Using green fluorescent protein (GFP) as a model system and their fluorescence
+                    as the measure of fitness, I studied how these landscapes differ between closely
+                    related proteins. We asked: why are some proteins more tolerant to mutations than
+                    others? Can their biophysical properties predict this mutational robustness? How
+                    transferable are the effects of mutations between similar proteins? And how
+                    should fitness landscapes be explored experimentally and through machine learning
+                    to best predict protein function and guide protein design?</p>
+                    <p>With the help of the Young Investigator Travel and Undergraduate Travel
+                    Awards, I presented this work at SMBE 2025 in Beijing.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="win win--wide" id="p-mice" tabindex="-1" role="dialog" aria-labelledby="p-mice-h">
+                <a class="win__scrim" href="#bench" aria-label="Close window" tabindex="-1"></a>
+                <div class="win__frame">
+                    <div class="win__bar">
+                        <span class="win__title">subretinal_fibrosis.txt</span>
+                        <span class="win__btns" aria-hidden="true">
+                            <span class="win__btn">&minus;</span><span class="win__btn">&#9633;</span>
+                        </span>
+                        <a class="win__close" href="#bench" aria-label="Close window">&times;</a>
+                    </div>
+                    <div class="win__body">
+                        <p class="win__prompt" aria-hidden="true">C:\&gt; type subretinal_fibrosis.txt</p>
+                        <p class="win__kicker">by the mice &middot; previously</p>
+                        <h2 id="p-mice-h">Subretinal fibrosis</h2>
+                    <p>Fibrosis develops when the normal process of scar formation becomes
+                    dysregulated, causing excessive scar tissue to build up and interfere with how an
+                    organ functions. In the eye, subretinal fibrosis can develop as an end stage of
+                    neovascular age-related macular degeneration (nAMD), a major cause of central
+                    vision loss in people over 50.</p>
+                    <p>During my internship at Roche, I analysed single-nucleus RNA-seq data from
+                    three different mouse models to understand: how do these models differ from one
+                    another, and how well do they reflect the human disease? What gene-expression
+                    signatures characterize each model, and how well do they translate to humans? And
+                    how do ageing and different anti-permeability treatments influence the
+                    development of subretinal fibrosis?</p>
+                    </div>
+                </div>
+            </article>
         </div>
     </main>
 
-
-
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js?v=7"></script>
 </body>
-</html> 
+</html>
