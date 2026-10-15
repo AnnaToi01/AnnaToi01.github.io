@@ -436,7 +436,7 @@ function render(){
   document.getElementById("total").textContent = priced.length ? `Everything shown adds up to ${money(priced.reduce((a,i)=>a+eur(i.price,i.cur),0),"€",2)}.` : "";
   const out = document.getElementById("out");
   if(view==="table"){
-    const rows = list.filter(i=>i.cat!=="inbox");
+    const rows = list.filter(i=>i.cat!=="inbox"&&i.cat!=="shops");
     const sel = rows.filter(i=>picked.has(i.id));
     const pk = rows.filter(pickable), allOn = pk.length && pk.every(i=>picked.has(i.id));
     out.innerHTML = `<div class="tablewrap"><table><thead><tr>
