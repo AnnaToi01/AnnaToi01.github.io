@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Little Wishlist</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&family=Nunito:wght@400;600;700;800&family=Gaegu:wght@400;700&display=swap">
+<style>
+/* Layout: a gingham-backed scrapbook page, marquee + sticker chips on top, item cards taped onto category shelves, scribbled notes in the margins, a basket bar at the bottom */
+:root{
+  --bg:#fdeef3; --check:rgba(240,150,185,.16); --paper:#fffafc; --ink:#4a2a3d; --muted:#93738a;
+  --pink:#f27aa6; --pink-soft:#ffd6e5; --lilac:#c9b6f2; --mint:#bfe8d4; --butter:#ffe9a8; --sky:#bcdcf7;
+  --line:#f3cfe0; --shadow:rgba(180,80,130,.14); --tape:rgba(201,182,242,.75); --tape2:rgba(191,232,212,.8);
+  --display:"Sniglet","Comic Sans MS",ui-rounded,system-ui,sans-serif;
+  --body:"Nunito",ui-rounded,system-ui,-apple-system,sans-serif;
+  --hand:"Gaegu","Comic Sans MS","Bradley Hand",cursive;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#24161f; --check:rgba(242,122,166,.07); --paper:#33202c; --ink:#fbe4ee; --muted:#c7a3b7;
+  --pink:#ff94bc; --pink-soft:#5a2c42; --lilac:#4a3d6e; --mint:#24503f; --butter:#5a4a1c; --sky:#23435e;
+  --line:#4d3242; --shadow:rgba(0,0,0,.35); --tape:rgba(120,100,180,.6); --tape2:rgba(70,140,110,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#24161f; --check:rgba(242,122,166,.07); --paper:#33202c; --ink:#fbe4ee; --muted:#c7a3b7;
+  --pink:#ff94bc; --pink-soft:#5a2c42; --lilac:#4a3d6e; --mint:#24503f; --butter:#5a4a1c; --sky:#23435e;
+  --line:#4d3242; --shadow:rgba(0,0,0,.35); --tape:rgba(120,100,180,.6); --tape2:rgba(70,140,110,.6); color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{overflow-x:hidden}
+body{
+  background-color:var(--bg);
+  background-image:linear-gradient(90deg,var(--check) 50%,transparent 50%),linear-gradient(var(--check) 50%,transparent 50%);
+  background-size:28px 28px;
+  color:var(--ink); font-family:var(--body); font-size:15px; line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 110px; position:relative; overflow-x:hidden;
+}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:26px;position:relative;z-index:1}
+
+/* marquee */
+.marquee{margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));overflow:hidden;background:var(--pink);color:var(--paper);
+  font-family:var(--hand);font-size:1.15rem;font-weight:700;white-space:nowrap;border-bottom:3px dotted var(--paper)}
+.marquee span{display:inline-block;padding:4px 0;animation:scroll 38s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+header{display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding-top:22px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,6vw,3.4rem);line-height:1;margin:0;text-wrap:balance}
+h1 .bow{display:inline-block;transform:rotate(-8deg);color:var(--pink)}
+.sub{color:var(--muted);margin:0;max-width:60ch}
+.counter{font-family:var(--hand);font-size:1.1rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+.counter b{font-family:ui-monospace,Menlo,monospace;background:var(--ink);color:var(--paper);padding:0 6px;border-radius:4px;letter-spacing:.15em;font-size:.9rem}
+
+/* quick add */
+.quick{background:var(--paper);border:2px dashed var(--pink);border-radius:22px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;position:relative}
+.quick h2{font-family:var(--display);font-size:1.15rem;margin:0}
+.quick form{display:flex;flex-wrap:wrap;gap:8px}
+.quick input{font:600 .95rem var(--body);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:999px;padding:9px 14px;min-width:0}
+.quick input#q-url{flex:2 1 220px} .quick input#q-note{flex:1 1 140px}
+.btn{font:800 .95rem var(--body);border:0;border-radius:999px;padding:9px 18px;background:var(--pink);color:var(--paper);cursor:pointer}
+.btn.ghost{background:none;color:var(--ink);border:2px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.quick .msg{font-size:.85rem;margin:0;color:var(--muted)}
+.quick .msg.err{color:var(--pink);font-weight:700}
+.quick details{font-size:.85rem;color:var(--muted)}
+.quick summary{cursor:pointer;font-weight:700}
+.quick details ol{margin:6px 0;padding-left:20px}
+.quick .tokenrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.quick .tokenrow input{flex:1 1 220px}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+.tally{display:flex;flex-wrap:wrap;gap:10px}
+.tally button{font:700 .9rem var(--body);color:var(--ink);cursor:pointer;border:2px dashed var(--line);background:var(--paper);border-radius:999px;padding:7px 14px;display:flex;gap:8px;align-items:center;transition:transform .15s}
+.tally button:hover{transform:translateY(-2px) rotate(-1deg)}
+.tally button[aria-pressed="true"]{border-style:solid;border-color:var(--pink);background:var(--pink-soft)}
+.tally .n{font-family:var(--display);background:var(--bg);border-radius:999px;padding:0 8px;font-variant-numeric:tabular-nums}
+.viewtoggle{display:flex;background:var(--paper);border-radius:999px;padding:4px;border:2px solid var(--line)}
+.viewtoggle button{font:700 .85rem var(--body);color:var(--muted);border:0;background:none;padding:5px 14px;border-radius:999px;cursor:pointer}
+.viewtoggle button[aria-pressed="true"]{background:var(--pink);color:var(--paper)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+
+section.shelf{display:flex;flex-direction:column;gap:16px}
+.shelf h2{font-family:var(--display);font-size:1.5rem;margin:0;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:8px;text-align:center}
+.shelf h2 .deco{color:var(--pink);font-family:var(--body);font-size:1rem;letter-spacing:.05em}
+.shelf h2 small{font-family:var(--hand);font-size:1.1rem;color:var(--muted);font-weight:700;width:100%}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px 18px}
+.card{background:var(--paper);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px;
+  box-shadow:0 6px 0 var(--line),0 10px 24px var(--shadow);position:relative;min-width:0;transition:transform .2s}
+.card::before{content:"";position:absolute;top:-10px;left:50%;width:84px;height:22px;transform:translateX(-50%) rotate(-3deg);background:var(--tape);z-index:2;
+  clip-path:polygon(4% 0,96% 0,100% 20%,96% 40%,100% 60%,96% 80%,100% 100%,0 100%,4% 80%,0 60%,4% 40%,0 20%)}
+.card:nth-child(even)::before{background:var(--tape2);transform:translateX(-50%) rotate(4deg)}
+.card:nth-child(3n+1){transform:rotate(-.6deg)}
+.card:nth-child(3n+2){transform:rotate(.5deg)}
+.card:hover{transform:rotate(0) translateY(-3px)}
+.card.picked{box-shadow:0 6px 0 var(--pink),0 10px 24px var(--shadow)}
+.card.flash{animation:flash 1.2s ease 2}
+@keyframes flash{50%{box-shadow:0 0 0 6px var(--pink),0 10px 24px var(--shadow)}}
+.sticker{position:absolute;top:22px;right:8px;z-index:3;font-family:var(--hand);font-weight:700;font-size:1rem;background:var(--butter);color:var(--ink);padding:2px 10px;border-radius:999px;transform:rotate(8deg);box-shadow:0 2px 0 var(--line)}
+.tile{aspect-ratio:4/5;max-width:100%;border-radius:16px;overflow:hidden;border:3px solid var(--paper);outline:2px dashed var(--line)}
+.tile img{width:100%;height:100%;object-fit:cover;display:block}
+.c-jewelry .tile img{object-fit:contain;background:#fff}
+.kind{align-self:flex-start;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;background:var(--pink-soft);border-radius:999px;padding:2px 10px}
+.brand{font-size:.8rem;color:var(--muted);font-weight:700;margin:0;letter-spacing:.03em}
+.name{font-family:var(--display);font-size:1.2rem;line-height:1.15;margin:0;text-wrap:balance}
+.pricerow{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.price{font-family:var(--display);font-size:1.35rem;color:var(--pink);font-variant-numeric:tabular-nums}
+.price small{font-family:var(--body);font-size:.75rem;color:var(--muted);font-weight:700;display:block;line-height:1.2}
+.pick{font:800 .8rem var(--body);color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;white-space:nowrap}
+.pick[aria-pressed="true"]{background:var(--pink);border-color:var(--pink);color:var(--paper)}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:.85rem}
+dt{color:var(--muted);font-weight:700}
+dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.desc{font-size:.88rem;margin:0}
+.card a.go{margin-top:auto;align-self:flex-start;font-weight:800;color:var(--ink);text-decoration:none;border-bottom:3px wavy var(--pink);padding-bottom:1px}
+
+/* to-sort inbox cards */
+.inboxcard{background:var(--paper);border:2px dashed var(--lilac);border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.inboxcard a{font-weight:800;color:var(--ink);overflow-wrap:anywhere}
+.inboxcard .when{font-family:var(--hand);font-size:1rem;color:var(--muted)}
+
+.tablewrap{overflow-x:auto;background:var(--paper);border-radius:22px;box-shadow:0 6px 0 var(--line),0 10px 24px var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:820px;font-size:.88rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:2px dotted var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:400;font-size:.95rem;background:var(--pink-soft)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:800;color:var(--pink)}
+td.num small{display:block;color:var(--muted);font-weight:600;font-size:.75rem}
+td a{color:var(--ink);font-weight:700}
+tr.sel td{background:var(--pink-soft)}
+tfoot td{font-family:var(--display);font-size:1.05rem;border-bottom:0;background:var(--bg)}
+input[type="checkbox"]{width:20px;height:20px;accent-color:var(--pink);cursor:pointer}
+.thumb{width:48px;height:60px;object-fit:cover;border-radius:10px;display:block}
+
+/* basket bar */
+.basket{position:fixed;left:0;right:0;bottom:0;z-index:20;
+  padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  background:var(--ink);color:var(--paper);display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:center;font-weight:700;
+  border-top:4px dotted var(--pink)}
+.basket .sum{font-family:var(--display);font-size:1.4rem;color:var(--pink);font-variant-numeric:tabular-nums}
+.basket button{font:800 .85rem var(--body);background:none;color:var(--paper);border:2px solid var(--paper);border-radius:999px;padding:4px 12px;cursor:pointer}
+
+/* scattered notes */
+.scribble{position:absolute;z-index:0;pointer-events:none;font-family:var(--hand);font-weight:700;font-size:1.3rem;line-height:1.1;color:var(--muted);max-width:150px;text-align:center;opacity:.9;white-space:pre-line}
+.scribble.pinkish{color:var(--pink)}
+.inline-scribble{white-space:pre-line;font-family:var(--hand);font-weight:700;font-size:1.35rem;color:var(--pink);text-align:center;margin:0}
+@media (max-width:1279px){.scribble{display:none}}
+@media (min-width:1280px){.inline-scribble{display:none}}
+
+.sparkle{position:fixed;pointer-events:none;z-index:50;color:var(--pink);font-size:14px;animation:fall .9s ease-out forwards}
+@keyframes fall{to{transform:translateY(24px) scale(.3) rotate(90deg);opacity:0}}
+
+footer{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--muted);font-size:.85rem;text-align:center}
+.buttons{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.b88{width:88px;height:31px;display:grid;place-items:center;font:800 9px/1.05 var(--body);text-transform:uppercase;letter-spacing:.04em;border:2px outset var(--line);text-align:center;padding:0 3px}
+.b88:nth-child(1){background:var(--pink);color:var(--paper)} .b88:nth-child(2){background:var(--lilac);color:var(--ink)}
+.b88:nth-child(3){background:var(--mint);color:var(--ink)} .b88:nth-child(4){background:var(--butter);color:var(--ink)} .b88:nth-child(5){background:var(--sky);color:var(--ink)}
+.ring{font-family:var(--hand);font-size:1.2rem;display:flex;gap:10px;align-items:center}
+.ring button{font:inherit;color:var(--ink);background:none;border:0;cursor:pointer;text-decoration:underline wavy var(--pink)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.card{transform:none!important}.sparkle{display:none}}
+</style>
+</head>
+<body>
+
+
+<div class="marquee" aria-hidden="true"><span id="marq"></span></div>
+
+<div class="wrap">
+  <header>
+    <h1>Little Wishlist <span class="bow">♡</span></h1>
+    <p class="sub">Every link sorted onto its shelf, with a photo, the price in euros, colour and what it's made of. Tick things to add up a basket.</p>
+    <div class="counter">things on the list <b id="count">0000</b></div>
+  </header>
+
+  <section class="quick" id="quick" aria-labelledby="quick-h">
+    <h2 id="quick-h">✧ quick add</h2>
+    <form id="q-form">
+      <input id="q-url" type="url" inputmode="url" placeholder="paste a link…" required aria-label="Product link">
+      <input id="q-note" type="text" placeholder="note (size, colour…)" aria-label="Note">
+      <button class="btn" id="q-add" type="submit">Add</button>
+    </form>
+    <p class="msg" id="q-msg">New links land in "to sort". Ask Claude to sort them and they get a photo, price and shelf.</p>
+    <details id="q-setup">
+      <summary>Phone setup (one time)</summary>
+      <ol>
+        <li>On GitHub, go to Settings → Developer settings → Fine-grained tokens → Generate new token.</li>
+        <li>Repository access: only <b>AnnaToi01.github.io</b>. Permissions: <b>Contents → Read and write</b>.</li>
+        <li>Paste the token below. It stays in this browser only and is never put on the site.</li>
+      </ol>
+      <div class="tokenrow">
+        <input id="q-token" type="password" placeholder="github_pat_…" aria-label="GitHub token" autocomplete="off">
+        <button class="btn" id="q-save" type="button">Save key</button>
+        <button class="btn ghost" id="q-forget" type="button">Forget key</button>
+      </div>
+    </details>
+  </section>
+
+  <div class="toolbar">
+    <div class="tally" id="tally" role="group" aria-label="Filter by category"></div>
+    <div class="viewtoggle" role="group" aria-label="View">
+      <button id="v-cards" aria-pressed="true">Cards</button>
+      <button id="v-table" aria-pressed="false">Table</button>
+    </div>
+  </div>
+
+  <p class="sub" id="total"></p>
+  <main id="out"></main>
+
+  <footer>
+    <div class="ring"><button id="prev" type="button">&lt; prev</button>·<button id="rand" type="button">random wish</button>·<button id="next" type="button">next &gt;</button></div>
+    <div class="buttons" aria-hidden="true">
+      <span class="b88">made with ♡</span><span class="b88">window shopper</span><span class="b88">best viewed on my phone</span><span class="b88">treat yourself club</span><span class="b88">est. oct 2026</span>
+    </div>
+    <p id="ratesnote">All prices in euros, converted from each shop's own price at the European Central Bank rate for 15 Oct 2026 (€1 = £0.8461 = $1.1208 = ₩1,508).</p>
+  </footer>
+</div>
+
+<div class="basket" id="basket" hidden>
+  <span>basket ♡ <span id="b-n">0</span></span>
+  <span class="sum" id="b-sum">€0</span>
+  <button id="b-clear" type="button">Clear</button>
+</div>
+
+<script>
+const IMGS = null;
+const REPO = "AnnaToi01/AnnaToi01.github.io", INBOX_PATH = "wishlist/inbox.json";
+const CATS = {
+  inbox:{label:"To sort"},
+  clothes:{label:"Clothes"},
+  shoes:{label:"Shoes"},
+  jewelry:{label:"Jewelry"},
+  accessories:{label:"Accessories"},
+  shops:{label:"Shops to browse"},
+  other:{label:"Other"}
+};
+const SHELF_NOTES = {clothes:"outfit era incoming",shoes:"walking into my villain era",jewelry:"shiny things only",shops:"just looking… for now",inbox:"fresh off the phone"};
+const SCRIBBLES = ["add to cart?? maybe","it's an investment","one day…","no thoughts just outfits","window shopping is cardio","☆ manifesting ☆","main character fit","silver > gold","ok but the colour…","for a special occasion (every day)","trying hard\nfashion","trying\nhard fashion","in progress","ill be so fashionable one day","imagine me in this!!","ill 🪨 this","goes with… my eyes","goes with… my curls","goes with… this thing","i need to keep up"].sort(()=>Math.random()-.5);
+const STICKERS = {options:"dream",otto:"new!",olas:"♡♡♡",lucky:"so cute"};
+
+const ITEMS = [
+  {cat:"clothes",kind:"Maxi dress",brand:"Rhi Dancey",name:"The Options Dress",img:"options",price:150,cur:"£",color:"Art print, black lining",material:"95% power mesh, Lycra jersey lining",desc:"Form-fitting maxi with adjustable spaghetti straps and a small slit. Limited-edition collab with artist Omer Mosseri. Stretchy, not see-through.",url:"https://www.rhidancey.com/shop/p/the-options-dress"},
+  {cat:"clothes",kind:"Longsleeve top",brand:"Rhi Dancey",name:"Lucky Star Longsleeve",img:"lucky",price:89,cur:"£",color:"Baby blue",material:"95% cotton, 5% elastane",desc:"Fitted longsleeve, digitally printed on the front and sleeves. Limited-edition collab with Fiorenza Art.",url:"https://www.rhidancey.com/shop/p/lucky-star-longsleeve"},
+  {cat:"clothes",kind:"Longsleeve top",brand:"Rhi Dancey",name:"Emma Longsleeve",img:"emma",price:89,cur:"£",color:"Bunny print, striped sleeves",material:"Cotton jersey and Lycra",desc:"Printed bunny motif with contrast deadstock striped knit sleeves, a scoop back and two adjustable ties. Collab with Swan Gossip.",url:"https://www.rhidancey.com/shop/p/emma-longsleeve"},
+  {cat:"clothes",kind:"Drape skirt",brand:"Kiko Kostadinov",name:"Oriole Drape Skirt",img:"kiko",price:935,cur:"€",color:"Cobalt Brush (also Slate Brush)",material:"Printed metallic satin, 100% polyester",desc:"Mid-rise skirt with gathered drapes around a quilted yoke, cascading tiers of different lengths and an invisible side zip.",url:"https://kikokostadinov.com/products/oriole-drape-skirt-cobalt-brush"},
+  {cat:"clothes",kind:"Layered tee",brand:"ADSB",name:"Mixed Stripe Sleeve Layered Top",img:"adsb",price:180,cur:"$",color:"Charcoal",material:"Cotton, polyester and elastane panels",desc:"Oversized tee with a vintage-style graphic print, built to look like a longsleeve under a short-sleeve. Mismatched stripe sleeves and an asymmetric hem.",url:"https://adsb.co.kr/products/mixed-stripe-sleeve-layered-top-charcoal"},
+  {cat:"clothes",kind:"Gown",brand:"Ottolinger",name:"Mesh Gown (Glitched Check)",img:"otto",price:487,cur:"€",color:"Glitched check print",material:"90% recycled polyester, 10% elastane, stretch jersey lining",desc:"Sculptural floor-length gown with a cowl neckline, logo cuffs and an all-over graphic print. Designed in Berlin, made in Greece.",url:"https://ottolinger.com/shop/products/aw26-mesh-gown-glitched-check"},
+  {cat:"jewelry",kind:"Ring",brand:"Soleilu",name:"Las Olas con Piedras",img:"olas",price:260,cur:"€",color:"Silver with clear stones",material:"925 sterling silver, cubic zirconia",desc:"Sea-inspired wave ring with broken zirconias cast in place. Open design, so the size adjusts.",url:"https://soleilu.com/en/products/las-olas-con-piedras?variant=53444994728266"},
+  {cat:"jewelry",kind:"Ring",brand:"Soleilu",name:"Basic Ring",img:"basic",price:140,cur:"€",color:"Silver",material:"925 sterling silver",desc:"Simple everyday band, handmade without moulds so each one comes out slightly different.",url:"https://soleilu.com/en/products/basic-ring?variant=53446115033418"},
+  {cat:"jewelry",kind:"Hoop earrings",brand:"Tyger by the Tail",name:"The Mini Carmens",img:"carmens",price:72,cur:"£",color:"Peridot and citrine stones",material:"Sterling silver or 18ct gold-plated brass (9ct gold made to order)",desc:"A pair of organic-shaped mini hoops with little peridot and citrine jewels.",url:"https://www.tygerbythetail.co.uk/products/the-mini-carmens?variant=54951761052034"},
+  {cat:"shops",kind:"Shoe shop",brand:"Psylos",name:"Psylos",img:"psylos",color:"Pictured: XMZY X-Dimension Chunky Shoes, white (€269.80)",material:"Independent chunky footwear labels",desc:"Bold, sculptural shoes mixing street culture with design. Prices only show on each product page.",url:"https://psylos1.com/en/products/xmzy-x-dimension-chunky-shoes-white"},
+  {cat:"shops",kind:"Shoe shop",brand:"Fluevog",name:"Fluevog women's shoes",img:"fluevog",lo:499,hi:599,cur:"$",color:"Pictured: Poppet (purple). Also: Twee (green, yellow), Kinship (green snake), Kahlo (black)",material:"249 styles in stock",desc:"A whole collection page rather than one item. Send the link to the exact pair you want and it gets its own card.",url:"https://www.fluevog.com/collections/womens?filter.v.availability=1&page=3&sort_by=created-descending"},
+  {cat:"shops",kind:"Shoes & bags",brand:"Cruda",name:"Cruda shop",img:"cruda",lo:350,hi:845,cur:"$",color:"Picks seen: Amanda, Lola, Carmen, Cecilia con Lazo, Victoria, Jenny",material:"35 items, shoes and bags",desc:"Handmade designer shoes and bags. This is the full shop page, so pick a favourite and send its link.",url:"https://crudastore.com/tienda/"},
+  {cat:"shops",kind:"Clothing & accessories",brand:"Damson Madder",name:"Damson Madder",img:"damson",lo:28,hi:125,cur:"£",color:"Pictured: Genevieve Midi Dress, rose print",material:"Knitwear, dresses, outerwear, nightwear and more (250+ items)",desc:"London label with prints, stripes and gingham. Most pieces fall in the price range shown.",url:"https://damsonmadder.com/"},
+  {cat:"shops",kind:"Clothing",brand:"ADER error",name:"ADER error",img:"ader",color:"Pictured: AW campaign",material:"Seoul label, clothing and accessories",desc:"Prices aren't on the main page. Send a link to a specific piece and it gets its own card.",url:"https://adererror.com/en/shop"},
+  {cat:"shops",kind:"Clothing & shoes",brand:"Post Archive Faction",name:"Post Archive Faction (PAF)",img:"paf",lo:14500,hi:148400,cur:"₩",color:"Pictured: Cut Out Coat",material:"155 items. Outerwear goes up to about €310.",desc:"Seoul label known for technical, deconstructed cuts. Most items fall in the price range shown.",url:"https://postarchivefaction.com/"},
+  {cat:"shops",kind:"Clothing & shoes",brand:"GmbH",name:"GmbH new season",img:"gmbh",color:"Pictured: Overknee boot, organic leather",material:"Boots, jackets, tops, hoodies and swimwear",desc:"Berlin label. Prices only show on each product page.",url:"https://gmbhgmbh.eu/shop/?category=new+season"},
+  {cat:"shops",kind:"Clothing",brand:"Ottolinger",name:"Ottolinger",img:"otto",color:"Pictured: Mesh Gown (also on your Clothes shelf)",material:"Berlin label, dresses, knits and accessories",desc:"Prices only show on each product page.",url:"https://ottolinger.com/shop"}
+];
+
+
+const imgSrc = k => (IMGS && IMGS[k]) || ("img/" + k + ".jpg");
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+ITEMS.forEach(i => i.id = slug(i.brand + "-" + i.name));
+
+// European Central Bank reference rates, 15 Oct 2026: €1 = £0.8461 = $1.1208 = ₩1508.48
+const PER_EUR = {"€":1,"£":0.8461,"$":1.1208,"₩":1508.48};
+const eur = (n,cur) => n / PER_EUR[cur];
+const money = (n,cur,dec) => cur + n.toLocaleString("en-GB",{minimumFractionDigits:dec,maximumFractionDigits:dec});
+const fmt = it => it.lo==null && it.price==null ? "Prices on site" : it.lo!=null
+  ? money(eur(it.lo,it.cur),"€",0) + "–" + money(eur(it.hi,it.cur),"€",0).slice(1)
+  : money(eur(it.price,it.cur),"€",2);
+const orig = it => !it.cur || it.cur==="€" ? "" : "was " + (it.lo!=null ? money(it.lo,it.cur,0)+"–"+money(it.hi,it.cur,0).slice(1) : money(it.price,it.cur,it.price%1?2:0));
+const esc = s => String(s ?? "").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const store = {get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+let filter = "all", view = store.get("wl-view","cards");
+let picked = new Set(store.get("wl-basket",[]));
+let inbox = [];  // links saved from the quick-add box, waiting to be sorted
+
+/* ---------- marquee + counter ---------- */
+(function(){
+  const newest = ITEMS.find(i=>i.cat!=="shops"&&STICKERS[i.img]==="new!") || ITEMS[0];
+  const t = ` ✧ welcome to my little wishlist ✧ newest: ${newest ? newest.brand.toLowerCase()+" "+newest.name.toLowerCase() : ""} ✧ window shopping is cardio ✧ ${ITEMS.length} wishes and counting ✧ tick things to add up a basket ✧ `;
+  document.getElementById("marq").textContent = t + t;
+})();
+
+/* ---------- rendering ---------- */
+function allItems(){ return inbox.length ? [...inbox.map((x,n)=>({...x,cat:"inbox",id:"inbox-"+n})), ...ITEMS] : ITEMS; }
+
+function renderTally(){
+  const list = allItems(), counts = {};
+  list.forEach(i=>counts[i.cat]=(counts[i.cat]||0)+1);
+  const chips = [["all","Everything",list.length], ...Object.keys(CATS).filter(k=>counts[k]).map(k=>[k,CATS[k].label,counts[k]])];
+  document.getElementById("tally").innerHTML = chips.map(([k,l,n])=>`<button data-k="${k}" aria-pressed="${filter===k}">${l} <span class="n">${n}</span></button>`).join("");
+  document.getElementById("count").textContent = String(ITEMS.filter(i=>i.cat!=="shops").length).padStart(4,"0");
+}
+
+const pickable = it => it.price!=null;
+
+function card(it){
+  if(it.cat==="inbox") return `<article class="inboxcard"><span class="when">${esc(new Date(it.added).toLocaleDateString("en-GB",{day:"numeric",month:"short"}))}</span>
+    <a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(hostOf(it.url))}</a>${it.note?`<span>${esc(it.note)}</span>`:""}</article>`;
+  const on = picked.has(it.id), st = STICKERS[it.img] && it.cat!=="shops" ? STICKERS[it.img] : "";
+  return `<article class="card c-${it.cat}${on?" picked":""}" id="card-${it.id}">
+    ${st?`<span class="sticker" aria-hidden="true">${esc(st)}</span>`:""}
+    <div class="tile"><img src="${imgSrc(it.img)}" alt="${esc(it.name)}" loading="lazy"></div>
+    <span class="kind">${esc(it.kind)}</span>
+    <div><p class="brand">${esc(it.brand)}</p><h3 class="name">${esc(it.name)}</h3></div>
+    <div class="pricerow"><div class="price">${esc(fmt(it))}${orig(it)?`<small>${esc(orig(it))}${it.lo!=null?" for most items":""}</small>`:""}</div>
+      ${pickable(it)?`<button class="pick" type="button" data-pick="${it.id}" aria-pressed="${on}">${on?"♥ in basket":"♡ basket"}</button>`:""}</div>
+    <p class="desc">${esc(it.desc)}</p>
+    <dl><dt>Colour</dt><dd>${esc(it.color)}</dd><dt>${it.cat==="shops"?"Stock":"Made of"}</dt><dd>${esc(it.material)}</dd></dl>
+    <a class="go" href="${esc(it.url)}" target="_blank" rel="noopener">Open in shop ↗</a>
+  </article>`;
+}
+function hostOf(u){ try{ return new URL(u).hostname.replace(/^www\./,"") }catch(e){ return u } }
+
+function render(){
+  renderTally();
+  document.getElementById("v-cards").setAttribute("aria-pressed",view==="cards");
+  document.getElementById("v-table").setAttribute("aria-pressed",view==="table");
+  const list = allItems().filter(i=>filter==="all"||i.cat===filter);
+  const priced = list.filter(pickable);
+  document.getElementById("total").textContent = priced.length ? `Single items shown add up to ${money(priced.reduce((a,i)=>a+eur(i.price,i.cur),0),"€",2)}.` : "";
+  const out = document.getElementById("out");
+  if(view==="table"){
+    const rows = list.filter(i=>i.cat!=="inbox");
+    const sel = rows.filter(i=>picked.has(i.id));
+    const allOn = rows.filter(pickable).length && rows.filter(pickable).every(i=>picked.has(i.id));
+    out.innerHTML = `<div class="tablewrap"><table><thead><tr>
+      <th><input type="checkbox" id="pick-all" aria-label="Select all items" ${allOn?"checked":""}></th><th></th><th>Category</th><th>Item</th><th>Brand</th><th>Type</th><th>Price (€)</th><th>Colour</th><th>Made of</th></tr></thead><tbody>${
+      rows.map(it=>`<tr class="${picked.has(it.id)?"sel":""}">
+        <td>${pickable(it)?`<input type="checkbox" data-pick="${it.id}" aria-label="Add ${esc(it.name)} to basket" ${picked.has(it.id)?"checked":""}>`:""}</td>
+        <td><img class="thumb" src="${imgSrc(it.img)}" alt=""></td><td>${CATS[it.cat].label}</td>
+        <td><a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)}</a></td><td>${esc(it.brand)}</td><td>${esc(it.kind)}</td>
+        <td class="num">${esc(fmt(it))}${orig(it)?`<small>${esc(orig(it))}</small>`:""}</td><td>${esc(it.color)}</td><td>${esc(it.material)}</td></tr>`).join("")
+    }</tbody><tfoot><tr><td colspan="6">Basket: ${sel.length} ${sel.length===1?"thing":"things"} ticked</td><td class="num">${money(sel.reduce((a,i)=>a+eur(i.price,i.cur),0),"€",2)}</td><td colspan="2"></td></tr></tfoot></table></div>`;
+  } else {
+    const groups = Object.keys(CATS).map(k=>{
+      const g = list.filter(i=>i.cat===k); if(!g.length) return "";
+      return `<section class="shelf"><h2><span class="deco" aria-hidden="true">₊˚ ✧ ━━⊱</span>${CATS[k].label}<span class="deco" aria-hidden="true">⊰━━ ✧ ₊˚</span><small>${g.length} ${g.length===1?"thing":"things"} · ${SHELF_NOTES[k]||""}</small></h2><div class="grid">${g.map(card).join("")}</div></section>`;
+    }).filter(Boolean);
+    out.innerHTML = groups.map((g,n)=> n ? `<p class="inline-scribble" aria-hidden="true">~ ${esc(SCRIBBLES[(n*5)%SCRIBBLES.length])} ~</p>` + g : g)
+      .join('<div style="height:18px"></div>');
+  }
+  renderBasket();
+  requestAnimationFrame(placeScribbles);
+}
+
+function renderBasket(){
+  const sel = ITEMS.filter(i=>picked.has(i.id)&&pickable(i));
+  const b = document.getElementById("basket");
+  b.hidden = !sel.length;
+  document.getElementById("b-n").textContent = `${sel.length} ${sel.length===1?"thing":"things"}`;
+  document.getElementById("b-sum").textContent = money(sel.reduce((a,i)=>a+eur(i.price,i.cur),0),"€",2);
+}
+function togglePick(id, on){
+  on = on ?? !picked.has(id);
+  on ? picked.add(id) : picked.delete(id);
+  store.set("wl-basket",[...picked]); render();
+}
+
+/* ---------- scattered notes in the margins (wide screens) ---------- */
+function placeScribbles(){
+  document.querySelectorAll(".scribble").forEach(n=>n.remove());
+  if(window.innerWidth < 1280) return;
+  const wrap = document.querySelector(".wrap").getBoundingClientRect();
+  const H = document.body.scrollHeight, gutter = (window.innerWidth - wrap.width)/2;
+  const shuffled = SCRIBBLES;
+  const n = Math.min(shuffled.length, Math.floor(H/260));
+  for(let i=0;i<n;i++){
+    const el = document.createElement("div");
+    el.className = "scribble" + (i%3===0?" pinkish":"");
+    el.setAttribute("aria-hidden","true");
+    el.textContent = shuffled[i];
+    const left = i%2===0;
+    const x = Math.max(8, (gutter-150)/2 + (Math.random()*30-15));
+    el.style.top = (180 + i*(H-300)/n + Math.random()*60) + "px";
+    el.style[left?"left":"right"] = x + "px";
+    el.style.transform = `rotate(${(Math.random()*16-8).toFixed(1)}deg)`;
+    document.body.appendChild(el);
+  }
+}
+let rt; window.addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(placeScribbles,200)});
+
+/* ---------- sparkle cursor ---------- */
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches && matchMedia("(pointer:fine)").matches){
+  let last=0;
+  window.addEventListener("pointermove",e=>{
+    const now=performance.now(); if(now-last<70) return; last=now;
+    const s=document.createElement("span"); s.className="sparkle"; s.textContent=Math.random()<.5?"✦":"✧";
+    s.style.left=e.clientX+6+"px"; s.style.top=e.clientY+6+"px";
+    document.body.appendChild(s); setTimeout(()=>s.remove(),900);
+  });
+}
+
+/* ---------- events ---------- */
+document.getElementById("tally").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b) return; filter=b.dataset.k; render();});
+["cards","table"].forEach(v=>document.getElementById("v-"+v).addEventListener("click",()=>{view=v; store.set("wl-view",v); render();}));
+document.getElementById("out").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-pick]"); if(b) togglePick(b.dataset.pick);
+});
+document.getElementById("out").addEventListener("change",e=>{
+  if(e.target.id==="pick-all"){ ITEMS.filter(i=>pickable(i)&&(filter==="all"||i.cat===filter)).forEach(i=>e.target.checked?picked.add(i.id):picked.delete(i.id)); store.set("wl-basket",[...picked]); render(); return; }
+  if(e.target.dataset.pick) togglePick(e.target.dataset.pick, e.target.checked);
+});
+document.getElementById("b-clear").addEventListener("click",()=>{picked.clear(); store.set("wl-basket",[]); render();});
+
+let cursor = -1;
+function jump(n){
+  if(view!=="cards"){view="cards"; render();}
+  if(filter!=="all"){filter="all"; render();}
+  cursor = (n+ITEMS.length)%ITEMS.length;
+  const el = document.getElementById("card-"+ITEMS[cursor].id); if(!el) return;
+  el.scrollIntoView({behavior:"smooth",block:"center"});
+  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+}
+document.getElementById("prev").onclick=()=>jump(cursor-1);
+document.getElementById("next").onclick=()=>jump(cursor+1);
+document.getElementById("rand").onclick=()=>jump(Math.floor(Math.random()*ITEMS.length));
+
+/* ---------- quick add (works on the GitHub Pages site) ---------- */
+const onSite = /github\.io$/.test(location.hostname);
+const qMsg = document.getElementById("q-msg");
+const say = (t,err) => { qMsg.textContent=t; qMsg.className="msg"+(err?" err":""); };
+const tokenInput = document.getElementById("q-token");
+const getToken = () => store.get("wl-token","");
+
+if(!onSite){
+  document.getElementById("q-add").disabled = true;
+  say("Quick add works on annatoi01.github.io/wishlist. Open it there on your phone.");
+} else {
+  if(getToken()) tokenInput.placeholder = "key saved ✓";
+  else document.getElementById("q-setup").open = true;
+  const pre = new URLSearchParams(location.search).get("add");
+  if(pre) document.getElementById("q-url").value = pre;
+}
+document.getElementById("q-save").onclick=()=>{ const t=tokenInput.value.trim(); if(!t) return say("Paste the token first.",true); store.set("wl-token",t); tokenInput.value=""; tokenInput.placeholder="key saved ✓"; document.getElementById("q-setup").open=false; say("Key saved on this device. Paste a link to add it."); };
+document.getElementById("q-forget").onclick=()=>{ try{localStorage.removeItem("wl-token")}catch(e){} tokenInput.placeholder="github_pat_…"; say("Key removed from this device."); };
+
+const b64enc = s => btoa(unescape(encodeURIComponent(s)));
+const b64dec = s => decodeURIComponent(escape(atob(s.replace(/\n/g,""))));
+async function pushToInbox(entry, retry=true){
+  const api = `https://api.github.com/repos/${REPO}/contents/${INBOX_PATH}`;
+  const h = {Authorization:"Bearer "+getToken(), Accept:"application/vnd.github+json"};
+  let r = await fetch(api,{headers:h,cache:"no-store"});
+  if(r.status===401||r.status===403) throw new Error("GitHub didn't accept the key. Check it has Contents → Read and write for AnnaToi01.github.io.");
+  let list=[], sha;
+  if(r.ok){ const f=await r.json(); sha=f.sha; try{list=JSON.parse(b64dec(f.content))}catch(e){list=[]} }
+  else if(r.status!==404) throw new Error("Couldn't reach GitHub ("+r.status+"). Try again in a moment.");
+  list.push(entry);
+  r = await fetch(api,{method:"PUT",headers:h,body:JSON.stringify({message:"wishlist: quick add "+hostOf(entry.url),content:b64enc(JSON.stringify(list,null,2)+"\n"),...(sha?{sha}:{})})});
+  if(r.status===409 && retry) return pushToInbox(entry,false);
+  if(!r.ok) throw new Error("GitHub refused the save ("+r.status+"). Check the key's permissions.");
+  return list;
+}
+document.getElementById("q-form").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!onSite) return;
+  if(!getToken()){ document.getElementById("q-setup").open=true; return say("Set up the key first (one time).",true); }
+  const url=document.getElementById("q-url").value.trim(), note=document.getElementById("q-note").value.trim();
+  const btn=document.getElementById("q-add"); btn.disabled=true; say("Saving…");
+  try{
+    inbox = await pushToInbox({url,note,added:new Date().toISOString()});
+    document.getElementById("q-url").value=""; document.getElementById("q-note").value="";
+    say("Saved to \"to sort\" ♡ Ask Claude to sort it when you're back at your laptop.");
+    render();
+  }catch(err){ say(err.message,true); }
+  finally{ btn.disabled=false; }
+});
+
+async function loadInbox(){
+  if(location.protocol==="file:") return;
+  try{ const r=await fetch("inbox.json?"+Date.now(),{cache:"no-store"}); if(r.ok){ const d=await r.json(); if(Array.isArray(d)&&d.length){ inbox=d; render(); } } }catch(e){}
+}
+
+render();
+loadInbox();
+</script>
+
+</body>
+</html>
