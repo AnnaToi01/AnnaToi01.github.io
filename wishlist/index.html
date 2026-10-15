@@ -8,7 +8,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&family=Nunito:wght@400;600;700;800&family=Gaegu:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&family=Nunito:wght@400;600;700;800&family=Gaegu:wght@400;700&family=Space+Mono:wght@400;700&display=swap">
 <style>
 /* Layout: a gingham-backed scrapbook page, marquee + sticker chips on top, item cards taped onto category shelves, scribbled notes in the margins, a basket bar at the bottom */
 :root{
@@ -18,6 +18,7 @@
   --display:"Sniglet","Comic Sans MS",ui-rounded,system-ui,sans-serif;
   --body:"Nunito",ui-rounded,system-ui,-apple-system,sans-serif;
   --hand:"Gaegu","Comic Sans MS","Bradley Hand",cursive;
+  --mono:"Space Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#24161f; --check:rgba(242,122,166,.07); --paper:#33202c; --ink:#fbe4ee; --muted:#c7a3b7;
@@ -100,7 +101,6 @@ section.shelf{display:flex;flex-direction:column;gap:16px}
 .card.picked{box-shadow:0 6px 0 var(--pink),0 10px 24px var(--shadow)}
 .card.flash{animation:flash 1.2s ease 2}
 @keyframes flash{50%{box-shadow:0 0 0 6px var(--pink),0 10px 24px var(--shadow)}}
-.sticker{position:absolute;top:22px;right:8px;z-index:3;font-family:var(--hand);font-weight:700;font-size:1rem;background:var(--butter);color:var(--ink);padding:2px 10px;border-radius:999px;transform:rotate(8deg);box-shadow:0 2px 0 var(--line)}
 .tile{aspect-ratio:4/5;max-width:100%;border-radius:16px;overflow:hidden;border:3px solid var(--paper);outline:2px dashed var(--line)}
 .tile img{width:100%;height:100%;object-fit:cover;display:block}
 .c-jewelry .tile img{object-fit:contain;background:#fff}
@@ -161,6 +161,52 @@ footer{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(
 .ring{font-family:var(--hand);font-size:1.2rem;display:flex;gap:10px;align-items:center}
 .ring button{font:inherit;color:var(--ink);background:none;border:0;cursor:pointer;text-decoration:underline wavy var(--pink)}
 
+/* hearts (top-left) + bin (top-right) on every card */
+.hearts{position:absolute;top:22px;left:8px;z-index:3;display:flex;gap:1px;background:var(--paper);border-radius:999px;padding:2px 6px;box-shadow:0 2px 0 var(--line);transform:rotate(-4deg)}
+.hearts button,.hearts span{font:700 1rem/1 var(--body);color:var(--pink);background:none;border:0;padding:1px;cursor:pointer;transition:transform .12s}
+.hearts span{cursor:default}
+.hearts button:hover{transform:scale(1.3)}
+.trash{position:absolute;top:20px;right:8px;z-index:3;display:flex;align-items:center;gap:4px;height:34px;min-width:34px;padding:0 7px;border-radius:999px;border:2px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;box-shadow:0 2px 0 var(--line);transform:rotate(5deg);font:800 .8rem var(--body)}
+.trash svg{width:20px;height:20px;flex:none}
+.trash:hover svg{animation:wobble .4s ease}
+.trash .trash-q{display:none}
+.trash.armed{background:var(--pink);border-color:var(--pink);color:var(--paper)}
+.trash.armed .trash-q{display:inline}
+@keyframes wobble{25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}}
+.toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;background:var(--ink);color:var(--paper);font-weight:700;padding:8px 16px;border-radius:999px;max-width:calc(100% - 32px);text-align:center}
+.loading{font-family:var(--hand);font-size:1.4rem;color:var(--muted);text-align:center}
+
+/* the tights folder: an XP/98 window like the ones on annatoi01.github.io */
+.folder{--bar1:#c58ce8;--bar2:#a869d1;background:var(--paper);border:2px solid var(--ink);border-radius:6px 6px 4px 4px;box-shadow:6px 6px 0 var(--shadow),0 18px 40px var(--shadow);overflow:hidden;min-width:0}
+.folder__bar{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 10px;background:linear-gradient(var(--bar1),var(--bar2));border-bottom:2px solid var(--ink)}
+.folder__icon{width:22px;height:17px;flex:none;position:relative;background:#ffd86b;border:1.5px solid #7a5a12;border-radius:2px 3px 3px 3px}
+.folder__icon::before{content:"";position:absolute;left:-1.5px;top:-6px;width:10px;height:5px;background:#ffd86b;border:1.5px solid #7a5a12;border-bottom:0;border-radius:2px 2px 0 0}
+.folder__title{flex:1;min-width:0;font-family:var(--mono);font-size:.85rem;font-weight:700;color:#fff;text-shadow:1px 1px 0 rgba(59,30,77,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.folder__btns{display:flex;gap:4px}
+.folder__btns button{width:22px;height:20px;display:grid;place-items:center;background:#f0e7f7;border:1px solid #3b1e4d;border-radius:2px;font:700 .75rem/1 var(--mono);color:#3b1e4d;box-shadow:inset -1px -1px 0 rgba(59,30,77,.35);cursor:pointer;padding:0}
+.folder__btns button:hover{background:var(--bar1);color:#fff}
+.folder__menu{display:flex;gap:16px;padding:3px 10px;font-family:var(--mono);font-size:.75rem;color:var(--muted);border-bottom:1px solid var(--line);background:var(--bg)}
+.folder__menu span::first-letter{text-decoration:underline}
+.folder__body{padding:26px 14px 16px;background:var(--paper);box-shadow:inset 2px 2px 0 var(--line)}
+.folder__status{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:4px 10px;font-family:var(--mono);font-size:.72rem;color:var(--muted);border-top:1px solid var(--line);background:var(--bg)}
+.folder.min .folder__menu,.folder.min .folder__body{display:none}
+.minigrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:24px 14px}
+.mini{position:relative;display:flex;flex-direction:column;gap:4px;min-width:0;padding:8px;border-radius:10px;border:1px dashed transparent}
+.mini:hover,.mini.picked{border-color:var(--line);background:var(--bg)}
+.mini.flash{animation:flash 1.2s ease 2}
+.mini .hearts{top:-12px;left:2px;padding:1px 5px}
+.mini .hearts button,.mini .hearts span{font-size:.85rem}
+.mini .trash{top:-12px;right:2px;height:28px;min-width:28px;padding:0 5px}
+.mini .trash svg{width:16px;height:16px}
+.mini__img{display:block;aspect-ratio:3/4;max-width:100%;border:2px solid var(--ink);border-radius:3px;overflow:hidden;background:#fff}
+.mini__img img{width:100%;height:100%;object-fit:cover;display:block}
+.mini__name{margin:4px 0 0;font-family:var(--mono);font-size:.78rem;font-weight:700;line-height:1.25;overflow-wrap:anywhere}
+.mini__brand{margin:0;font-size:.72rem;color:var(--muted);font-weight:700}
+.mini__row{display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap}
+.mini__row .price{font-size:1.05rem}
+.mini__row .pick{font-size:.72rem;padding:2px 8px}
+.sale{font-family:var(--hand);font-weight:700;color:var(--pink);font-size:.95rem}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.card{transform:none!important}.sparkle{display:none}}
 </style>
 </head>
@@ -203,7 +249,7 @@ footer{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(
   </div>
 
   <p class="sub" id="total"></p>
-  <main id="out"></main>
+  <main id="out"><p class="loading">loading wishes…</p></main>
 
   <footer>
     <div class="ring"><button id="prev" type="button">&lt; prev</button>·<button id="rand" type="button">random wish</button>·<button id="next" type="button">next &gt;</button></div>
@@ -220,72 +266,154 @@ footer{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(
   <button id="b-clear" type="button">Clear</button>
 </div>
 
+<div class="toast" id="toast" role="status" hidden></div>
+
 <script>
 const IMGS = null;
-const REPO = "AnnaToi01/AnnaToi01.github.io", INBOX_PATH = "wishlist/inbox.json";
+const SEED = [{"cat": "clothes", "kind": "Maxi dress", "brand": "Rhi Dancey", "name": "The Options Dress", "img": "options", "price": 150, "cur": "£", "color": "Art print, black lining", "material": "95% power mesh, Lycra jersey lining", "desc": "Form-fitting maxi with adjustable spaghetti straps and a small slit. Limited-edition collab with artist Omer Mosseri. Stretchy, not see-through.", "url": "https://www.rhidancey.com/shop/p/the-options-dress", "id": "rhi-dancey-the-options-dress", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Longsleeve top", "brand": "Rhi Dancey", "name": "Lucky Star Longsleeve", "img": "lucky", "price": 89, "cur": "£", "color": "Baby blue", "material": "95% cotton, 5% elastane", "desc": "Fitted longsleeve, digitally printed on the front and sleeves. Limited-edition collab with Fiorenza Art.", "url": "https://www.rhidancey.com/shop/p/lucky-star-longsleeve", "id": "rhi-dancey-lucky-star-longsleeve", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Longsleeve top", "brand": "Rhi Dancey", "name": "Emma Longsleeve", "img": "emma", "price": 89, "cur": "£", "color": "Bunny print, striped sleeves", "material": "Cotton jersey and Lycra", "desc": "Printed bunny motif with contrast deadstock striped knit sleeves, a scoop back and two adjustable ties. Collab with Swan Gossip.", "url": "https://www.rhidancey.com/shop/p/emma-longsleeve", "id": "rhi-dancey-emma-longsleeve", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Drape skirt", "brand": "Kiko Kostadinov", "name": "Oriole Drape Skirt", "img": "kiko", "price": 935, "cur": "€", "color": "Cobalt Brush (also Slate Brush)", "material": "Printed metallic satin, 100% polyester", "desc": "Mid-rise skirt with gathered drapes around a quilted yoke, cascading tiers of different lengths and an invisible side zip.", "url": "https://kikokostadinov.com/products/oriole-drape-skirt-cobalt-brush", "id": "kiko-kostadinov-oriole-drape-skirt", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Layered tee", "brand": "ADSB", "name": "Mixed Stripe Sleeve Layered Top", "img": "adsb", "price": 180, "cur": "$", "color": "Charcoal", "material": "Cotton, polyester and elastane panels", "desc": "Oversized tee with a vintage-style graphic print, built to look like a longsleeve under a short-sleeve. Mismatched stripe sleeves and an asymmetric hem.", "url": "https://adsb.co.kr/products/mixed-stripe-sleeve-layered-top-charcoal", "id": "adsb-mixed-stripe-sleeve-layered-top", "hearts": 0, "added": "2026-10-15"}, {"cat": "clothes", "kind": "Gown", "brand": "Ottolinger", "name": "Mesh Gown (Glitched Check)", "img": "otto", "price": 487, "cur": "€", "color": "Glitched check print", "material": "90% recycled polyester, 10% elastane, stretch jersey lining", "desc": "Sculptural floor-length gown with a cowl neckline, logo cuffs and an all-over graphic print. Designed in Berlin, made in Greece.", "url": "https://ottolinger.com/shop/products/aw26-mesh-gown-glitched-check", "id": "ottolinger-mesh-gown-glitched-check", "hearts": 0, "added": "2026-10-15"}, {"cat": "jewelry", "kind": "Ring", "brand": "Soleilu", "name": "Las Olas con Piedras", "img": "olas", "price": 260, "cur": "€", "color": "Silver with clear stones", "material": "925 sterling silver, cubic zirconia", "desc": "Sea-inspired wave ring with broken zirconias cast in place. Open design, so the size adjusts.", "url": "https://soleilu.com/en/products/las-olas-con-piedras?variant=53444994728266", "id": "soleilu-las-olas-con-piedras", "hearts": 0, "added": "2026-10-15"}, {"cat": "jewelry", "kind": "Ring", "brand": "Soleilu", "name": "Basic Ring", "img": "basic", "price": 140, "cur": "€", "color": "Silver", "material": "925 sterling silver", "desc": "Simple everyday band, handmade without moulds so each one comes out slightly different.", "url": "https://soleilu.com/en/products/basic-ring?variant=53446115033418", "id": "soleilu-basic-ring", "hearts": 0, "added": "2026-10-15"}, {"cat": "jewelry", "kind": "Hoop earrings", "brand": "Tyger by the Tail", "name": "The Mini Carmens", "img": "carmens", "price": 72, "cur": "£", "color": "Peridot and citrine stones", "material": "Sterling silver or 18ct gold-plated brass (9ct gold made to order)", "desc": "A pair of organic-shaped mini hoops with little peridot and citrine jewels.", "url": "https://www.tygerbythetail.co.uk/products/the-mini-carmens?variant=54951761052034", "id": "tyger-by-the-tail-the-mini-carmens", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoe shop", "brand": "Psylos", "name": "Psylos", "img": "psylos", "color": "Pictured: XMZY X-Dimension Chunky Shoes, white", "material": "Independent chunky footwear labels", "desc": "Bold, sculptural shoes mixing street culture with design.", "url": "https://psylos1.com/en/products/xmzy-x-dimension-chunky-shoes-white", "id": "psylos-psylos", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoe shop", "brand": "Fluevog", "name": "Fluevog women's shoes", "img": "fluevog", "color": "Pictured: Poppet (purple). Also: Twee (green, yellow), Kinship (green snake), Kahlo (black)", "material": "249 styles in stock", "desc": "Chunky, characterful shoes and boots from Vancouver.", "url": "https://www.fluevog.com/collections/womens?filter.v.availability=1&page=3&sort_by=created-descending", "id": "fluevog-fluevog-women-s-shoes", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoes & bags", "brand": "Cruda", "name": "Cruda shop", "img": "cruda", "color": "Picks seen: Amanda, Lola, Carmen, Cecilia con Lazo, Victoria, Jenny", "material": "35 items, shoes and bags", "desc": "Handmade designer shoes and bags from Mexico.", "url": "https://crudastore.com/tienda/", "id": "cruda-cruda-shop", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing & accessories", "brand": "Damson Madder", "name": "Damson Madder", "img": "damson", "color": "Pictured: Genevieve Midi Dress, rose print", "material": "Knitwear, dresses, outerwear, nightwear and more (250+ items)", "desc": "London label with prints, stripes and gingham.", "url": "https://damsonmadder.com/", "id": "damson-madder-damson-madder", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing", "brand": "ADER error", "name": "ADER error", "img": "ader", "color": "Pictured: AW campaign", "material": "Seoul label, clothing and accessories", "desc": "Seoul label with playful, slightly off-kilter basics.", "url": "https://adererror.com/en/shop", "id": "ader-error-ader-error", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing & shoes", "brand": "Post Archive Faction", "name": "Post Archive Faction (PAF)", "img": "paf", "color": "Pictured: Cut Out Coat", "material": "155 items, lots of outerwear", "desc": "Seoul label known for technical, deconstructed cuts.", "url": "https://postarchivefaction.com/", "id": "post-archive-faction-post-archive-faction-paf", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing & shoes", "brand": "GmbH", "name": "GmbH new season", "img": "gmbh", "color": "Pictured: Overknee boot, organic leather", "material": "Boots, jackets, tops, hoodies and swimwear", "desc": "Berlin label with sharp tailoring and leather boots.", "url": "https://gmbhgmbh.eu/shop/?category=new+season", "id": "gmbh-gmbh-new-season", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Clothing", "brand": "Ottolinger", "name": "Ottolinger", "img": "otto", "color": "Pictured: Mesh Gown (also on your Clothes shelf)", "material": "Berlin label, dresses, knits and accessories", "desc": "Berlin label with sculptural, twisted dresses and knits.", "url": "https://ottolinger.com/shop", "id": "ottolinger-ottolinger", "hearts": 0, "added": "2026-10-15"}, {"cat": "shops", "kind": "Shoe shop", "brand": "Miista", "name": "Miista", "img": "miista", "color": "Pictured: Inaya mid-calf biker boots, brown", "material": "Boots, mules and platforms", "desc": "London label with shoes made in Spain. Mules, biker boots and tall riding boots.", "url": "https://www.miista.com/en", "id": "miista-miista", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Loewe – Vintage Yellow & Purple", "img": "soksi-loewe", "price": 65.0, "cur": "€", "color": "Vintage yellow and purple", "material": "40 den 3D, bicolour, made in Italy · size S/M", "desc": "Two-tone 3D tights with a flat seam and no gusset. Logo knitted under the waistband.", "url": "https://maisonsoksi.com/products/loewe-vintage-yellow-purple-tights?variant=52995419078999", "id": "soksi-loewe", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Hard Pois – Mulberry", "img": "soksi-hard-pois", "price": 65.0, "cur": "€", "color": "Mulberry", "material": "30 den, double covered, made in Italy · size S/M", "desc": "Bicolour polka-dot tights with a flat seam and no gusset.", "url": "https://maisonsoksi.com/products/hard-pois-mulberry-tights?variant=52995417243991", "id": "soksi-hard-pois", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Super Wormhole – Red", "img": "soksi-super-wormhole", "price": 44.0, "cur": "€", "color": "Red", "material": "32 den, double covered, made in Italy · size S/M", "desc": "Swirly wormhole pattern with a deeper tone, flat seam and no gusset.", "url": "https://maisonsoksi.com/products/super-wormhole-red-tights?variant=52995453747543", "id": "soksi-super-wormhole", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Maison Soksi", "name": "Wormhole – Purple", "img": "soksi-wormhole", "price": 44.0, "cur": "€", "color": "Purple", "material": "32 den, double covered, made in Italy · size S/M", "desc": "Bicolour wormhole pattern, flat seam and no gusset.", "url": "https://maisonsoksi.com/products/wormhole-purple-tights?variant=52995452666199", "id": "soksi-wormhole", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Winterberry Check", "img": "viken-winterberry", "price": 39.9, "cur": "$", "color": "Red berry check", "material": "Soft stretch fabric · size S", "desc": "Classic red-berry checks with a festive feel.", "url": "https://vikenplan.com/collections/plaid-1/products/winterberry-check-vk010625c249", "id": "viken-winterberry", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Emerald Tartan", "img": "viken-emerald-tartan", "price": 39.9, "cur": "$", "color": "Green tartan", "material": "Soft, durable stretch fabric · size S", "desc": "Rich green tartan, warm enough for winter layering.", "url": "https://vikenplan.com/collections/plaid-1/products/emerald-tartan-vk010625d548", "id": "viken-emerald-tartan", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Lavender Plaid", "img": "viken-lavender-plaid", "price": 39.9, "cur": "$", "color": "Lavender pastel check", "material": "Cosy stretch fabric · size S", "desc": "Soft pastel plaid for autumn and winter outfits.", "url": "https://vikenplan.com/collections/plaid-1/products/vk010625d547", "id": "viken-lavender-plaid", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Brown Blue College Check", "img": "viken-college-check", "price": 39.9, "cur": "$", "color": "Brown and blue check", "material": "Stretch fabric · size S", "desc": "Preppy brown-and-blue college check.", "url": "https://vikenplan.com/collections/plaid-1/products/viken-plan-college-art-print-tights-colored-stripes-pantyhose-tights-sky-blue-check-vk0281", "id": "viken-college-check", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Thor Satin Gloss", "img": "viken-thor-satin", "price": 39.9, "cur": "$", "color": "Black", "material": "Glossy stretch satin · size S", "desc": "High-shine satin tights for day or night.", "url": "https://vikenplan.com/products/thor-collection-vk070625d001?variant=46316281364642", "id": "viken-thor-satin", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Silky Velvet Touch – Lilac", "img": "viken-velvet-lilac", "price": 29.0, "cur": "$", "color": "Lilac", "material": "Velvet-touch fabric · size S", "desc": "Silky lilac tights with a soft velvet feel.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-silky-comfort-pantyhose-tightsvelvet-touch-vk030125c003?variant=45838493515938", "id": "viken-velvet-lilac", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Purple-Yellow Stripes Check", "img": "viken-purple-yellow-check", "price": 39.9, "cur": "$", "color": "Purple and yellow check", "material": "Stretch fabric · size S", "desc": "Purple and yellow checkered print.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-blue-red-stripes-checked-tights-hosiery-pantyhose-vk0489", "id": "viken-purple-yellow-check", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Crew socks", "brand": "Viken Plan", "name": "Pink Axolotl Socks", "img": "viken-axolotl-socks", "price": 25.9, "cur": "$", "color": "Light pink", "material": "Knit, with a 3D axolotl appliqué · size Free Size", "desc": "Light pink crew socks with a little knitted axolotl at the ankle, gills and tail included.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-pink-axolotl-3d-knit-applique-crew-socks-vk801226c102", "id": "viken-axolotl-socks", "hearts": 0, "added": "2026-10-15"}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Purple Black Vertical Stripe", "img": "viken-purple-black-stripe", "price": 39.9, "cur": "$", "color": "Purple and black stripes", "material": "Stretch fabric · size S", "desc": "Sleek vertical stripes for every day or evening.", "url": "https://vikenplan.com/collections/best-sellers/products/viken-plan-purple-black-vertical-striped-tights-hosiery-pantyhose-vk401226d241", "id": "viken-purple-black-stripe", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Striped & Polka Dot Gray", "img": "viken-stripe-dot-gray", "price": 39.9, "cur": "$", "color": "Gray", "material": "Stretch fabric · size S", "desc": "Gray tights mixing stripes and polka dots.", "url": "https://vikenplan.com/collections/striped/products/striped-polka-dot-gray-tights-hosiery-pantyhose-vk010125d628", "id": "viken-stripe-dot-gray", "hearts": 0, "added": "2026-10-15", "was": 59.0}, {"cat": "tights", "kind": "Tights", "brand": "Viken Plan", "name": "Teal Check", "img": "viken-teal-check", "price": 39.9, "cur": "$", "color": "Teal check", "material": "Stretch fabric · size S", "desc": "Cool teal checks with a festive twist.", "url": "https://vikenplan.com/collections/plaid-1/products/teal-check-vk010625c250", "id": "viken-teal-check", "hearts": 0, "added": "2026-10-15", "was": 59.0}];
+const REPO = "AnnaToi01/AnnaToi01.github.io", ITEMS_PATH = "wishlist/items.json", INBOX_PATH = "wishlist/inbox.json";
 const CATS = {
   inbox:{label:"To sort"},
   clothes:{label:"Clothes"},
   shoes:{label:"Shoes"},
   jewelry:{label:"Jewelry"},
   accessories:{label:"Accessories"},
+  tights:{label:"Tights"},
   shops:{label:"Shops to browse"},
   other:{label:"Other"}
 };
 const SHELF_NOTES = {clothes:"outfit era incoming",shoes:"walking into my villain era",jewelry:"shiny things only",shops:"just looking… for now",inbox:"fresh off the phone"};
 const SCRIBBLES = ["add to cart?? maybe","it's an investment","one day…","no thoughts just outfits","window shopping is cardio","☆ manifesting ☆","main character fit","silver > gold","ok but the colour…","for a special occasion (every day)","trying hard\nfashion","trying\nhard fashion","in progress","ill be so fashionable one day","imagine me in this!!","ill 🪨 this","goes with… my eyes","goes with… my curls","goes with… this thing","i need to keep up"].sort(()=>Math.random()-.5);
-const STICKERS = {options:"dream",otto:"new!",olas:"♡♡♡",lucky:"so cute"};
-
-const ITEMS = [
-  {cat:"clothes",kind:"Maxi dress",brand:"Rhi Dancey",name:"The Options Dress",img:"options",price:150,cur:"£",color:"Art print, black lining",material:"95% power mesh, Lycra jersey lining",desc:"Form-fitting maxi with adjustable spaghetti straps and a small slit. Limited-edition collab with artist Omer Mosseri. Stretchy, not see-through.",url:"https://www.rhidancey.com/shop/p/the-options-dress"},
-  {cat:"clothes",kind:"Longsleeve top",brand:"Rhi Dancey",name:"Lucky Star Longsleeve",img:"lucky",price:89,cur:"£",color:"Baby blue",material:"95% cotton, 5% elastane",desc:"Fitted longsleeve, digitally printed on the front and sleeves. Limited-edition collab with Fiorenza Art.",url:"https://www.rhidancey.com/shop/p/lucky-star-longsleeve"},
-  {cat:"clothes",kind:"Longsleeve top",brand:"Rhi Dancey",name:"Emma Longsleeve",img:"emma",price:89,cur:"£",color:"Bunny print, striped sleeves",material:"Cotton jersey and Lycra",desc:"Printed bunny motif with contrast deadstock striped knit sleeves, a scoop back and two adjustable ties. Collab with Swan Gossip.",url:"https://www.rhidancey.com/shop/p/emma-longsleeve"},
-  {cat:"clothes",kind:"Drape skirt",brand:"Kiko Kostadinov",name:"Oriole Drape Skirt",img:"kiko",price:935,cur:"€",color:"Cobalt Brush (also Slate Brush)",material:"Printed metallic satin, 100% polyester",desc:"Mid-rise skirt with gathered drapes around a quilted yoke, cascading tiers of different lengths and an invisible side zip.",url:"https://kikokostadinov.com/products/oriole-drape-skirt-cobalt-brush"},
-  {cat:"clothes",kind:"Layered tee",brand:"ADSB",name:"Mixed Stripe Sleeve Layered Top",img:"adsb",price:180,cur:"$",color:"Charcoal",material:"Cotton, polyester and elastane panels",desc:"Oversized tee with a vintage-style graphic print, built to look like a longsleeve under a short-sleeve. Mismatched stripe sleeves and an asymmetric hem.",url:"https://adsb.co.kr/products/mixed-stripe-sleeve-layered-top-charcoal"},
-  {cat:"clothes",kind:"Gown",brand:"Ottolinger",name:"Mesh Gown (Glitched Check)",img:"otto",price:487,cur:"€",color:"Glitched check print",material:"90% recycled polyester, 10% elastane, stretch jersey lining",desc:"Sculptural floor-length gown with a cowl neckline, logo cuffs and an all-over graphic print. Designed in Berlin, made in Greece.",url:"https://ottolinger.com/shop/products/aw26-mesh-gown-glitched-check"},
-  {cat:"jewelry",kind:"Ring",brand:"Soleilu",name:"Las Olas con Piedras",img:"olas",price:260,cur:"€",color:"Silver with clear stones",material:"925 sterling silver, cubic zirconia",desc:"Sea-inspired wave ring with broken zirconias cast in place. Open design, so the size adjusts.",url:"https://soleilu.com/en/products/las-olas-con-piedras?variant=53444994728266"},
-  {cat:"jewelry",kind:"Ring",brand:"Soleilu",name:"Basic Ring",img:"basic",price:140,cur:"€",color:"Silver",material:"925 sterling silver",desc:"Simple everyday band, handmade without moulds so each one comes out slightly different.",url:"https://soleilu.com/en/products/basic-ring?variant=53446115033418"},
-  {cat:"jewelry",kind:"Hoop earrings",brand:"Tyger by the Tail",name:"The Mini Carmens",img:"carmens",price:72,cur:"£",color:"Peridot and citrine stones",material:"Sterling silver or 18ct gold-plated brass (9ct gold made to order)",desc:"A pair of organic-shaped mini hoops with little peridot and citrine jewels.",url:"https://www.tygerbythetail.co.uk/products/the-mini-carmens?variant=54951761052034"},
-  {cat:"shops",kind:"Shoe shop",brand:"Psylos",name:"Psylos",img:"psylos",color:"Pictured: XMZY X-Dimension Chunky Shoes, white",material:"Independent chunky footwear labels",desc:"Bold, sculptural shoes mixing street culture with design.",url:"https://psylos1.com/en/products/xmzy-x-dimension-chunky-shoes-white"},
-  {cat:"shops",kind:"Shoe shop",brand:"Fluevog",name:"Fluevog women's shoes",img:"fluevog",color:"Pictured: Poppet (purple). Also: Twee (green, yellow), Kinship (green snake), Kahlo (black)",material:"249 styles in stock",desc:"Chunky, characterful shoes and boots from Vancouver.",url:"https://www.fluevog.com/collections/womens?filter.v.availability=1&page=3&sort_by=created-descending"},
-  {cat:"shops",kind:"Shoes & bags",brand:"Cruda",name:"Cruda shop",img:"cruda",color:"Picks seen: Amanda, Lola, Carmen, Cecilia con Lazo, Victoria, Jenny",material:"35 items, shoes and bags",desc:"Handmade designer shoes and bags from Mexico.",url:"https://crudastore.com/tienda/"},
-  {cat:"shops",kind:"Clothing & accessories",brand:"Damson Madder",name:"Damson Madder",img:"damson",color:"Pictured: Genevieve Midi Dress, rose print",material:"Knitwear, dresses, outerwear, nightwear and more (250+ items)",desc:"London label with prints, stripes and gingham.",url:"https://damsonmadder.com/"},
-  {cat:"shops",kind:"Clothing",brand:"ADER error",name:"ADER error",img:"ader",color:"Pictured: AW campaign",material:"Seoul label, clothing and accessories",desc:"Seoul label with playful, slightly off-kilter basics.",url:"https://adererror.com/en/shop"},
-  {cat:"shops",kind:"Clothing & shoes",brand:"Post Archive Faction",name:"Post Archive Faction (PAF)",img:"paf",color:"Pictured: Cut Out Coat",material:"155 items, lots of outerwear",desc:"Seoul label known for technical, deconstructed cuts.",url:"https://postarchivefaction.com/"},
-  {cat:"shops",kind:"Clothing & shoes",brand:"GmbH",name:"GmbH new season",img:"gmbh",color:"Pictured: Overknee boot, organic leather",material:"Boots, jackets, tops, hoodies and swimwear",desc:"Berlin label with sharp tailoring and leather boots.",url:"https://gmbhgmbh.eu/shop/?category=new+season"},
-  {cat:"shops",kind:"Clothing",brand:"Ottolinger",name:"Ottolinger",img:"otto",color:"Pictured: Mesh Gown (also on your Clothes shelf)",material:"Berlin label, dresses, knits and accessories",desc:"Berlin label with sculptural, twisted dresses and knits.",url:"https://ottolinger.com/shop"},
-  {cat:"shops",kind:"Shoe shop",brand:"Miista",name:"Miista",img:"miista",color:"Pictured: Inaya mid-calf biker boots, brown",material:"Boots, mules and platforms",desc:"London label with shoes made in Spain. Mules, biker boots and tall riding boots.",url:"https://www.miista.com/en"}
-];
-
+const BIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1.3 12.2a1.5 1.5 0 0 1-1.5 1.3H8.8a1.5 1.5 0 0 1-1.5-1.3z" style="fill:var(--paper)" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4.5 6.5h15M9.5 6.5V4.8c0-.7.5-1.3 1.2-1.3h2.6c.7 0 1.2.6 1.2 1.3v1.7M9.6 10.5l.4 7.5M14.4 10.5l-.4 7.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M12 16.4l-1.7-1.6a1 1 0 0 1 1.4-1.4l.3.3.3-.3a1 1 0 0 1 1.4 1.4z" style="fill:var(--pink)"/></svg>';
 
 const imgSrc = k => (IMGS && IMGS[k]) || ("img/" + k + ".jpg");
-const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-ITEMS.forEach(i => i.id = slug(i.brand + "-" + i.name));
 
 // European Central Bank reference rates, 15 Oct 2026: €1 = £0.8461 = $1.1208
 const PER_EUR = {"€":1,"£":0.8461,"$":1.1208,"₩":1508.48};
 const eur = (n,cur) => n / PER_EUR[cur];
 const money = (n,cur,dec) => cur + n.toLocaleString("en-GB",{minimumFractionDigits:dec,maximumFractionDigits:dec});
-const fmt = it => it.lo==null && it.price==null ? "" : it.lo!=null
-  ? money(eur(it.lo,it.cur),"€",0) + "–" + money(eur(it.hi,it.cur),"€",0).slice(1)
-  : money(eur(it.price,it.cur),"€",2);
-const orig = it => !it.cur || it.cur==="€" ? "" : "was " + (it.lo!=null ? money(it.lo,it.cur,0)+"–"+money(it.hi,it.cur,0).slice(1) : money(it.price,it.cur,it.price%1?2:0));
+const fmt = it => it.price==null ? "" : money(eur(it.price,it.cur),"€",2);
+const orig = it => !it.cur || it.cur==="€" || it.price==null ? "" : "was " + money(it.price,it.cur,it.price%1?2:0);
 const esc = s => String(s ?? "").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const store = {get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const hostOf = u => { try{ return new URL(u).hostname.replace(/^www\./,"") }catch(e){ return u } };
 
+let ITEMS = SEED.slice();
+let inbox = [];  // links saved from the quick-add box, waiting to be sorted
 let filter = "all", view = store.get("wl-view","cards");
 let picked = new Set(store.get("wl-basket",[]));
-let inbox = [];  // links saved from the quick-add box, waiting to be sorted
+let ready = false;
 
-/* ---------- marquee + counter ---------- */
-(function(){
-  const newest = ITEMS.find(i=>i.cat!=="shops"&&STICKERS[i.img]==="new!") || ITEMS[0];
-  const t = ` ✧ welcome to my little wishlist ✧ newest: ${newest ? newest.brand.toLowerCase()+" "+newest.name.toLowerCase() : ""} ✧ window shopping is cardio ✧ ${ITEMS.length} wishes and counting ✧ tick things to add up a basket ✧ `;
-  document.getElementById("marq").textContent = t + t;
-})();
+const onSite = /github\.io$/.test(location.hostname);
+const getToken = () => store.get("wl-token","");
+const canEdit = () => onSite && !!getToken();
+
+function toast(t){
+  const el = document.getElementById("toast"); el.textContent = t; el.hidden = false;
+  clearTimeout(toast.t); toast.t = setTimeout(()=>el.hidden=true, 3200);
+}
+
+/* ---------- GitHub storage: items.json and inbox.json in the repo ---------- */
+const b64enc = s => btoa(unescape(encodeURIComponent(s)));
+const b64dec = s => decodeURIComponent(escape(atob(s.replace(/\n/g,""))));
+const api = path => `https://api.github.com/repos/${REPO}/contents/${path}`;
+const ghHeaders = () => ({Authorization:"Bearer "+getToken(), Accept:"application/vnd.github+json"});
+
+async function ghGet(path){
+  const r = await fetch(api(path)+"?ref=main",{headers:ghHeaders(),cache:"no-store"});
+  if(r.status===404) return {list:[],sha:null};
+  if(r.status===401||r.status===403) throw new Error("GitHub didn't accept the key. Check it can read and write AnnaToi01.github.io.");
+  if(!r.ok) throw new Error("Couldn't reach GitHub ("+r.status+").");
+  const f = await r.json(); let list = [];
+  try{ list = JSON.parse(b64dec(f.content)) }catch(e){}
+  return {list, sha:f.sha};
+}
+let queue = Promise.resolve();
+// read the file fresh, change it with fn, write it back; retried once if someone else wrote in between
+function mutate(path, fn, message){
+  const job = queue.catch(()=>{}).then(async()=>{
+    for(let attempt=0; attempt<2; attempt++){
+      const {list,sha} = await ghGet(path);
+      const next = fn(list) || list;
+      const r = await fetch(api(path),{method:"PUT",headers:ghHeaders(),body:JSON.stringify({message,content:b64enc(JSON.stringify(next,null,1)+"\n"),...(sha?{sha}:{})})});
+      if(r.status===409 && attempt===0) continue;
+      if(!r.ok) throw new Error("GitHub refused the save ("+r.status+").");
+      return next;
+    }
+  });
+  queue = job;
+  return job;
+}
+
+async function loadData(){
+  if(onSite){
+    try{
+      if(getToken()){
+        const [a,b] = await Promise.all([ghGet(ITEMS_PATH),ghGet(INBOX_PATH)]);
+        if(a.list.length) ITEMS = a.list; inbox = b.list;
+      } else {
+        const get = p => fetch(p+"?"+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.json():null);
+        const [a,b] = await Promise.all([get("items.json"),get("inbox.json")]);
+        if(Array.isArray(a)&&a.length) ITEMS = a; if(Array.isArray(b)) inbox = b;
+      }
+    }catch(e){ toast(e.message) }
+  }
+  ready = true; render();
+}
 
 /* ---------- rendering ---------- */
-function allItems(){ return inbox.length ? [...inbox.map((x,n)=>({...x,cat:"inbox",id:"inbox-"+n})), ...ITEMS] : ITEMS; }
+const inboxId = x => "inbox-" + x.added;
+function allItems(){ return [...inbox.map(x=>({...x,cat:"inbox",id:inboxId(x)})), ...ITEMS]; }
+const pickable = it => it.price!=null && it.cat!=="inbox";
+
+function heartsHTML(it){
+  const n = it.hearts||0;
+  if(canEdit()) return `<div class="hearts" role="group" aria-label="Hearts for ${esc(it.name)}">${[1,2,3,4,5].map(k=>
+    `<button type="button" data-heart="${esc(it.id)}" data-k="${k}" aria-label="${k} ${k===1?"heart":"hearts"}" aria-pressed="${k<=n}">${k<=n?"♥":"♡"}</button>`).join("")}</div>`;
+  return n ? `<div class="hearts" aria-label="${n} hearts"><span>${"♥".repeat(n)}</span></div>` : "";
+}
+const trashHTML = it => canEdit() ? `<button type="button" class="trash" data-del="${esc(it.id)}" aria-label="Delete ${esc(it.name||hostOf(it.url))}">${BIN}<span class="trash-q">bye?</span></button>` : "";
+
+function card(it){
+  if(it.cat==="inbox") return `<article class="inboxcard" style="position:relative">${trashHTML(it)}<span class="when">${esc(new Date(it.added).toLocaleDateString("en-GB",{day:"numeric",month:"short"}))}</span>
+    <a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(hostOf(it.url))}</a>${it.note?`<span>${esc(it.note)}</span>`:""}</article>`;
+  const on = picked.has(it.id);
+  return `<article class="card c-${it.cat}${on?" picked":""}" id="card-${esc(it.id)}">
+    ${heartsHTML(it)}${trashHTML(it)}
+    <div class="tile"><img src="${imgSrc(it.img)}" alt="${esc(it.name)}" loading="lazy"></div>
+    <span class="kind">${esc(it.kind)}</span>
+    <div><p class="brand">${esc(it.brand)}</p><h3 class="name">${esc(it.name)}</h3></div>
+    ${it.cat==="shops"?"":`<div class="pricerow"><div class="price">${esc(fmt(it))}${orig(it)?`<small>${esc(orig(it))}</small>`:""}</div>
+      ${pickable(it)?`<button class="pick" type="button" data-pick="${esc(it.id)}" aria-pressed="${on}">${on?"♥ in basket":"♡ basket"}</button>`:""}</div>`}
+    <p class="desc">${esc(it.desc)}</p>
+    <dl><dt>Colour</dt><dd>${esc(it.color)}</dd><dt>${it.cat==="shops"?"Stock":"Made of"}</dt><dd>${esc(it.material)}</dd></dl>
+    <a class="go" href="${esc(it.url)}" target="_blank" rel="noopener">Open in shop ↗</a>
+  </article>`;
+}
+
+function mini(it){
+  const on = picked.has(it.id);
+  return `<article class="mini${on?" picked":""}" id="card-${esc(it.id)}">
+    ${heartsHTML(it)}${trashHTML(it)}
+    <a class="mini__img" href="${esc(it.url)}" target="_blank" rel="noopener"><img src="${imgSrc(it.img)}" alt="${esc(it.name)}" loading="lazy"></a>
+    <p class="mini__name">${esc(it.name)}</p>
+    <p class="mini__brand">${esc(it.brand)} · ${esc(it.kind.toLowerCase())}${it.was?` <span class="sale">sale!</span>`:""}</p>
+    <div class="mini__row"><span class="price">${esc(fmt(it))}</span>
+      <button class="pick" type="button" data-pick="${esc(it.id)}" aria-pressed="${on}">${on?"♥":"♡ basket"}</button></div>
+  </article>`;
+}
+
+function folder(g){
+  const min = store.get("wl-folder-min",false);
+  const total = g.filter(pickable).reduce((a,i)=>a+eur(i.price,i.cur),0);
+  return `<section class="folder${min?" min":""}" id="folder-tights" aria-label="Tights folder">
+    <div class="folder__bar"><span class="folder__icon" aria-hidden="true"></span><span class="folder__title">C:\\My Wishes\\Tights</span>
+      <div class="folder__btns"><button type="button" data-fold aria-label="${min?"Open":"Minimise"} folder">${min?"▢":"_"}</button><button type="button" data-fold tabindex="-1" aria-hidden="true">□</button><button type="button" data-fold tabindex="-1" aria-hidden="true">×</button></div></div>
+    <div class="folder__menu" aria-hidden="true"><span>File</span><span>Edit</span><span>View</span><span>Favourites</span><span>Help</span></div>
+    <div class="folder__body"><div class="minigrid">${g.map(mini).join("")}</div></div>
+    <div class="folder__status"><span>${g.length} object(s)</span><span>${min?"double-click to open":money(total,"€",2)+" for all of them"}</span></div>
+  </section>`;
+}
 
 function renderTally(){
   const list = allItems(), counts = {};
@@ -293,55 +421,40 @@ function renderTally(){
   const chips = [["all","Everything",list.length], ...Object.keys(CATS).filter(k=>counts[k]).map(k=>[k,CATS[k].label,counts[k]])];
   document.getElementById("tally").innerHTML = chips.map(([k,l,n])=>`<button data-k="${k}" aria-pressed="${filter===k}">${l} <span class="n">${n}</span></button>`).join("");
   document.getElementById("count").textContent = String(ITEMS.filter(i=>i.cat!=="shops").length).padStart(4,"0");
+  const newest = [...ITEMS].reverse().find(i=>i.cat!=="shops");
+  const t = ` ✧ welcome to my little wishlist ✧ newest: ${newest ? (newest.brand+" "+newest.name).toLowerCase() : ""} ✧ window shopping is cardio ✧ ${ITEMS.length} wishes and counting ✧ tick things to add up a basket ✧ `;
+  document.getElementById("marq").textContent = t + t;
 }
-
-const pickable = it => it.price!=null;
-
-function card(it){
-  if(it.cat==="inbox") return `<article class="inboxcard"><span class="when">${esc(new Date(it.added).toLocaleDateString("en-GB",{day:"numeric",month:"short"}))}</span>
-    <a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(hostOf(it.url))}</a>${it.note?`<span>${esc(it.note)}</span>`:""}</article>`;
-  const on = picked.has(it.id), st = STICKERS[it.img] && it.cat!=="shops" ? STICKERS[it.img] : "";
-  return `<article class="card c-${it.cat}${on?" picked":""}" id="card-${it.id}">
-    ${st?`<span class="sticker" aria-hidden="true">${esc(st)}</span>`:""}
-    <div class="tile"><img src="${imgSrc(it.img)}" alt="${esc(it.name)}" loading="lazy"></div>
-    <span class="kind">${esc(it.kind)}</span>
-    <div><p class="brand">${esc(it.brand)}</p><h3 class="name">${esc(it.name)}</h3></div>
-    ${it.cat==="shops"?"":`<div class="pricerow"><div class="price">${esc(fmt(it))}${orig(it)?`<small>${esc(orig(it))}${it.lo!=null?" for most items":""}</small>`:""}</div>
-      ${pickable(it)?`<button class="pick" type="button" data-pick="${it.id}" aria-pressed="${on}">${on?"♥ in basket":"♡ basket"}</button>`:""}</div>`}
-    <p class="desc">${esc(it.desc)}</p>
-    <dl><dt>Colour</dt><dd>${esc(it.color)}</dd><dt>${it.cat==="shops"?"Stock":"Made of"}</dt><dd>${esc(it.material)}</dd></dl>
-    <a class="go" href="${esc(it.url)}" target="_blank" rel="noopener">Open in shop ↗</a>
-  </article>`;
-}
-function hostOf(u){ try{ return new URL(u).hostname.replace(/^www\./,"") }catch(e){ return u } }
 
 function render(){
+  if(!ready) return;
   renderTally();
   document.getElementById("v-cards").setAttribute("aria-pressed",view==="cards");
   document.getElementById("v-table").setAttribute("aria-pressed",view==="table");
   const list = allItems().filter(i=>filter==="all"||i.cat===filter);
   const priced = list.filter(pickable);
-  document.getElementById("total").textContent = priced.length ? `Single items shown add up to ${money(priced.reduce((a,i)=>a+eur(i.price,i.cur),0),"€",2)}.` : "";
+  document.getElementById("total").textContent = priced.length ? `Everything shown adds up to ${money(priced.reduce((a,i)=>a+eur(i.price,i.cur),0),"€",2)}.` : "";
   const out = document.getElementById("out");
   if(view==="table"){
     const rows = list.filter(i=>i.cat!=="inbox");
     const sel = rows.filter(i=>picked.has(i.id));
-    const allOn = rows.filter(pickable).length && rows.filter(pickable).every(i=>picked.has(i.id));
+    const pk = rows.filter(pickable), allOn = pk.length && pk.every(i=>picked.has(i.id));
     out.innerHTML = `<div class="tablewrap"><table><thead><tr>
-      <th><input type="checkbox" id="pick-all" aria-label="Select all items" ${allOn?"checked":""}></th><th></th><th>Category</th><th>Item</th><th>Brand</th><th>Type</th><th>Price (€)</th><th>Colour</th><th>Made of</th></tr></thead><tbody>${
+      <th><input type="checkbox" id="pick-all" aria-label="Select all items" ${allOn?"checked":""}></th><th></th><th>Category</th><th>Item</th><th>Brand</th><th>♥</th><th>Price (€)</th><th>Colour</th><th>Made of</th></tr></thead><tbody>${
       rows.map(it=>`<tr class="${picked.has(it.id)?"sel":""}">
-        <td>${pickable(it)?`<input type="checkbox" data-pick="${it.id}" aria-label="Add ${esc(it.name)} to basket" ${picked.has(it.id)?"checked":""}>`:""}</td>
+        <td>${pickable(it)?`<input type="checkbox" data-pick="${esc(it.id)}" aria-label="Add ${esc(it.name)} to basket" ${picked.has(it.id)?"checked":""}>`:""}</td>
         <td><img class="thumb" src="${imgSrc(it.img)}" alt=""></td><td>${CATS[it.cat].label}</td>
-        <td><a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)}</a></td><td>${esc(it.brand)}</td><td>${esc(it.kind)}</td>
+        <td><a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)}</a></td><td>${esc(it.brand)}</td><td style="color:var(--pink);white-space:nowrap">${"♥".repeat(it.hearts||0)}</td>
         <td class="num">${esc(fmt(it))}${orig(it)?`<small>${esc(orig(it))}</small>`:""}</td><td>${esc(it.color)}</td><td>${esc(it.material)}</td></tr>`).join("")
     }</tbody><tfoot><tr><td colspan="6">Basket: ${sel.length} ${sel.length===1?"thing":"things"} ticked</td><td class="num">${money(sel.reduce((a,i)=>a+eur(i.price,i.cur),0),"€",2)}</td><td colspan="2"></td></tr></tfoot></table></div>`;
   } else {
     const groups = Object.keys(CATS).map(k=>{
       const g = list.filter(i=>i.cat===k); if(!g.length) return "";
+      if(k==="tights") return folder(g);
       return `<section class="shelf"><h2><span class="deco" aria-hidden="true">₊˚ ✧ ━━⊱</span>${CATS[k].label}<span class="deco" aria-hidden="true">⊰━━ ✧ ₊˚</span><small>${g.length} ${g.length===1?"thing":"things"} · ${SHELF_NOTES[k]||""}</small></h2><div class="grid">${g.map(card).join("")}</div></section>`;
     }).filter(Boolean);
-    out.innerHTML = groups.map((g,n)=> n ? `<p class="inline-scribble" aria-hidden="true">~ ${esc(SCRIBBLES[(n*5)%SCRIBBLES.length])} ~</p>` + g : g)
-      .join('<div style="height:18px"></div>');
+    out.innerHTML = groups.length ? groups.map((g,n)=> n ? `<p class="inline-scribble" aria-hidden="true">~ ${esc(SCRIBBLES[(n*5)%SCRIBBLES.length])} ~</p>` + g : g).join('<div style="height:18px"></div>')
+      : `<p class="loading">nothing here yet ♡</p>`;
   }
   renderBasket();
   requestAnimationFrame(placeScribbles);
@@ -349,8 +462,7 @@ function render(){
 
 function renderBasket(){
   const sel = ITEMS.filter(i=>picked.has(i.id)&&pickable(i));
-  const b = document.getElementById("basket");
-  b.hidden = !sel.length;
+  document.getElementById("basket").hidden = !sel.length;
   document.getElementById("b-n").textContent = `${sel.length} ${sel.length===1?"thing":"things"}`;
   document.getElementById("b-sum").textContent = money(sel.reduce((a,i)=>a+eur(i.price,i.cur),0),"€",2);
 }
@@ -360,23 +472,53 @@ function togglePick(id, on){
   store.set("wl-basket",[...picked]); render();
 }
 
+/* ---------- hearts + delete (only with the key saved) ---------- */
+const heartTimers = {};
+function setHearts(id, k){
+  const it = ITEMS.find(i=>i.id===id); if(!it) return;
+  const n = (it.hearts||0)===k ? 0 : k;
+  it.hearts = n; render();
+  clearTimeout(heartTimers[id]);
+  heartTimers[id] = setTimeout(()=>{
+    mutate(ITEMS_PATH, list=>{ const x=list.find(i=>i.id===id); if(x) x.hearts=n; }, `wishlist: ${n} ♥ for ${it.name}`)
+      .catch(err=>{ toast(err.message); loadData(); });
+  }, 700);
+}
+function del(id, btn){
+  if(!btn.classList.contains("armed")){
+    document.querySelectorAll(".trash.armed").forEach(b=>b.classList.remove("armed"));
+    btn.classList.add("armed"); clearTimeout(del.t); del.t = setTimeout(()=>btn.classList.remove("armed"), 3000);
+    return;
+  }
+  if(id.startsWith("inbox-")){
+    const added = id.slice(6);
+    inbox = inbox.filter(x=>x.added!==added); render();
+    mutate(INBOX_PATH, list=>list.filter(x=>x.added!==added), "wishlist: remove link from inbox")
+      .then(()=>toast("Gone ♡")).catch(err=>{ toast(err.message); loadData(); });
+    return;
+  }
+  const it = ITEMS.find(i=>i.id===id);
+  ITEMS = ITEMS.filter(i=>i.id!==id); picked.delete(id); store.set("wl-basket",[...picked]); render();
+  mutate(ITEMS_PATH, list=>list.filter(i=>i.id!==id), `wishlist: remove ${it ? it.name : id}`)
+    .then(()=>toast("Gone ♡")).catch(err=>{ toast(err.message); loadData(); });
+}
+
 /* ---------- scattered notes in the margins (wide screens) ---------- */
 function placeScribbles(){
   document.querySelectorAll(".scribble").forEach(n=>n.remove());
   if(window.innerWidth < 1280) return;
   const wrap = document.querySelector(".wrap").getBoundingClientRect();
   const H = document.body.scrollHeight, gutter = (window.innerWidth - wrap.width)/2;
-  const shuffled = SCRIBBLES;
-  const n = Math.min(shuffled.length, Math.floor(H/260));
+  const n = Math.min(SCRIBBLES.length, Math.floor(H/260));
   for(let i=0;i<n;i++){
     const el = document.createElement("div");
     el.className = "scribble" + (i%3===0?" pinkish":"");
     el.setAttribute("aria-hidden","true");
-    el.textContent = shuffled[i];
-    const left = i%2===0;
-    const x = Math.max(8, (gutter-150)/2 + (Math.random()*30-15));
+    el.textContent = SCRIBBLES[i];
+    const w = Math.min(150, gutter-24), x = Math.max(8, (gutter-w)/2 + (Math.random()*16-8));
+    el.style.maxWidth = w + "px";
     el.style.top = (180 + i*(H-300)/n + Math.random()*60) + "px";
-    el.style[left?"left":"right"] = x + "px";
+    el.style[i%2===0?"left":"right"] = x + "px";
     el.style.transform = `rotate(${(Math.random()*16-8).toFixed(1)}deg)`;
     document.body.appendChild(el);
   }
@@ -397,9 +539,15 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches && matchMedia("(point
 /* ---------- events ---------- */
 document.getElementById("tally").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b) return; filter=b.dataset.k; render();});
 ["cards","table"].forEach(v=>document.getElementById("v-"+v).addEventListener("click",()=>{view=v; store.set("wl-view",v); render();}));
+const setFolder = min => { store.set("wl-folder-min",min); render(); };
 document.getElementById("out").addEventListener("click",e=>{
-  const b=e.target.closest("button[data-pick]"); if(b) togglePick(b.dataset.pick);
+  const b = e.target.closest("button"); if(!b) return;
+  if(b.dataset.pick) return togglePick(b.dataset.pick);
+  if(b.dataset.heart) return setHearts(b.dataset.heart, +b.dataset.k);
+  if(b.dataset.del) return del(b.dataset.del, b);
+  if(b.hasAttribute("data-fold")) return setFolder(!store.get("wl-folder-min",false));
 });
+document.getElementById("out").addEventListener("dblclick",e=>{ if(e.target.closest(".folder__bar")) setFolder(!store.get("wl-folder-min",false)); });
 document.getElementById("out").addEventListener("change",e=>{
   if(e.target.id==="pick-all"){ ITEMS.filter(i=>pickable(i)&&(filter==="all"||i.cat===filter)).forEach(i=>e.target.checked?picked.add(i.id):picked.delete(i.id)); store.set("wl-basket",[...picked]); render(); return; }
   if(e.target.dataset.pick) togglePick(e.target.dataset.pick, e.target.checked);
@@ -408,8 +556,10 @@ document.getElementById("b-clear").addEventListener("click",()=>{picked.clear();
 
 let cursor = -1;
 function jump(n){
-  if(view!=="cards"){view="cards"; render();}
-  if(filter!=="all"){filter="all"; render();}
+  if(view!=="cards"){view="cards";}
+  filter="all";
+  if(store.get("wl-folder-min",false)) store.set("wl-folder-min",false);
+  render();
   cursor = (n+ITEMS.length)%ITEMS.length;
   const el = document.getElementById("card-"+ITEMS[cursor].id); if(!el) return;
   el.scrollIntoView({behavior:"smooth",block:"center"});
@@ -419,41 +569,22 @@ document.getElementById("prev").onclick=()=>jump(cursor-1);
 document.getElementById("next").onclick=()=>jump(cursor+1);
 document.getElementById("rand").onclick=()=>jump(Math.floor(Math.random()*ITEMS.length));
 
-/* ---------- quick add (works on the GitHub Pages site) ---------- */
-const onSite = /github\.io$/.test(location.hostname);
+/* ---------- quick add ---------- */
 const qMsg = document.getElementById("q-msg");
 const say = (t,err) => { qMsg.textContent=t; qMsg.className="msg"+(err?" err":""); };
 const tokenInput = document.getElementById("q-token");
-const getToken = () => store.get("wl-token","");
 
 if(!onSite){
   document.getElementById("q-add").disabled = true;
-  
 } else {
   if(getToken()) tokenInput.placeholder = "key saved ✓";
   else document.getElementById("q-setup").open = true;
   const pre = new URLSearchParams(location.search).get("add");
   if(pre) document.getElementById("q-url").value = pre;
 }
-document.getElementById("q-save").onclick=()=>{ const t=tokenInput.value.trim(); if(!t) return say("Paste the token first.",true); store.set("wl-token",t); tokenInput.value=""; tokenInput.placeholder="key saved ✓"; document.getElementById("q-setup").open=false; say("Key saved."); };
-document.getElementById("q-forget").onclick=()=>{ try{localStorage.removeItem("wl-token")}catch(e){} tokenInput.placeholder="github_pat_…"; say("Key removed from this device."); };
+document.getElementById("q-save").onclick=()=>{ const t=tokenInput.value.trim(); if(!t) return say("Paste the key first.",true); store.set("wl-token",t); tokenInput.value=""; tokenInput.placeholder="key saved ✓"; document.getElementById("q-setup").open=false; say("Key saved."); loadData(); };
+document.getElementById("q-forget").onclick=()=>{ try{localStorage.removeItem("wl-token")}catch(e){} tokenInput.placeholder="github_pat_…"; say("Key removed from this device."); render(); };
 
-const b64enc = s => btoa(unescape(encodeURIComponent(s)));
-const b64dec = s => decodeURIComponent(escape(atob(s.replace(/\n/g,""))));
-async function pushToInbox(entry, retry=true){
-  const api = `https://api.github.com/repos/${REPO}/contents/${INBOX_PATH}`;
-  const h = {Authorization:"Bearer "+getToken(), Accept:"application/vnd.github+json"};
-  let r = await fetch(api,{headers:h,cache:"no-store"});
-  if(r.status===401||r.status===403) throw new Error("GitHub didn't accept the key. Check it has Contents → Read and write for AnnaToi01.github.io.");
-  let list=[], sha;
-  if(r.ok){ const f=await r.json(); sha=f.sha; try{list=JSON.parse(b64dec(f.content))}catch(e){list=[]} }
-  else if(r.status!==404) throw new Error("Couldn't reach GitHub ("+r.status+"). Try again in a moment.");
-  list.push(entry);
-  r = await fetch(api,{method:"PUT",headers:h,body:JSON.stringify({message:"wishlist: quick add "+hostOf(entry.url),content:b64enc(JSON.stringify(list,null,2)+"\n"),...(sha?{sha}:{})})});
-  if(r.status===409 && retry) return pushToInbox(entry,false);
-  if(!r.ok) throw new Error("GitHub refused the save ("+r.status+"). Check the key's permissions.");
-  return list;
-}
 document.getElementById("q-form").addEventListener("submit",async e=>{
   e.preventDefault();
   if(!onSite) return;
@@ -461,7 +592,8 @@ document.getElementById("q-form").addEventListener("submit",async e=>{
   const url=document.getElementById("q-url").value.trim(), note=document.getElementById("q-note").value.trim();
   const btn=document.getElementById("q-add"); btn.disabled=true; say("Saving…");
   try{
-    inbox = await pushToInbox({url,note,added:new Date().toISOString()});
+    const entry = {url,note,added:new Date().toISOString()};
+    inbox = await mutate(INBOX_PATH, list=>{ list.push(entry); return list; }, "wishlist: quick add "+hostOf(url));
     document.getElementById("q-url").value=""; document.getElementById("q-note").value="";
     say("Saved to \"to sort\" ♡");
     render();
@@ -469,13 +601,9 @@ document.getElementById("q-form").addEventListener("submit",async e=>{
   finally{ btn.disabled=false; }
 });
 
-async function loadInbox(){
-  if(location.protocol==="file:") return;
-  try{ const r=await fetch("inbox.json?"+Date.now(),{cache:"no-store"}); if(r.ok){ const d=await r.json(); if(Array.isArray(d)&&d.length){ inbox=d; render(); } } }catch(e){}
-}
+if(onSite){ loadData(); setTimeout(()=>{ if(!ready){ ready=true; render(); } }, 4000); }
+else { ready = true; render(); }
 
-render();
-loadInbox();
 </script>
 
 </body>
