@@ -183,14 +183,9 @@ footer{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(
       <input id="q-note" type="text" placeholder="note (size, colour…)" aria-label="Note">
       <button class="btn" id="q-add" type="submit">Add</button>
     </form>
-    <p class="msg" id="q-msg">New links land in "to sort". Ask Claude to sort them and they get a photo, price and shelf.</p>
+    <p class="msg" id="q-msg" aria-live="polite"></p>
     <details id="q-setup">
-      <summary>Phone setup (one time)</summary>
-      <ol>
-        <li>On GitHub, go to Settings → Developer settings → Fine-grained tokens → Generate new token.</li>
-        <li>Repository access: only <b>AnnaToi01.github.io</b>. Permissions: <b>Contents → Read and write</b>.</li>
-        <li>Paste the token below. It stays in this browser only and is never put on the site.</li>
-      </ol>
+      <summary>key</summary>
       <div class="tokenrow">
         <input id="q-token" type="password" placeholder="github_pat_…" aria-label="GitHub token" autocomplete="off">
         <button class="btn" id="q-save" type="button">Save key</button>
@@ -258,7 +253,8 @@ const ITEMS = [
   {cat:"shops",kind:"Clothing",brand:"ADER error",name:"ADER error",img:"ader",color:"Pictured: AW campaign",material:"Seoul label, clothing and accessories",desc:"Prices aren't on the main page. Send a link to a specific piece and it gets its own card.",url:"https://adererror.com/en/shop"},
   {cat:"shops",kind:"Clothing & shoes",brand:"Post Archive Faction",name:"Post Archive Faction (PAF)",img:"paf",lo:14500,hi:148400,cur:"₩",color:"Pictured: Cut Out Coat",material:"155 items. Outerwear goes up to about €310.",desc:"Seoul label known for technical, deconstructed cuts. Most items fall in the price range shown.",url:"https://postarchivefaction.com/"},
   {cat:"shops",kind:"Clothing & shoes",brand:"GmbH",name:"GmbH new season",img:"gmbh",color:"Pictured: Overknee boot, organic leather",material:"Boots, jackets, tops, hoodies and swimwear",desc:"Berlin label. Prices only show on each product page.",url:"https://gmbhgmbh.eu/shop/?category=new+season"},
-  {cat:"shops",kind:"Clothing",brand:"Ottolinger",name:"Ottolinger",img:"otto",color:"Pictured: Mesh Gown (also on your Clothes shelf)",material:"Berlin label, dresses, knits and accessories",desc:"Prices only show on each product page.",url:"https://ottolinger.com/shop"}
+  {cat:"shops",kind:"Clothing",brand:"Ottolinger",name:"Ottolinger",img:"otto",color:"Pictured: Mesh Gown (also on your Clothes shelf)",material:"Berlin label, dresses, knits and accessories",desc:"Prices only show on each product page.",url:"https://ottolinger.com/shop"},
+  {cat:"shops",kind:"Shoe shop",brand:"Miista",name:"Miista",img:"miista",lo:210,hi:495,cur:"€",color:"Pictured: Inaya mid-calf biker boots, brown",material:"Boots, mules and platforms",desc:"London label with shoes made in Spain. Mules start around €210 and tall boots go up to about €495.",url:"https://www.miista.com/en"}
 ];
 
 
@@ -432,14 +428,14 @@ const getToken = () => store.get("wl-token","");
 
 if(!onSite){
   document.getElementById("q-add").disabled = true;
-  say("Quick add works on annatoi01.github.io/wishlist. Open it there on your phone.");
+  
 } else {
   if(getToken()) tokenInput.placeholder = "key saved ✓";
   else document.getElementById("q-setup").open = true;
   const pre = new URLSearchParams(location.search).get("add");
   if(pre) document.getElementById("q-url").value = pre;
 }
-document.getElementById("q-save").onclick=()=>{ const t=tokenInput.value.trim(); if(!t) return say("Paste the token first.",true); store.set("wl-token",t); tokenInput.value=""; tokenInput.placeholder="key saved ✓"; document.getElementById("q-setup").open=false; say("Key saved on this device. Paste a link to add it."); };
+document.getElementById("q-save").onclick=()=>{ const t=tokenInput.value.trim(); if(!t) return say("Paste the token first.",true); store.set("wl-token",t); tokenInput.value=""; tokenInput.placeholder="key saved ✓"; document.getElementById("q-setup").open=false; say("Key saved."); };
 document.getElementById("q-forget").onclick=()=>{ try{localStorage.removeItem("wl-token")}catch(e){} tokenInput.placeholder="github_pat_…"; say("Key removed from this device."); };
 
 const b64enc = s => btoa(unescape(encodeURIComponent(s)));
@@ -461,13 +457,13 @@ async function pushToInbox(entry, retry=true){
 document.getElementById("q-form").addEventListener("submit",async e=>{
   e.preventDefault();
   if(!onSite) return;
-  if(!getToken()){ document.getElementById("q-setup").open=true; return say("Set up the key first (one time).",true); }
+  if(!getToken()){ document.getElementById("q-setup").open=true; return say("Add your key first.",true); }
   const url=document.getElementById("q-url").value.trim(), note=document.getElementById("q-note").value.trim();
   const btn=document.getElementById("q-add"); btn.disabled=true; say("Saving…");
   try{
     inbox = await pushToInbox({url,note,added:new Date().toISOString()});
     document.getElementById("q-url").value=""; document.getElementById("q-note").value="";
-    say("Saved to \"to sort\" ♡ Ask Claude to sort it when you're back at your laptop.");
+    say("Saved to \"to sort\" ♡");
     render();
   }catch(err){ say(err.message,true); }
   finally{ btn.disabled=false; }
