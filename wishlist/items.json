@@ -12,7 +12,7 @@
   "desc": "Form-fitting maxi with adjustable spaghetti straps and a small slit. Limited-edition collab with artist Omer Mosseri. Stretchy, not see-through.",
   "url": "https://www.rhidancey.com/shop/p/the-options-dress",
   "id": "rhi-dancey-the-options-dress",
-  "hearts": 0,
+  "hearts": 4,
   "added": "2026-10-15"
  },
  {
@@ -275,7 +275,7 @@
   "brand": "Maison Soksi",
   "name": "Loewe – Vintage Yellow & Purple",
   "img": "soksi-loewe",
-  "price": 65.0,
+  "price": 65,
   "cur": "€",
   "color": "Vintage yellow and purple",
   "material": "40 den 3D, bicolour, made in Italy · size S/M",
@@ -291,7 +291,7 @@
   "brand": "Maison Soksi",
   "name": "Hard Pois – Mulberry",
   "img": "soksi-hard-pois",
-  "price": 65.0,
+  "price": 65,
   "cur": "€",
   "color": "Mulberry",
   "material": "30 den, double covered, made in Italy · size S/M",
@@ -307,7 +307,7 @@
   "brand": "Maison Soksi",
   "name": "Super Wormhole – Red",
   "img": "soksi-super-wormhole",
-  "price": 44.0,
+  "price": 44,
   "cur": "€",
   "color": "Red",
   "material": "32 den, double covered, made in Italy · size S/M",
@@ -323,7 +323,7 @@
   "brand": "Maison Soksi",
   "name": "Wormhole – Purple",
   "img": "soksi-wormhole",
-  "price": 44.0,
+  "price": 44,
   "cur": "€",
   "color": "Purple",
   "material": "32 den, double covered, made in Italy · size S/M",
@@ -348,7 +348,7 @@
   "id": "viken-winterberry",
   "hearts": 0,
   "added": "2026-10-15",
-  "was": 59.0
+  "was": 59
  },
  {
   "cat": "tights",
@@ -365,7 +365,7 @@
   "id": "viken-emerald-tartan",
   "hearts": 0,
   "added": "2026-10-15",
-  "was": 59.0
+  "was": 59
  },
  {
   "cat": "tights",
@@ -382,7 +382,7 @@
   "id": "viken-lavender-plaid",
   "hearts": 0,
   "added": "2026-10-15",
-  "was": 59.0
+  "was": 59
  },
  {
   "cat": "tights",
@@ -399,7 +399,7 @@
   "id": "viken-college-check",
   "hearts": 0,
   "added": "2026-10-15",
-  "was": 59.0
+  "was": 59
  },
  {
   "cat": "tights",
@@ -423,7 +423,7 @@
   "brand": "Viken Plan",
   "name": "Silky Velvet Touch – Lilac",
   "img": "viken-velvet-lilac",
-  "price": 29.0,
+  "price": 29,
   "cur": "$",
   "color": "Lilac",
   "material": "Velvet-touch fabric · size S",
@@ -448,7 +448,7 @@
   "id": "viken-purple-yellow-check",
   "hearts": 0,
   "added": "2026-10-15",
-  "was": 59.0
+  "was": 59
  },
  {
   "cat": "tights",
@@ -481,7 +481,7 @@
   "id": "viken-purple-black-stripe",
   "hearts": 0,
   "added": "2026-10-15",
-  "was": 59.0
+  "was": 59
  },
  {
   "cat": "tights",
@@ -498,7 +498,7 @@
   "id": "viken-stripe-dot-gray",
   "hearts": 0,
   "added": "2026-10-15",
-  "was": 59.0
+  "was": 59
  },
  {
   "cat": "tights",
@@ -515,6 +515,6 @@
   "id": "viken-teal-check",
   "hearts": 0,
   "added": "2026-10-15",
-  "was": 59.0
+  "was": 59
  }
 ]
