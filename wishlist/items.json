@@ -958,5 +958,37 @@
   "id": "taottao-plaid-block",
   "hearts": 0,
   "added": "2026-10-27"
+ },
+ {
+  "cat": "clothes",
+  "kind": "Cami top",
+  "brand": "taottao",
+  "name": "Stretch Lace Cami – Lucid Plaid",
+  "img": "taottao-lace-cami",
+  "price": 89,
+  "cur": "$",
+  "color": "Plaid print lace",
+  "material": "85% polyester, 15% spandex · size M/L",
+  "desc": "Stretchy lace cami in a dreamy plaid print.",
+  "url": "https://taottao.net/products/stretch-lace-cami-top-lucid-plaid?variant=44658060558422",
+  "id": "taottao-lace-cami",
+  "hearts": 0,
+  "added": "2026-10-27"
+ },
+ {
+  "cat": "clothes",
+  "kind": "Cami top",
+  "brand": "taottao",
+  "name": "Dark Pink Glossy Sprinkle Cake Top",
+  "img": "taottao-sprinkle-cake",
+  "price": 178,
+  "cur": "$",
+  "color": "Dark pink, glossy",
+  "material": "95% polyester, 5% spandex · size L",
+  "desc": "Shiny jersey cami top that looks like a sprinkle cake.",
+  "url": "https://taottao.net/collections/tops/products/dark-pink-glossy-jersey-cami-strap-top?variant=45566687379542",
+  "id": "taottao-sprinkle-cake",
+  "hearts": 0,
+  "added": "2026-10-27"
  }
 ]
