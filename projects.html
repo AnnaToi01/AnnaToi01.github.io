@@ -11,12 +11,12 @@
     <meta property="og:title" content="Research — Anna Toidze">
     <meta property="og:description" content="Microbes and evolution: mobile genetic elements, bacterial pangenomes, plasmid modelling and protein fitness landscapes.">
     <meta property="og:url" content="https://annatoi01.github.io/projects.html">
-    <link rel="stylesheet" href="assets/css/styles.css?v=7">
+    <link rel="stylesheet" href="assets/css/styles.css?v=8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
 </head>
-<body class="bench-page" data-win="specimen">
+<body class="bench-page" data-win="bench">
     <a class="skip-link" href="#main">Skip to content</a>
     <a class="back-home" href="index.html">
         <span aria-hidden="true">&larr;</span> back to Anna
@@ -25,97 +25,80 @@
     <main id="main">
         <!-- ============================================================
              THE BENCH
-             Objects are plain <a href="#panel-id"> links and the panels open
-             with the CSS :target selector. That means: no JavaScript needed,
-             deep links work (annatoi01.github.io/projects.html#p-computer),
-             and the browser back button closes a panel. script.js only adds
-             Escape-to-close and backdrop-click on top of that.
+             A photo of my bench with my drawings laid over it. The photo covers
+             the whole window like the home page; on screens shaped differently
+             from the photo, the cropped part can be scrolled into view.
 
-             ARTWORK: every object is a .bench-art frame. Two of them borrow
-             existing icons as stand-ins; the other two are empty dashed
-             frames. Each one is commented with the file to drop in. Replace
-             the whole <span class="bench-art"> contents with your <img>.
+             Every drawing was exported on the same 1280x960 canvas as the photo,
+             then cropped. Each one is placed in % of the scene, so the
+             arrangement holds at any size. The numbers come from the crop:
+             left = x / 1280, top = y / 960, width = crop width / 1280.
+
+             Objects are plain <a href="#panel-id"> links and the panels open
+             with :target - no JavaScript needed, deep links work, and the back
+             button closes a panel.
              ============================================================ -->
         <section class="bench" id="bench" aria-labelledby="bench-title">
-            <header class="bench-intro">
-                <h1 id="bench-title">Research</h1>
-                <p class="bench-lede">I am Anna, and I like microbes and evolution. My path into
-                science began in high school with a simple question:</p>
-                <p class="bench-question">Why can some people tolerate lactose, when nearly all
-                mammals lose that ability as adults?</p>
-                <p class="bench-lede">The curiosity to answer these questions pulled me down a
-                rabbit hole towards evolutionary biology and pushed me towards research early on. I
-                started with competing in biology Olympiads and a high school project about the
-                evolution of genomic structure of <em>Burkholderia mallei</em>.</p>
-                <p class="bench-hint"><span aria-hidden="true">↓</span> You find yourself at my
-                bench. Pick something up.</p>
-            </header>
+            <h1 id="bench-title" class="sr-only">Research</h1>
+            <div class="bench-scene">
+                <img class="bench-photo" src="assets/images/projects/web/background.jpg" alt="" width="1280" height="960">
 
-            <!-- The scene is generated from assets/bench/bench.svg by
-                 tools/build-bench.py - do not hand-edit between the markers,
-                 it gets overwritten. Placement lives in the SVG. -->
-            <!-- BENCH:START (generated) -->
-            <div class="bench-stage">
-                <div class="bench-wall" aria-hidden="true"></div>
-                <div class="bench-surface" aria-hidden="true"></div>
-
-                <!-- BLACKBOARD -> mathematical modelling of plasmids.
-                     Drawn in CSS/text rather than an image so the chalk formula
-                     stays editable. Swap for assets/icons/bench/blackboard.svg
-                     if you'd rather have your own drawing. -->
-                <a class="bench-object bench-object--blackboard" href="#p-blackboard">
-                    <span class="bench-art bench-art--chalk">
-                        <span class="chalk" aria-hidden="true">
-                            <span class="chalk-line">dD/dt = &gamma;DR &minus; &alpha;D</span>
-                            <span class="chalk-line">dR/dt = &psi;R &minus; &gamma;DR</span>
-                            <span class="chalk-line chalk-faint">c, &sigma; &hellip;</span>
-                        </span>
-                    </span>
-                    <span class="bench-object__name">blackboard</span>
-                    <span class="bench-object__sub">modelling plasmids</span>
+                <a class="bench-item" href="#p-blackboard" data-label="modelling plasmids"
+                   style="left: 5.547%; top: 0.833%; width: 33.203%;">
+                    <img src="assets/images/projects/web/blackboard.webp" alt="Whiteboard: mathematical modeling of plasmids">
                 </a>
 
-                <!-- COMPUTER -> the two computational projects (MGEs + pangenome) -->
-                <a class="bench-object bench-object--computer" href="#p-computer">
-                    <span class="bench-art">
-                        <!-- swap for: assets/icons/bench/computer.svg -->
-                        <img src="assets/icons/laptop-svgrepo-com.svg" alt="" aria-hidden="true">
-                    </span>
-                    <span class="bench-tag">now</span>
-                    <span class="bench-object__name">computer</span>
-                    <span class="bench-object__sub">MGEs &amp; pangenomes</span>
+                <a class="bench-item" href="#p-computer" data-label="MGEs &amp; pangenomes · now"
+                   style="left: 54.375%; top: 24.896%; width: 33.203%;">
+                    <img src="assets/images/projects/web/computer.webp" alt="Laptop: co-evolution of MGEs and pangenome evolution of E. coli">
                 </a>
 
-                <!-- PIPETTES + PROTEIN COLUMN -> GFP fitness landscapes -->
-                <a class="bench-object bench-object--pipettes" href="#p-pipettes">
-                    <span class="bench-art">
-                        <!-- swap for: assets/icons/bench/pipettes.svg -->
-                        <img src="assets/icons/Test_Tube.svg" alt="" aria-hidden="true">
-                    </span>
-                    <span class="bench-object__name">pipettes &amp; column</span>
-                    <span class="bench-object__sub">GFP landscapes</span>
+                <a class="bench-item" href="#p-pipettes" data-label="GFP landscapes"
+                   style="left: 17.422%; top: 53.125%; width: 25.703%;">
+                    <img src="assets/images/projects/web/gfps.webp" alt="Glowing jellyfish and GFP tube: GFP fitness landscapes">
                 </a>
 
-                <!-- MICE + LASER -> subretinal fibrosis -->
-                <a class="bench-object bench-object--mice" href="#p-mice">
-                    <span class="bench-art bench-art--empty">
-                        <!-- swap for: assets/icons/bench/mice-laser.svg -->
-                        <span class="bench-art__todo" aria-hidden="true">mice&nbsp;+&nbsp;laser</span>
-                    </span>
-                    <span class="bench-object__name">mice &amp; laser</span>
-                    <span class="bench-object__sub">subretinal fibrosis</span>
+                <a class="bench-item" href="#p-mice" data-label="subretinal fibrosis"
+                   style="left: 70.469%; top: 78.229%; width: 17.344%;">
+                    <img src="assets/images/projects/web/mice.webp" alt="Mouse and laser: subretinal fibrosis">
+                </a>
+
+                <a class="bench-item" href="#p-intro" data-label="about my research"
+                   style="left: 47.578%; top: 81.771%; width: 19.766%;">
+                    <img src="assets/images/projects/web/intro.webp" alt="Made by Anna: how I got into research">
                 </a>
             </div>
-            <!-- BENCH:END -->
         </section>
 
         <!-- ============================================================
              PANELS - one per object. Hidden until their id is the URL
              fragment, then shown as an overlay.
+
+             THE TEXT LIVES IN content/research.txt - edit it there.
+             assets/js/research-text.js fills each window from the section
+             named in its data-text attribute. The window colours are set by
+             id in styles.css.
              ============================================================ -->
         <div class="bench-panels">
 
-            <article class="win win--wide" id="p-computer" tabindex="-1" role="dialog" aria-labelledby="p-computer-h">
+            <article class="win win--wide" id="p-intro" data-text="intro" tabindex="-1" role="dialog" aria-labelledby="p-intro-h">
+                <a class="win__scrim" href="#bench" aria-label="Close window" tabindex="-1"></a>
+                <div class="win__frame">
+                    <div class="win__bar">
+                        <span class="win__title">readme.txt</span>
+                        <span class="win__btns" aria-hidden="true">
+                            <span class="win__btn">&minus;</span><span class="win__btn">&#9633;</span>
+                        </span>
+                        <a class="win__close" href="#bench" aria-label="Close window">&times;</a>
+                    </div>
+                    <div class="win__body">
+                        <p class="win__prompt" aria-hidden="true"></p>
+                        <div class="win__content"></div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="win win--wide" id="p-computer" data-text="phd" tabindex="-1" role="dialog" aria-labelledby="p-computer-h">
                 <a class="win__scrim" href="#bench" aria-label="Close window" tabindex="-1"></a>
                 <div class="win__frame">
                     <div class="win__bar">
@@ -126,51 +109,13 @@
                         <a class="win__close" href="#bench" aria-label="Close window">&times;</a>
                     </div>
                     <div class="win__body">
-                        <p class="win__prompt" aria-hidden="true">C:\&gt; type co_evolution_of_mges.txt</p>
-                        <p class="win__kicker">on the computer &middot; now</p>
-                        <h2 id="p-computer-h">Co-evolution of MGEs</h2>
-                    <p>I am currently pursuing a PhD at Institut Pasteur co-supervised by Eduardo
-                    Rocha and François Blanquart. I study how mobile genetic elements (MGEs), like
-                    plasmids or phages, shape the evolution of bacteria.</p>
-                    <p>These elements are often thought of as parasites of their hosts: plasmids may
-                    incur costs for their maintenance and transfer, while phages may even lyse the
-                    cells they infect. But, at the same time, these MGEs may be useful to their
-                    hosts, as they carry traits such as antimicrobial resistance or virulence.</p>
-                    <p>Even more interestingly, these elements can themselves have parasites. Some
-                    plasmids hijack the transfer machinery of other plasmids to spread, while phage
-                    satellites hijack phage particles for their own dissemination. This encapsulates
-                    interactions that range from parasitism to mutualism and unfold over several
-                    nested levels within one bacterial genome.</p>
-                    <p>I am curious about how these MGEs interact with one another and with their
-                    bacterial hosts, sometimes creating systems composed of parasites of parasites of
-                    parasites. I want to understand: how do these parasites and their hosts co-evolve,
-                    and what changes when we move beyond the usual two-player host&ndash;parasite
-                    system?</p>
-
-                    <hr class="win__rule">
-
-                    <h3>Pangenome evolution of <em>E. coli</em></h3>
-                    <p><em>Escherichia coli</em> is one of the best-studied organisms in biology, but
-                    it has a dual nature: it is a common gut commensal, while also being a major
-                    opportunistic pathogen responsible for up to a million deaths each year.</p>
-                    <p>Whether an <em>E. coli</em> is more likely to live harmlessly in the gut or
-                    cause disease depends partly on its genomic composition and evolutionary history.
-                    In my master's thesis I studied the pangenome evolution of major clones, sequence
-                    types, of <em>E. coli</em>. All of them are globally widespread and can be found
-                    both in healthy carriers and infected patients, but some are much more strongly
-                    associated with infections than others. I wanted to understand: what makes more
-                    pathogenic clones different from more commensal ones? What makes some
-                    <em>E. coli</em> lineages more successful than others? How do their pangenomes
-                    diversify over time? And what drives their diversification? (wink at the MGEs
-                    above)</p>
-                    <p>I&rsquo;ve presented this work at MEEHubs2026 and &ldquo;Ecology and evolution
-                    of host&ndash;parasite interactions in a changing world&rdquo; Jacques Monod
-                    Conference in Roscoff.</p>
+                        <p class="win__prompt" aria-hidden="true"></p>
+                        <div class="win__content"></div>
                     </div>
                 </div>
             </article>
 
-            <article class="win win--wide" id="p-blackboard" tabindex="-1" role="dialog" aria-labelledby="p-blackboard-h">
+            <article class="win win--wide" id="p-blackboard" data-text="plasmids" tabindex="-1" role="dialog" aria-labelledby="p-blackboard-h">
                 <a class="win__scrim" href="#bench" aria-label="Close window" tabindex="-1"></a>
                 <div class="win__frame">
                     <div class="win__bar">
@@ -181,24 +126,13 @@
                         <a class="win__close" href="#bench" aria-label="Close window">&times;</a>
                     </div>
                     <div class="win__body">
-                        <p class="win__prompt" aria-hidden="true">C:\&gt; type mathematical_modeling_of_plasmids.txt</p>
-                        <p class="win__kicker">on the blackboard &middot; previously</p>
-                        <h2 id="p-blackboard-h">Mathematical modeling of plasmids</h2>
-                    <p>Some plasmids encode the machinery needed to transfer themselves between
-                    bacterial cells and are called conjugative plasmids. Others, called mobilizable
-                    plasmids, do not encode this costly machinery and instead hijack it from
-                    conjugative plasmids for horizontal transfer. I created a mathematical model to
-                    understand: under which conditions can these elements coexist? How do factors
-                    such as transfer rates, plasmid costs, and segregation loss shape whether their
-                    relationship looks more like parasitism or mutualism? I also added traits such as
-                    antimicrobial resistance and toxin-antitoxin systems, often carried by plasmids,
-                    to ask whether they shift the dynamics of the whole system in one direction or
-                    the other.</p>
+                        <p class="win__prompt" aria-hidden="true"></p>
+                        <div class="win__content"></div>
                     </div>
                 </div>
             </article>
 
-            <article class="win win--wide" id="p-pipettes" tabindex="-1" role="dialog" aria-labelledby="p-pipettes-h">
+            <article class="win win--wide" id="p-pipettes" data-text="gfp" tabindex="-1" role="dialog" aria-labelledby="p-pipettes-h">
                 <a class="win__scrim" href="#bench" aria-label="Close window" tabindex="-1"></a>
                 <div class="win__frame">
                     <div class="win__bar">
@@ -209,27 +143,13 @@
                         <a class="win__close" href="#bench" aria-label="Close window">&times;</a>
                     </div>
                     <div class="win__body">
-                        <p class="win__prompt" aria-hidden="true">C:\&gt; type gfp_fitness_landscapes.txt</p>
-                        <p class="win__kicker">at the pipettes &middot; previously</p>
-                        <h2 id="p-pipettes-h">GFP fitness landscapes</h2>
-                    <p>I was curious about how mutations interact with one another through epistasis
-                    and how these interactions shape protein function and evolution. This
-                    relationship can be represented using fitness landscapes, where protein
-                    sequences are mapped to their function.</p>
-                    <p>Using green fluorescent protein (GFP) as a model system and their fluorescence
-                    as the measure of fitness, I studied how these landscapes differ between closely
-                    related proteins. We asked: why are some proteins more tolerant to mutations than
-                    others? Can their biophysical properties predict this mutational robustness? How
-                    transferable are the effects of mutations between similar proteins? And how
-                    should fitness landscapes be explored experimentally and through machine learning
-                    to best predict protein function and guide protein design?</p>
-                    <p>With the help of the Young Investigator Travel and Undergraduate Travel
-                    Awards, I presented this work at SMBE 2025 in Beijing.</p>
+                        <p class="win__prompt" aria-hidden="true"></p>
+                        <div class="win__content"></div>
                     </div>
                 </div>
             </article>
 
-            <article class="win win--wide" id="p-mice" tabindex="-1" role="dialog" aria-labelledby="p-mice-h">
+            <article class="win win--wide" id="p-mice" data-text="mice" tabindex="-1" role="dialog" aria-labelledby="p-mice-h">
                 <a class="win__scrim" href="#bench" aria-label="Close window" tabindex="-1"></a>
                 <div class="win__frame">
                     <div class="win__bar">
@@ -240,26 +160,15 @@
                         <a class="win__close" href="#bench" aria-label="Close window">&times;</a>
                     </div>
                     <div class="win__body">
-                        <p class="win__prompt" aria-hidden="true">C:\&gt; type subretinal_fibrosis.txt</p>
-                        <p class="win__kicker">by the mice &middot; previously</p>
-                        <h2 id="p-mice-h">Subretinal fibrosis</h2>
-                    <p>Fibrosis develops when the normal process of scar formation becomes
-                    dysregulated, causing excessive scar tissue to build up and interfere with how an
-                    organ functions. In the eye, subretinal fibrosis can develop as an end stage of
-                    neovascular age-related macular degeneration (nAMD), a major cause of central
-                    vision loss in people over 50.</p>
-                    <p>During my internship at Roche, I analysed single-nucleus RNA-seq data from
-                    three different mouse models to understand: how do these models differ from one
-                    another, and how well do they reflect the human disease? What gene-expression
-                    signatures characterize each model, and how well do they translate to humans? And
-                    how do ageing and different anti-permeability treatments influence the
-                    development of subretinal fibrosis?</p>
+                        <p class="win__prompt" aria-hidden="true"></p>
+                        <div class="win__content"></div>
                     </div>
                 </div>
             </article>
         </div>
     </main>
 
-    <script src="assets/js/script.js?v=7"></script>
+    <script src="assets/js/script.js?v=8"></script>
+    <script src="assets/js/research-text.js?v=1"></script>
 </body>
 </html>

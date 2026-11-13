@@ -1,0 +1,139 @@
+HOW THIS FILE WORKS
+All the text in the pop-up windows on the Research page (projects.html) comes
+from this file. Edit it, save, and reload the page.
+
+  === name ===        starts a window. Keep the names as they are, they connect
+                      each window to its drawing:
+                        intro    - the "Made by" stamp
+                        phd      - the laptop
+                        plasmids - the whiteboard
+                        gfp      - the jellyfish
+                        mice     - the mouse
+  file: name.txt      the file name shown in the title bar and the C:\> line
+  # Title [now]       the window's title; [now] or [previously] adds the small
+                      coloured tag (leave it out for no tag)
+  ## Heading [now]    a smaller heading inside the window
+  ---                 a thin dividing line
+  > text              a small grey note
+  *text*              italic,  **text** bold,  [text](https://...) a link
+
+Paragraphs are separated by an empty line. Line breaks inside a paragraph
+don't matter. Everything above the first === line is ignored.
+
+
+=== intro ===
+file: readme.txt
+
+# Research
+
+I am Anna, and I like microbes and evolution. My path into science began in
+high school with a simple question: why can some people tolerate lactose, when
+nearly all mammals lose that ability as adults?
+
+The curiosity to answer these questions pulled me down a rabbit hole towards
+evolutionary biology and pushed me towards research early on. I started with
+competing in biology Olympiads and a high school project about the evolution of
+genomic structure of *Burkholderia mallei*. Now, after lots of moving between different countries and research institutions, I have finally settled in Paris, France. Here, I present some of the projects that I have worked on throughout this journey!
+
+> You find yourself at my bench in Okinawa, Japan. Close this and pick something up.
+
+
+=== phd ===
+file: co_evolution_of_mges.txt
+
+# Co-evolution of MGEs [now]
+
+I am currently pursuing a PhD at Institut Pasteur and Collège de France co-supervised by Eduardo
+Rocha and François Blanquart. I study how mobile genetic elements (MGEs), like
+plasmids or phages, shape the evolution of bacteria.
+
+These elements are often thought of as parasites of their hosts: plasmids may
+incur costs for their maintenance and transfer, while phages may even kill the
+cells they infect. But, at the same time, these MGEs may be useful to their
+hosts, as they carry traits such as antimicrobial resistance or virulence.
+
+Even more interestingly, these elements can themselves have parasites. Some
+plasmids hijack the transfer machinery of other plasmids to spread, while phage
+satellites hijack phage particles for their own dissemination. This encapsulates
+interactions that range from parasitism to mutualism and unfold over several
+nested host-parasite interactions within one bacterial genome.
+
+I am curious about how these MGEs influence one another and their
+bacterial hosts, sometimes creating systems composed of parasites of parasites of
+parasites. I want to understand: how do these parasites and their hosts co-evolve,
+and what changes when we move beyond the usual two-player host–parasite system?
+
+---
+
+## Pangenome evolution of *E. coli* [now]
+
+*Escherichia coli* is one of the best-studied organisms in biology and it is dual in its nature. On one hand, it is a common gut commensal found in humans, farm animals, and wildlife. On another hand, it is a major opportunistic pathogen responsible for up to a million deaths each year due intra- and extraintestinal infections.
+
+Pathogenicity of *E. coli* partly depends on its genome composition and evolutionary history. Some phylogenetic groups, like B2 and D, are more common in infections than others. I study the pangenome evolution of major successful clonal lineages, sequence types, of *E. coli*. All of them are globally widespread and can be found both
+in healthy carriers and infected patients, but some are much more strongly
+associated with infections than others. I wanted to understand: what makes more
+pathogenic clones different from more commensal ones? What makes some
+*E. coli* lineages more successful than others? How do their pangenomes
+diversify over time? And what drives their diversification? (wink at the MGEs
+above)
+
+I’ve presented this work at MEEHubs2026 and “Ecology and evolution of
+host-parasite interactions in a changing world” Jacques Monod Conference in
+Roscoff.
+
+
+=== plasmids ===
+file: mathematical_modeling_of_plasmids.txt
+
+# Mathematical modeling of plasmids [previously]
+
+Some plasmids encode the machinery needed to make a plus and transfer themselves between
+bacterial cells and they are called conjugative plasmids. Others, called mobilizable
+plasmids, do not encode this costly machinery and instead hijack it from
+conjugative plasmids for horizontal transfer. I created a mathematical model to
+understand: under which conditions can these elements coexist? How do factors
+such as transfer rates, plasmid costs, and segregation loss shape whether their
+relationship looks more like parasitism or mutualism? I also added traits such as
+antimicrobial resistance and toxin-antitoxin systems, often carried by plasmids,
+to ask whether they shift the dynamics of the whole system in one direction or
+the other.
+
+
+=== gfp ===
+file: gfp_fitness_landscapes.txt
+
+# GFP fitness landscapes [previously]
+
+How do we map a protein sequence to its function? This
+relationship can be represented using fitness landscapes. Using green fluorescent protein (GFP) as a model system and their fluorescence
+as the measure of fitness, I studied how these landscapes differ between closely
+related proteins. I was curious about how mutations interact with one another through epistasis
+and how these interactions shape protein function and evolution. 
+
+We asked: why are some proteins more tolerant to mutations than
+others? Can their biophysical properties predict this mutational robustness? How
+transferable are the effects of mutations between similar proteins? And how
+should fitness landscapes be explored experimentally and through machine learning
+to best predict protein function and guide protein design?
+
+With the help of the Young Investigator Travel and Undergraduate Travel Awards,
+I presented this work at SMBE 2025 in Beijing.
+
+
+=== mice ===
+file: subretinal_fibrosis.txt
+
+# Subretinal fibrosis [previously]
+
+Fibrosis develops when the normal process of scar formation becomes
+dysregulated, causing excessive scar tissue to build up and interfere with how an
+organ functions. In the eye, subretinal fibrosis can develop as an end stage of
+neovascular age-related macular degeneration (nAMD), a major cause of central
+vision loss in people over 50.
+
+During my internship at Roche, I analysed single-nucleus RNA-seq data from three
+different mouse models to understand: how do these models differ from one
+another, and how well do they reflect the human disease? What gene-expression
+signatures characterize each model, and how well do they translate to humans? And
+how do ageing and different anti-permeability treatments influence the
+development of subretinal fibrosis?

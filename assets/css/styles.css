@@ -2202,403 +2202,138 @@ select {
 /* ============================================
    THE LAB BENCH (Research page)
    ------------------------------------------------
-   A scene you explore rather than a document you scroll. Objects sit on a
-   bench; clicking one opens its project in an overlay panel.
+   A photo of the bench with hand-drawn objects laid over it; clicking one
+   opens its project in a pop-up window.
 
-   The whole scene lives in .bench-stage, which has a fixed aspect ratio.
-   Every object is positioned and sized in PERCENTAGES OF THAT STAGE, so the
-   composition scales as one unit at any window size and never drifts apart -
-   the same principle as the landing page's photo anchoring, but simpler here
-   because the stage is ours to define rather than a cover-fit photo.
-
-   Panels are shown with :target, so there is no JavaScript requirement:
-   deep links work and the back button closes a panel.
+   .bench is a fixed, full-window scroll box. .bench-scene inside it is sized
+   like `background-size: cover` for a 4:3 photo: it always fills the window,
+   and whatever overhangs (top/bottom on wide screens, the sides on phones)
+   can be scrolled to, so no drawing is ever out of reach. script.js starts
+   the scroll in the middle. Drawings are placed in % of the scene (inline
+   styles in projects.html), so they stay glued to the photo at any size.
    ============================================ */
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 .bench-page {
-    background: var(--bg);
+    background: #111;
 }
 
 .bench {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 7rem 1.5rem 3rem;
+    position: fixed;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    container-type: size;
+    scrollbar-width: none;
+    overscroll-behavior: none;
 }
 
-/* ---------- intro copy above the scene ---------- */
-.bench-intro {
-    max-width: 44rem;
-    margin: 0 auto 2.5rem;
-}
-
-.bench-intro h1 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 300;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin: 0 0 1rem;
-}
-
-.bench-lede {
-    color: var(--text);
-    font-size: 1.05rem;
-    line-height: 1.7;
-    margin: 0 0 0.9rem;
-}
-
-.bench-question {
-    font-style: italic;
-    color: var(--accent);
-    font-size: 1.15rem;
-    line-height: 1.6;
-    border-left: 3px solid rgba(140, 77, 180, 0.3);
-    padding-left: 1rem;
-    margin: 1.25rem 0 1.4rem;
-}
-
-.bench-hint {
-    margin: 1.75rem 0 0;
-    font-size: 0.9rem;
-    letter-spacing: 0.04em;
-    color: var(--accent-soft);
-}
-
-.bench-hint span {
-    margin-right: 0.35rem;
-}
-
-/* ---------- the stage ---------- */
-.bench-stage {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(59, 30, 77, 0.14);
-}
-
-.bench-wall {
-    position: absolute;
-    inset: 0 0 38% 0;
-    background:
-        radial-gradient(120% 90% at 50% 100%, rgba(255,255,255,0.35), transparent 70%),
-        linear-gradient(var(--rule), var(--rule-2));
-}
-
-.bench-surface {
-    position: absolute;
-    inset: 62% 0 0 0;
-    background:
-        linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0) 18%),
-        linear-gradient(var(--accent-soft), var(--accent-deep));
-}
-
-/* the bench edge highlight */
-.bench-surface::before {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 6px;
-    background: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0));
-}
-
-/* ---------- objects ---------- */
-.bench-object {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: var(--ink);
-    transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
-}
-
-.bench-object:hover,
-.bench-object:focus-visible {
-    transform: translateY(-6px) scale(1.03);
-    z-index: 5;
-}
-
-.bench-art {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    filter: drop-shadow(0 8px 10px rgba(59, 30, 77, 0.28));
-}
-
-.bench-art img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-/* placeholder frame for objects whose artwork does not exist yet */
-.bench-art--empty {
-    border: 2px dashed rgba(59, 30, 77, 0.4);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.35);
-    filter: none;
-}
-
-.bench-art__todo {
-    font-size: 0.78rem;
-    letter-spacing: 0.03em;
-    color: var(--muted);
-    text-align: center;
-    padding: 0.25rem;
-}
-
-/* the blackboard is drawn rather than an image, so the formula stays editable */
-.bench-art--chalk {
-    aspect-ratio: 4 / 3;
-    background: var(--board);
-    border: 6px solid var(--rule-2);
-    border-radius: 4px;
-    box-shadow: inset 0 0 30px rgba(0,0,0,0.45), 0 8px 14px rgba(59, 30, 77,0.3);
-    filter: none;
-    flex-direction: column;
-    gap: 0.35em;
-    padding: 0.6em;
-}
-
-.chalk {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4em;
-    font-family: var(--font-body);
-    color: rgba(255, 255, 255, 0.86);
-    text-shadow: 0 0 6px rgba(255,255,255,0.25);
-}
-
-.chalk-line {
-    font-size: clamp(0.5rem, 1.15vw, 0.95rem);
-    letter-spacing: 0.03em;
-    white-space: nowrap;
-}
-
-.chalk-faint {
-    opacity: 0.5;
-}
-
-.bench-object__name {
-    margin-top: 0.5rem;
-    font-size: clamp(0.7rem, 1.15vw, 0.95rem);
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-}
-
-.bench-object__sub {
-    font-size: clamp(0.6rem, 0.95vw, 0.8rem);
-    color: var(--muted);
-    white-space: nowrap;
-}
-
-/* the "now" flag on the current work */
-.bench-tag {
-    position: absolute;
-    top: -0.4rem;
-    right: -0.9rem;
-    background: var(--accent);
-    color: #fff;
-    font-size: clamp(0.55rem, 0.85vw, 0.72rem);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.15em 0.5em;
-    border-radius: 999px;
-    transform: rotate(6deg);
-}
-
-/* ---------- object placement, all % of the stage ---------- */
-.bench-object--blackboard {
-    left: 5%;
-    top: 7%;
-    width: 30%;
-}
-
-.bench-object--computer {
-    left: 44%;
-    top: 30%;
-    width: 22%;
-}
-
-.bench-object--pipettes {
-    left: 21%;
-    top: 46%;
-    width: 10%;
-}
-
-.bench-object--mice {
-    left: 71%;
-    top: 44%;
-    width: 21%;
-}
-
-/* ---------- panels ---------- */
-.bench-panel {
+.bench::-webkit-scrollbar {
     display: none;
 }
 
-.bench-panel:target {
-    display: block;
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    overflow-y: auto;
-    padding: 4rem 1.25rem;
-    background: rgba(59, 30, 77, 0.55);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    animation: bench-panel-in 0.25s ease-out;
-}
-
-@keyframes bench-panel-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-.bench-panel__card {
+.bench-scene {
     position: relative;
-    max-width: 46rem;
-    margin: 0 auto;
-    background: var(--card);
-    border-radius: 12px;
-    padding: 2.5rem 2.5rem 2.25rem;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+    width: max(100cqw, 100cqh * 4 / 3);
+    height: max(100cqh, 100cqw * 3 / 4);
 }
 
-.bench-panel__close {
+.bench-photo {
     position: absolute;
-    top: 0.75rem;
-    right: 1rem;
-    font-size: 1.9rem;
-    line-height: 1;
-    color: var(--accent-soft);
-    text-decoration: none;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-.bench-panel__close:hover {
-    color: var(--accent);
+.bench-item {
+    position: absolute;
+    display: block;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.bench-panel__kicker {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--accent-soft);
-    margin: 0 0 0.5rem;
-}
-
-.bench-panel__card h2 {
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
-    font-weight: 600;
-    color: var(--ink);
-    margin: 0 0 1rem;
-    line-height: 1.2;
-}
-
-.bench-panel__card h3 {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--ink);
-    margin: 0 0 0.85rem;
-    line-height: 1.25;
-}
-
-.bench-panel__card p {
-    color: var(--text);
-    font-size: 1rem;
-    line-height: 1.72;
-    margin: 0 0 0.95rem;
-}
-
-.bench-panel__card p:last-child {
-    margin-bottom: 0;
-}
-
-.bench-panel__rule {
-    border: 0;
-    border-top: 1px solid var(--rule);
-    margin: 2rem 0 1.5rem;
-}
-
-/* ---------- narrow screens: the scene gets taller, objects re-tuck ---------- */
-@media (max-width: 820px) {
-    .bench {
-        padding: 6rem 1rem 2rem;
-    }
-
-    .bench-stage {
-        aspect-ratio: 4 / 5;
-    }
-
-    .bench-wall   { inset: 0 0 46% 0; }
-    .bench-surface { inset: 54% 0 0 0; }
-
-    .bench-object--blackboard { left: 8%;  top: 5%;  width: 54%; }
-    .bench-object--computer   { left: 12%; top: 40%; width: 40%; }
-    .bench-object--pipettes   { left: 62%; top: 30%; width: 18%; }
-    .bench-object--mice       { left: 58%; top: 60%; width: 36%; }
-
-    .bench-object__name { font-size: 0.8rem; }
-    .bench-object__sub  { font-size: 0.68rem; }
-
-    .bench-panel:target { padding: 2rem 0.75rem; }
-    .bench-panel__card  { padding: 2rem 1.35rem 1.75rem; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .bench-object { transition: none; }
-    .bench-panel:target { animation: none; }
-}
-
-/* ------------------------------------------------
-   The generated bench SVG (tools/build-bench.py)
-   Replaces .bench-stage once assets/bench/bench.svg exists. Placement and
-   scale come entirely from the SVG's own viewBox, so there is nothing to
-   tune here - and because SVG <a> hit-tests the drawn shape, each object is
-   clickable exactly where it is visible.
-   ------------------------------------------------ */
-.bench-svg {
+.bench-item img {
     display: block;
     width: 100%;
     height: auto;
-    border-radius: 14px;
-    box-shadow: 0 10px 40px rgba(59, 30, 77, 0.14);
-}
-
-.bench-hit {
-    cursor: pointer;
-}
-
-/* transform-box/origin are essential in SVG: without them the transform is
-   measured from the SVG's origin, so objects fly across the scene instead of
-   lifting in place. */
-.bench-hit > * {
-    transform-box: fill-box;
-    transform-origin: center;
     transition: transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1),
                 filter 0.25s ease;
+    -webkit-user-drag: none;
 }
 
-.bench-hit:hover > *,
-.bench-hit:focus-visible > * {
-    transform: translateY(-1.5%) scale(1.04);
-    filter: drop-shadow(0 6px 10px rgba(59, 30, 77, 0.35));
+/* the glow follows the drawing's outline, not its box */
+.bench-item:hover img,
+.bench-item:focus-visible img {
+    transform: translateY(-2%) scale(1.04);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.85))
+            drop-shadow(0 8px 14px rgba(0, 0, 0, 0.45));
+    animation: bench-wiggle 0.3s ease-out;
 }
 
-.bench-hit:focus-visible {
-    outline: 3px solid var(--accent);
+/* a barely-there nod to the home page's beer-cup salute */
+@keyframes bench-wiggle {
+    0%   { transform: translateY(0) scale(1); }
+    35%  { transform: translateY(-1%) scale(1.02) rotate(-0.6deg); }
+    70%  { transform: translateY(-2%) scale(1.04) rotate(0.4deg); }
+    100% { transform: translateY(-2%) scale(1.04) rotate(0deg); }
+}
+
+.bench-item:focus-visible {
+    outline: 3px solid #fff;
     outline-offset: 4px;
+    border-radius: 6px;
+}
+
+/* hover label, same pill as the home page stickers */
+.bench-item[data-label]::after {
+    content: attr(data-label);
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translate(-50%, -0.4rem);
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(20, 20, 22, 0.85);
+    color: #fefbf7;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* the blackboard touches the top edge, so its label goes underneath */
+.bench-item[href="#p-blackboard"]::after {
+    bottom: auto;
+    top: 100%;
+    transform: translate(-50%, 0.4rem);
+}
+
+.bench-item:hover::after,
+.bench-item:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .bench-hit > * { transition: none; }
+    .bench-item img { transition: none; animation: none !important; }
 }
 
 /* ============================================
@@ -3137,4 +2872,106 @@ body[data-win="paper"] .win__body {
     .bench-hint::after {
         animation: none;
     }
+}
+
+/* ---------- bench (Research page) ----------
+   XP chrome in the colours of the lab bench: a glossy black title bar like
+   the bench top, a charcoal body, and a close button in each project's own
+   colour (set below by panel id). */
+#p-computer   { --proj: #9457c0; }  /* PhD - purple */
+#p-pipettes   { --proj: #4fa630; }  /* GFP - jellyfish green */
+#p-mice       { --proj: #c41a1a; }  /* mice - laser red */
+#p-blackboard { --proj: #2b6fd6; }  /* blackboard - blue */
+#p-intro      { --proj: #6b6e75; }
+
+body[data-win="bench"] .win {
+    --ink: #f2f0ec;
+    --text: #dcd9d3;
+    --muted: #a7a39c;
+    --muted-2: #8d8981;
+    --rule: #3a3b3f;
+}
+
+body[data-win="bench"] .win__scrim {
+    background: rgba(8, 8, 10, 0.55);
+}
+
+body[data-win="bench"] .win__frame {
+    background: #232427;
+    border: 1px solid #0b0b0c;
+    border-radius: 8px 8px 4px 4px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+                0 22px 50px rgba(0, 0, 0, 0.55);
+}
+
+body[data-win="bench"] .win__bar {
+    padding: 0.45rem 0.45rem 0.45rem 0.85rem;
+    background: linear-gradient(#5b5e64 0%, #34363b 9%, #222327 50%, #17181a 51%, #1d1e21 92%, #2c2e33 100%);
+    border-bottom: 1px solid #0b0b0c;
+}
+
+body[data-win="bench"] .win__title {
+    font-family: 'Trebuchet MS', var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #fff;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8);
+}
+
+body[data-win="bench"] .win__btn,
+body[data-win="bench"] .win__close {
+    width: 1.45rem;
+    height: 1.45rem;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 4px;
+    font-family: 'Trebuchet MS', var(--font-body);
+    font-weight: 700;
+    color: #fff;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+body[data-win="bench"] .win__btn {
+    background: linear-gradient(#8a8d93, #4a4c51 55%, #3a3c40);
+    font-size: 0.8rem;
+}
+
+body[data-win="bench"] .win__close {
+    background: linear-gradient(color-mix(in srgb, var(--proj) 55%, #fff),
+                                var(--proj) 55%,
+                                color-mix(in srgb, var(--proj) 75%, #000));
+    font-size: 1.05rem;
+}
+
+body[data-win="bench"] .win__close:hover,
+body[data-win="bench"] .win__close:focus-visible {
+    background: linear-gradient(color-mix(in srgb, var(--proj) 35%, #fff),
+                                color-mix(in srgb, var(--proj) 80%, #fff) 55%,
+                                var(--proj));
+    color: #fff;
+}
+
+/* one font for everything you read; only the C:\> prompt stays monospace */
+body[data-win="bench"] .win__body h2,
+body[data-win="bench"] .win__body h3 {
+    font-family: var(--font-body);
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+body[data-win="bench"] .win__body h2 { font-size: 1.4rem; }
+body[data-win="bench"] .win__body h3 { font-size: 1.15rem; }
+
+/* "now" / "previously", sitting next to the title in the project colour */
+.win__status {
+    display: inline-block;
+    margin-left: 0.5rem;
+    vertical-align: 0.2em;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    color: color-mix(in srgb, var(--proj, var(--accent)) 60%, #fff);
 }

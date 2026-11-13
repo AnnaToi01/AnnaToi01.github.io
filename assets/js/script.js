@@ -161,3 +161,19 @@ if (popupWindows.length) {
         });
     });
 }
+
+// ---------------------------------------------------------------------------
+// Research bench: the photo covers the window, so on screens shaped
+// differently from it some of the scene overhangs. Start in the middle, so the
+// overhang is split evenly and either edge is one scroll away.
+// ---------------------------------------------------------------------------
+const benchScroller = document.querySelector('.bench');
+
+if (benchScroller) {
+    const centreBench = () => {
+        benchScroller.scrollLeft = (benchScroller.scrollWidth - benchScroller.clientWidth) / 2;
+        benchScroller.scrollTop = (benchScroller.scrollHeight - benchScroller.clientHeight) / 2;
+    };
+    centreBench();
+    window.addEventListener('load', centreBench);
+}
